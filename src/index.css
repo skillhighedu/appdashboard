@@ -4,14 +4,29 @@
     --color-primary: #0D8267;
     --color-tahiti: #3ab7bf;
     --color-bermuda: #78dcca;
-    
-    /* Adding font family */
-    --font-poppins: "Funnel Sans", serif;
 }
 
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
 @layer base {
-    /* Applying the font */
     :root {
-        font-family: var(--font-poppins);
+        --font-funnel: "Funnel Sans", sans-serif;
+        --font-lexend: "Lexend", sans-serif;
+        font-family: var(--font-lexend);
     }
+
+    /* Custom Font Utility Classes */
+    .font-lexend {
+        font-family: var(--font-lexend);
+    }
+
+    .font-funnel {
+        font-family: var(--font-funnel);
+    }
+}
+
+/* Dark Mode Fix */
+[data-theme="dark"] {
+    background-color: #121212;
+    color: white;
 }
