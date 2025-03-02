@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "📝 Use the following commit message format:"
+
+echo "-----------------------------------------"
+echo "✅ feat: add new feature"
+echo "✅ fix: resolve bug"
+echo "✅ chore: update dependencies"
+echo "✅ docs: update README"
+echo "✅ style: format code"
+echo "✅ refactor: improve structure"
+echo "✅ test: add tests"
+echo "-----------------------------------------"
+
+npx --no-install commitlint --edit "$1"
