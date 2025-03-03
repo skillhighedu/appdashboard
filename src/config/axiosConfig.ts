@@ -4,7 +4,7 @@ import config from "./config";
 const apiUrl = config.API_BASE_URL;
 
 const api = axios.create({baseURL: apiUrl,withCredentials: true
-})
+});
 
 // Request Interceptor: Attach token
 api.interceptors.request.use(
