@@ -1,17 +1,16 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",  
+    "baseUrl": "./src",
     "paths": {
       "@components/*": ["components/*"],
       "@pages/*": ["pages/*"],
       "@hooks/*": ["hooks/*"],
       "@utils/*": ["utils/*"],
       "@assets/*": ["assets/*"],
-     "@types/*": ["types/*"]
-
+      "@types/*": ["types/*"]
     },
     "tsBuildInfoFile": "./node_modules/.tsbuildinfo",
-    
+
     /* Target & Modules */
     "target": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
@@ -22,10 +21,10 @@
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    
+
     /* JSX Support for React */
     "jsx": "react-jsx",
-    
+
     /* Linting & Type Safety */
     "strict": true,
     "noUncheckedIndexedAccess": true,
@@ -33,7 +32,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
-    
+
     /* Optimization */
     "isolatedModules": true,
     "skipLibCheck": true,

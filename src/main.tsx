@@ -20,5 +20,5 @@ root.render(
         <App />
       </StoreProvider>
     </AuthProvider>
-  </StrictMode>
+  </StrictMode>,
 );

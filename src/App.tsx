@@ -9,7 +9,14 @@ function App() {
       <div className="w-full max-w-7xl mx-auto px-2 ">
         <Router>
           <Routes>
-            <Route path="/" element={<Layout><Landing /></Layout>} />
+            <Route
+              path="/"
+              element={
+                <Layout>
+                  <Landing />
+                </Layout>
+              }
+            />
           </Routes>
         </Router>
       </div>

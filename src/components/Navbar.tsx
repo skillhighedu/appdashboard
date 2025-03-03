@@ -4,7 +4,7 @@ import Logo from "@assets/images/logo.png";
 import { useState } from "react";
 
 export default function Navbar() {
-  const { theme, toggleTheme } = useTheme(); 
+  const { theme, toggleTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -17,16 +17,47 @@ export default function Navbar() {
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex gap-6 text-lg">
-          <li><a href="#" className="hover:text-green-500 dark:hover:text-green-300">Home</a></li>
-          <li><a href="#" className="hover:text-green-500 dark:hover:text-green-300">Services</a></li>
-          <li><a href="#" className="hover:text-green-500 dark:hover:text-green-300">Portfolio</a></li>
-          <li><a href="#" className="hover:text-green-500 dark:hover:text-green-300">Contact</a></li>
+          <li>
+            <a
+              href="#"
+              className="hover:text-green-500 dark:hover:text-green-300"
+            >
+              Home
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              className="hover:text-green-500 dark:hover:text-green-300"
+            >
+              Services
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              className="hover:text-green-500 dark:hover:text-green-300"
+            >
+              Portfolio
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              className="hover:text-green-500 dark:hover:text-green-300"
+            >
+              Contact
+            </a>
+          </li>
         </ul>
 
         {/* Right Section (Dark Mode & Mobile Menu) */}
         <div className="flex items-center gap-4">
           {/* Dark Mode Toggle */}
-          <button  onClick={toggleTheme} className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer">
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer"
+          >
             {theme === "dark" ? <Sun size={24} /> : <Moon size={24} />}
           </button>
 
@@ -40,10 +71,30 @@ export default function Navbar() {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden p-4 space-y-4 bg-white dark:bg-gray-900 dark:text-white transition-all">
-          <a href="#" className="block hover:text-green-500 dark:hover:text-green-300">Home</a>
-          <a href="#" className="block hover:text-green-500 dark:hover:text-green-300">Services</a>
-          <a href="#" className="block hover:text-green-500 dark:hover:text-green-300">Portfolio</a>
-          <a href="#" className="block hover:text-green-500 dark:hover:text-green-300">Contact</a>
+          <a
+            href="#"
+            className="block hover:text-green-500 dark:hover:text-green-300"
+          >
+            Home
+          </a>
+          <a
+            href="#"
+            className="block hover:text-green-500 dark:hover:text-green-300"
+          >
+            Services
+          </a>
+          <a
+            href="#"
+            className="block hover:text-green-500 dark:hover:text-green-300"
+          >
+            Portfolio
+          </a>
+          <a
+            href="#"
+            className="block hover:text-green-500 dark:hover:text-green-300"
+          >
+            Contact
+          </a>
         </div>
       )}
     </nav>

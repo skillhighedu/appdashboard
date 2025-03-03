@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Theme } from "types/theme"; 
+import { Theme } from "types/theme";
 
 export function useTheme() {
   const getStoredTheme = (): Theme => {
@@ -15,7 +15,8 @@ export function useTheme() {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  const toggleTheme = () => setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+  const toggleTheme = () =>
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
 
   return { theme, toggleTheme };
 }
