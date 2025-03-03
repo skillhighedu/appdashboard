@@ -6,11 +6,16 @@ const apiUrl = config.API_BASE_URL;
 const api = axios.create({ baseURL: apiUrl, withCredentials: true });
 
 // Request Interceptor: Attach token
-api.interceptors.request.use((config) => {
-    const token = localStorage.getItem("token");if (token) {config.headers.Authorization = `Bearer ${token}`;}
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
     return config;
-  },(error) => Promise.reject(error),
-)
+  },
+  (error) => Promise.reject(error),
+);
 
 // Response Interceptor: Handle 401 errors
 api.interceptors.response.use(
