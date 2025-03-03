@@ -4,5 +4,6 @@
 # Run TypeScript checks before committing
 npx tsc --noEmit
 
-# Run ESLint for linting
+# Run ESLint for linting and formatting
 npm run lint
+npm run format
