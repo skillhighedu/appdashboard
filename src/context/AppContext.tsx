@@ -1,19 +1,17 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useState, ReactNode } from "react";
 
 // Define StoreContext type
 interface StoreContextType {
-  cart: any[];
-  addToCart: (item: any) => void;
+  cart: string[];
+  addToCart: (item: string) => void;
 }
 
 // Create Context
 const StoreContext = createContext<StoreContextType | undefined>(undefined);
 
 export const StoreProvider = ({ children }: { children: ReactNode }) => {
-
-  const [cart, setCart] = useState<any[]>([]);
-
-  const addToCart = (item: any) => setCart([...cart, item]);
+  const [cart, setCart] = useState<string[]>([]);
+  const addToCart = (item: string) => setCart([...cart, item]);
 
   return (
     <StoreContext.Provider value={{ cart, addToCart }}>
@@ -22,9 +20,4 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-// Hook for using the StoreContext
-export const useStore = () => {
-  const context = useContext(StoreContext);
-  if (!context) throw new Error("useStore must be used within StoreProvider");
-  return context;
-};
+export default StoreContext;
