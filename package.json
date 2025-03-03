@@ -3,13 +3,19 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview",
-    "prepare": "husky install"
-  },
+ "scripts": {
+  "dev": "vite --mode development",
+  "build": "tsc -b && vite build",
+  "build:dev": "tsc -b && vite build --mode development",
+  "build:prod": "tsc -b && vite build --mode production",
+  "preview": "vite preview",
+  "preview:prod": "vite preview --mode production",
+  "lint": "eslint .",
+  "format": "prettier --write .",
+  "type-check": "tsc --noEmit",
+  "clean": "rm -rf dist node_modules && npm cache clean --force",
+  "start": "npm run build:prod && npm run preview:prod"
+},
   "dependencies": {
     "@tailwindcss/vite": "^4.0.9",
     "axios": "^1.8.1",

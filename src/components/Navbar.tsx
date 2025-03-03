@@ -1,31 +1,19 @@
-
-import { useState, useEffect } from "react";
+import { useTheme } from "@hooks/useTheme";
 import { Menu, X, Sun, Moon } from "lucide-react";
+import Logo from "@assets/images/logo.png";
+import { useState } from "react";
 
 export default function Navbar() {
+  const { theme, toggleTheme } = useTheme(); 
   const [isOpen, setIsOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(() => {
-    return typeof window !== "undefined" && localStorage.getItem("theme") === "dark";
-  });
-
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.setAttribute("data-theme", "dark");
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.setAttribute("data-theme", "light");
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [darkMode]);
 
   return (
-    <nav className="w-full shadow-md bg-white text-gray-900 dark:bg-gray-900 dark:text-white">
-      <div className="container mx-auto flex justify-between items-center p-4">
-        
+    <nav className="w-full bg-white text-gray-900 dark:bg-darkPrimary dark:text-white">
+      <div className="container mx-auto flex justify-between items-center p-6">
         {/* Logo */}
-        <a href="#" className="text-2xl font-bold">Loynix</a>
+        <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+          <img src={Logo} className="h-auto w-[180px]" alt="Logo" />
+        </a>
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex gap-6 text-lg">
@@ -37,13 +25,9 @@ export default function Navbar() {
 
         {/* Right Section (Dark Mode & Mobile Menu) */}
         <div className="flex items-center gap-4">
-          
           {/* Dark Mode Toggle */}
-          <button 
-            onClick={() => setDarkMode(!darkMode)} 
-            className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
-          >
-            {darkMode ? <Sun size={24} /> : <Moon size={24} />}
+          <button  onClick={toggleTheme} className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer">
+            {theme === "dark" ? <Sun size={24} /> : <Moon size={24} />}
           </button>
 
           {/* Mobile Menu Toggle */}

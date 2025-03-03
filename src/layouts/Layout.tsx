@@ -18,7 +18,7 @@ const Layout = ({ children }: LayoutProps) => {
         <Navbar />
 
         {/* Main Content */}
-        <main className="p-4 overflow-auto h-full bg-gray-100 ">
+        <main >
           {children}
         </main>
           {/* Footer */}

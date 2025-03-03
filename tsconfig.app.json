@@ -6,7 +6,9 @@
       "@pages/*": ["pages/*"],
       "@hooks/*": ["hooks/*"],
       "@utils/*": ["utils/*"],
-      "@assets/*": ["assets/*"]
+      "@assets/*": ["assets/*"],
+     "@types/*": ["types/*"]
+
     },
     "tsBuildInfoFile": "./node_modules/.tsbuildinfo",
     
