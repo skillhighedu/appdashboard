@@ -1,13 +1,28 @@
 import { useTheme } from "@hooks/useTheme";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, X, Sun, Moon, User, HomeIcon, MessageCircle,  Phone,  } from "lucide-react";
 import Logo from "@assets/images/logo.png";
 import { useState } from "react";
-
+import { Link } from "react-router-dom";
+import { authStore } from "@context/authStore";
+import { useLocation } from "react-router-dom";
+import Tooltip from "./ToolTip";
 
 export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
+  const currentRouteName = useLocation()
+  const { isAuthenticated } = authStore();
+
+
+
+  // Define menu items with icons
+  const menuItems = [
+    { name: "Home", href: "/home", icon: <HomeIcon size={20} /> },
+    { name: "Messages", href: "/services", icon: <MessageCircle size={20} /> },
+    // { name: "Instructions", href: "#portfolio", icon: <Image size={20} /> },
+    { name: "Contact", href: "/contact", icon: <Phone size={20} /> },
+  ];
 
   return (
     <nav className="w-full bg-white text-gray-900 dark:bg-darkPrimary dark:text-white ">
@@ -19,13 +34,14 @@ export default function Navbar() {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex gap-6 text-lg">
-          {["Home", "Services", "Portfolio", "Contact"].map((item) => (
+          {menuItems.map((item) => (
             <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
-              className="hover:text-green-500 dark:hover:text-green-300 transition-all"
+              key={item.name}
+              href={item.href}
+              className={`flex text-sm items-center gap-2 ${currentRouteName.pathname === item.href ? "text-primary":""} hover:text-primary dark:hover:text-primary text-gray-500 transition-all`}
             >
-              {item}
+              {item.icon}
+              {item.name}
             </a>
           ))}
         </div>
@@ -33,27 +49,33 @@ export default function Navbar() {
         {/* Right Section (Dark Mode & Mobile Menu) */}
         <div className="flex items-center gap-4">
           {/* Dark Mode Toggle */}
+          <Tooltip text={theme === "dark" ? "Turn off DarkMode" : "Turn on DarkMode"} position="bottom">
           <button
             onClick={toggleTheme}
             className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer transition"
           >
             {theme === "dark" ? <Sun size={24} /> : <Moon size={24} />}
           </button>
-          <button
+          </Tooltip>
 
-            className="px-6 py-3 text-md rounded-lg transition-all duration-300 
-                 hover:scale-105 active:scale-95 cursor-pointer bg-secondary text-primary hidden md:flex"
-          >
-            Login
-          </button>
-
-          <button
-
-            className="px-6 py-3 text-md rounded-lg transition-all duration-300 
-                 hover:scale-105 active:scale-95 cursor-pointer bg-gradient-to-r from-[#0D8267] to-[#031C16] text-white hidden md:flex"
-          >
-            Join Now
-          </button>
+          {!isAuthenticated ? (
+            <>
+              <Link to="/login">
+                <button className="px-6 py-3 text-md rounded-lg transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer bg-secondary text-primary hidden md:flex">
+                  Login
+                </button>
+              </Link>
+              <button className="px-6 py-3 text-md rounded-lg transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer bg-gradient-to-r from-[#0D8267] to-[#031C16] text-white hidden md:flex">
+                Join Now
+              </button>
+            </>
+          ) : (
+            <Link to="/login">
+              <button className="p-3 text-md transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer rounded-full bg-secondary text-primary hidden md:flex">
+                <User />
+              </button>
+            </Link>
+          )}
 
           {/* Mobile Menu Toggle */}
           <button onClick={() => setIsOpen(true)} className="md:hidden p-2">
@@ -92,32 +114,24 @@ export default function Navbar() {
               </button>
 
               {/* Menu Links */}
-              {["Home", "Services", "Portfolio", "Contact"].map((item) => (
+              {menuItems.map((item) => (
                 <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
-                  className="block text-lg font-medium hover:text-green-500 dark:hover:text-green-300 transition-all"
+                  key={item.name}
+                  href={item.href}
+                  className="flex items-center gap-2 text-lg font-medium hover:text-green-500 dark:hover:text-green-300 transition-all"
                   onClick={() => setIsOpen(false)}
                 >
-                  {item}
+                  {item.icon}
+                  {item.name}
                 </a>
               ))}
 
-              {/* Mobile Button */}
+              {/* Mobile Buttons */}
               <div className="flex flex-row space-x-4">
-                <button
-
-                  className="px-6 py-3 text-md rounded-lg transition-all duration-300 
-hover:scale-105 active:scale-95 cursor-pointer bg-secondary text-primary "
-                >
+                <button className="px-6 py-3 text-md rounded-lg transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer bg-secondary text-primary">
                   Login
                 </button>
-
-                <button
-
-                  className="px-6 py-3 text-md rounded-lg transition-all duration-300 
-hover:scale-105 active:scale-95 cursor-pointer bg-gradient-to-r from-[#0D8267] to-[#031C16] text-white "
-                >
+                <button className="px-6 py-3 text-md rounded-lg transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer bg-gradient-to-r from-[#0D8267] to-[#031C16] text-white">
                   Join Now
                 </button>
               </div>
@@ -125,8 +139,6 @@ hover:scale-105 active:scale-95 cursor-pointer bg-gradient-to-r from-[#0D8267] t
           </>
         )}
       </AnimatePresence>
-
-
     </nav>
   );
 }

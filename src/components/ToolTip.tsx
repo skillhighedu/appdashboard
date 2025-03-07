@@ -6,7 +6,11 @@ interface TooltipProps {
   position?: "top" | "bottom" | "left" | "right";
 }
 
-export default function Tooltip({ text, children, position = "top" }: TooltipProps) {
+export default function Tooltip({
+  text,
+  children,
+  position = "top",
+}: TooltipProps) {
   const [visible, setVisible] = useState(false);
 
   return (
@@ -21,7 +25,7 @@ export default function Tooltip({ text, children, position = "top" }: TooltipPro
       {/* Tooltip */}
       {visible && (
         <div
-          className={`absolute z-10 px-3 py-1 text-sm text-white bg-gray-900 dark:bg-white dark:text-black rounded-lg shadow-lg transition-opacity duration-300
+          className={`absolute  z-10 px-3 py-1 text-xs text-white bg-gray-900 dark:bg-white dark:text-black rounded-lg shadow-lg transition-opacity duration-300
           ${position === "top" ? "bottom-full mb-2" : ""}
           ${position === "bottom" ? "top-full mt-2" : ""}
           ${position === "left" ? "right-full mr-2" : ""}

@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import Dot_Pattern from "@assets/images/dot-pattern.png";
 import Button from "@components/Button";
 import { ArrowRight } from "lucide-react";
+import Logo from "@assets/images/logo.png";
+
 
 export default function Hero() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -17,23 +19,32 @@ export default function Hero() {
       dark:bg-darkPrimary dark:text-white`}
       style={
         !isDarkMode
-          ? { backgroundImage: `url(${Dot_Pattern})`, backgroundSize: "cover", backgroundPosition: "center" }
+          ? {
+              backgroundImage: `url(${Dot_Pattern})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }
           : {}
       }
     >
+    
       {/* Animated Title */}
       <motion.h1
-        className="text-4xl md:text-5xl font-bold text-primary"
+        className="text-4xl  md:text-5xl font-bold text-primary"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        SkillHigh
+          {/* Logo */}
+          <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+          <img src={Logo} className="h-auto w-[350px]" alt="Logo" />
+        </a>
+
       </motion.h1>
 
       {/* Animated Subtitle */}
       <motion.h2
-        className="text-lg md:text-4xl font-medium mt-7 max-w-4xl"
+        className="text-lg text-darkSecondary md:text-4xl font-medium mt-7 max-w-4xl"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}

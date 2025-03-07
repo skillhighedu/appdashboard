@@ -1,14 +1,23 @@
-import {   Linkedin, Mail,Instagram } from "lucide-react";
+import { Linkedin, Mail, Instagram } from "lucide-react";
 import Logo from "@assets/images/logo.png";
 import Tooltip from "./ToolTip";
 export default function Footer() {
-
   const socialMediaIcons = [
-    { icon: <Linkedin size={20} />, text: "Linkedin", link: "https://twitter.com" },
-    { icon: <Mail size={20} />, text: "LinkedIn", link: "https://linkedin.com" },
-    { icon: <Instagram size={20} />, text: "LinkedIn", link: "https://linkedin.com" },
-
-
+    {
+      icon: <Linkedin size={20} />,
+      text: "Linkedin",
+      link: "https://twitter.com",
+    },
+    {
+      icon: <Mail size={20} />,
+      text: "LinkedIn",
+      link: "https://linkedin.com",
+    },
+    {
+      icon: <Instagram size={20} />,
+      text: "LinkedIn",
+      link: "https://linkedin.com",
+    },
   ];
 
   return (
@@ -16,13 +25,15 @@ export default function Footer() {
       <div className="container mx-auto px-6 py-10">
         {/* Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left md:text-left">
-          
           {/* Company Info */}
           <div>
-             {/* Logo */}
-        <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-          <img src={Logo} className="h-auto w-[200px]" alt="Logo" />
-        </a>
+            {/* Logo */}
+            <a
+              href="/"
+              className="flex items-center space-x-3 rtl:space-x-reverse"
+            >
+              <img src={Logo} className="h-auto w-[200px]" alt="Logo" />
+            </a>
 
             <p className="mt-3 ml-6 text-sm">
               Gain Skills. Get Certified. Reach Higher.
@@ -54,21 +65,17 @@ export default function Footer() {
               Connect with Us
             </h3>
             <div className="flex justify-center md:justify-start gap-4 mt-4">
-           {socialMediaIcons && socialMediaIcons.map((socialMedia)=> (
-             <Tooltip text={socialMedia.text} position="top">
-             <a
-                 href="#"
-                 className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-primary dark:hover:bg-primary transition"
-               >
-                 {socialMedia.icon}
-               </a>
-               
-  
-               </Tooltip>
-           ))}
-           
-              
-             
+              {socialMediaIcons &&
+                socialMediaIcons.map((socialMedia) => (
+                  <Tooltip text={socialMedia.text} position="top">
+                    <a
+                      href="#"
+                      className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-primary dark:hover:bg-primary transition"
+                    >
+                      {socialMedia.icon}
+                    </a>
+                  </Tooltip>
+                ))}
             </div>
           </div>
         </div>

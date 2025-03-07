@@ -1,20 +1,21 @@
-import { createContext, useState, ReactNode } from "react";
+import { Course } from "../types/course";
+import React, { createContext, useState, ReactNode } from "react";
 
-// Define StoreContext type
+
 interface StoreContextType {
-  cart: string[];
-  addToCart: (item: string) => void;
+  enrolledCourses: Course[];
+  setEnrolledCourses: React.Dispatch<React.SetStateAction<Course[]>>
 }
 
-// Create Context
+//CREATING STORE CONTEXT
 const StoreContext = createContext<StoreContextType | undefined>(undefined);
 
 export const StoreProvider = ({ children }: { children: ReactNode }) => {
-  const [cart, setCart] = useState<string[]>([]);
-  const addToCart = (item: string) => setCart([...cart, item]);
+  const [enrolledCourses, setEnrolledCourses] = useState<Course[]>([]);
+  const value = { enrolledCourses, setEnrolledCourses }
 
   return (
-    <StoreContext.Provider value={{ cart, addToCart }}>
+    <StoreContext.Provider value={value}>
       {children}
     </StoreContext.Provider>
   );

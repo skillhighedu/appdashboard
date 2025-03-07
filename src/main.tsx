@@ -3,7 +3,8 @@ import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import { StoreProvider } from "./context/AppContext.tsx";
 import { AuthProvider } from "./context/AuthContext.tsx";
-import "./index.css"; // Keep CSS import last
+import "./index.css";
+import { Toaster } from "sonner";
 
 const rootElement = document.getElementById("root");
 
@@ -15,10 +16,11 @@ const root = createRoot(rootElement);
 
 root.render(
   <StrictMode>
+    <Toaster richColors position="bottom-right" />
     <AuthProvider>
       <StoreProvider>
         <App />
       </StoreProvider>
     </AuthProvider>
-  </StrictMode>,
+  </StrictMode>
 );

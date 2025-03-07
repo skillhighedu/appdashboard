@@ -1,10 +1,9 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useState, useEffect, ReactNode } from "react";
 
-// Define AuthContext type
 interface AuthContextType {
   user: string | null;
   isAuthenticated: boolean;
-  login: (username: string) => void;
+  login: (token: string) => void;
   logout: () => void;
 }
 
@@ -12,22 +11,30 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<string | null>(null);
-  const isAuthenticated = !!user;
+  const [user, setUser] = useState<string | null>(localStorage.getItem("token"));
 
-  const login = (username: string) => setUser(username);
-  const logout = () => setUser(null);
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+    if (storedToken) {
+      setUser(storedToken);
+    }
+  }, []);
+
+  const login = (token: string) => {
+    localStorage.setItem("token", token);
+    setUser(token);
+  };
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    setUser(null);
+  };
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ user, isAuthenticated: !!user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-// Hook for using AuthContext
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) throw new Error("useAuth must be used within AuthProvider");
-  return context;
-};
+export default AuthContext;
