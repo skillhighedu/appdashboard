@@ -1,20 +1,27 @@
 import { useTheme } from "@hooks/useTheme";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sun, Moon, User, HomeIcon, MessageCircle,  Phone,  } from "lucide-react";
+import {
+  Menu,
+  X,
+  Sun,
+  Moon,
+  User,
+  HomeIcon,
+  MessageCircle,
+  Phone,
+} from "lucide-react";
 import Logo from "@assets/images/logo.png";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { authStore } from "@context/authStore";
+import { useAuthStore } from "@context/authStore";
 import { useLocation } from "react-router-dom";
 import Tooltip from "./ToolTip";
 
 export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
-  const currentRouteName = useLocation()
-  const { isAuthenticated } = authStore();
-
-
+  const currentRouteName = useLocation();
+  const { isAuthenticated } = useAuthStore();
 
   // Define menu items with icons
   const menuItems = [
@@ -38,7 +45,7 @@ export default function Navbar() {
             <a
               key={item.name}
               href={item.href}
-              className={`flex text-sm items-center gap-2 ${currentRouteName.pathname === item.href ? "text-primary":""} hover:text-primary dark:hover:text-primary text-gray-500 transition-all`}
+              className={`flex text-sm items-center gap-2 ${currentRouteName.pathname === item.href ? "text-primary" : ""} hover:text-primary dark:hover:text-primary text-gray-500 transition-all`}
             >
               {item.icon}
               {item.name}
@@ -49,13 +56,16 @@ export default function Navbar() {
         {/* Right Section (Dark Mode & Mobile Menu) */}
         <div className="flex items-center gap-4">
           {/* Dark Mode Toggle */}
-          <Tooltip text={theme === "dark" ? "Turn off DarkMode" : "Turn on DarkMode"} position="bottom">
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer transition"
+          <Tooltip
+            text={theme === "dark" ? "Turn off DarkMode" : "Turn on DarkMode"}
+            position="bottom"
           >
-            {theme === "dark" ? <Sun size={24} /> : <Moon size={24} />}
-          </button>
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer transition"
+            >
+              {theme === "dark" ? <Sun size={24} /> : <Moon size={24} />}
+            </button>
           </Tooltip>
 
           {!isAuthenticated ? (
@@ -71,7 +81,7 @@ export default function Navbar() {
             </>
           ) : (
             <Link to="/login">
-              <button className="p-3 text-md transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer rounded-full bg-secondary text-primary hidden md:flex">
+              <button className="p-3 text-md  cursor-pointer rounded-full bg-secondary text-primary hidden md:flex">
                 <User />
               </button>
             </Link>

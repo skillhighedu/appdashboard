@@ -5,8 +5,8 @@ function Home() {
   return (
     <div className="flex flex-col items-left  min-h-screen">
       <Greeting name="Sai kiran" />
-      <Header title="Your Enrolled Courses"/>
-      <Courses/>
+      <Header title="Your Enrolled Courses" />
+      <Courses />
     </div>
   );
 }

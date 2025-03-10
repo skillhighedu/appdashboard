@@ -27,7 +27,7 @@ export default function Hero() {
           : {}
       }
     >
-    
+ 
       {/* Animated Title */}
       <motion.h1
         className="text-4xl  md:text-5xl font-bold text-primary"
@@ -35,11 +35,10 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
-          {/* Logo */}
-          <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+        {/* Logo */}
+        <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <img src={Logo} className="h-auto w-[350px]" alt="Logo" />
         </a>
-
       </motion.h1>
 
       {/* Animated Subtitle */}

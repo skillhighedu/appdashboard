@@ -34,10 +34,10 @@ const SonnerAlert = ({ message, type }: AlertProps) => {
           type === "success"
             ? "#16a34a"
             : type === "error"
-            ? "#dc2626"
-            : type === "warning"
-            ? "#facc15"
-            : "#3b82f6",
+              ? "#dc2626"
+              : type === "warning"
+                ? "#facc15"
+                : "#3b82f6",
       }}
     >
       Show {type} Alert

@@ -13,15 +13,20 @@ export default function Header({ title }: { title: string }) {
     <div className="flex items-center gap-4 p-4 bg-white dark:bg-gray-900">
       {/* Back Button (Hidden for specific routes) */}
       {!hiddenRoutes.includes(location.pathname) && (
-        <button onClick={() => navigate(-1)} className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
-         <Tooltip text="Back">
-         <ArrowLeftIcon className="w-6 h-6 text-primary dark:text-white" />
-         </Tooltip>
+        <button
+          onClick={() => navigate(-1)}
+          className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
+        >
+          <Tooltip text="Back">
+            <ArrowLeftIcon className="w-4 h-4 md:w-6 md:h-6 text-primary dark:text-white" />
+          </Tooltip>
         </button>
       )}
 
       {/* Page Title */}
-      <h1 className="text-3xl font-semibold text-primary dark:text-white">{title}</h1>
+      <h1 className="text-lg md:text-3xl font-semibold text-primary dark:text-white">
+        {title}
+      </h1>
     </div>
   );
 }

@@ -16,7 +16,9 @@ function App() {
       <div className="w-full max-w-7xl mx-auto px-2">
         <Router>
           {/* ✅ Suspense provides a fallback UI while components load */}
-          <Suspense fallback={<div className="text-white text-center">Loading...</div>}>
+          <Suspense
+            fallback={<div className="text-white text-center">Loading...</div>}
+          >
             <Routes>
               {/* Public Routes */}
               <Route
@@ -46,16 +48,15 @@ function App() {
                     </Layout>
                   }
                 />
-                  <Route
+                <Route
                   path="/courseDashboard"
                   element={
                     <Layout>
-                      <CourseDashboard/>
+                      <CourseDashboard />
                     </Layout>
                   }
                 />
               </Route>
-              
             </Routes>
           </Suspense>
         </Router>

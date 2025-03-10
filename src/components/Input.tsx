@@ -9,7 +9,11 @@ export default function Input({ label, error, ...props }: InputProps) {
   return (
     <div className="w-full mb-3">
       {/* Label */}
-      {label && <label className="block text-gray-700 dark:text-gray-300 mb-3">{label}</label>}
+      {label && (
+        <label className="block text-gray-700 dark:text-gray-300 mb-3">
+          {label}
+        </label>
+      )}
 
       {/* Input Field */}
       <input

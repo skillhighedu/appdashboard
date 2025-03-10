@@ -9,7 +9,6 @@
       "@assets/*": ["assets/*"],
       "@types/*": ["types/*"],
       "@context/*": ["context/*"]
-
     },
     "tsBuildInfoFile": "./node_modules/.tsbuildinfo",
 

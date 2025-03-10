@@ -1,13 +1,8 @@
 import axios from "axios";
-import { ApiError } from "../types/api";
 
-export const handleApiError = (error: unknown): ApiError => {
+export const handleApiError = (error: unknown): string => {
   if (axios.isAxiosError(error)) {
-    return {
-      message: error.response?.data?.message || "An error occurred",
-      status: error.response?.status || 500,
-    };
-  } else {
-    return { message: "Unexpected error", status: 500 };
+    return error.response?.data?.message || "An error occurred";
   }
+  return "Unexpected error";
 };

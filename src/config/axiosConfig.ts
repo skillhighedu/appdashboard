@@ -21,9 +21,9 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response && error.response.status === 401) {
+    if (error.response && error.response.status === 403) {
       localStorage.removeItem("token"); // Clear the stored token
-      window.location.href = "/login"; // Redirect to login page
+      // window.location.href = "/login"; // Redirect to login page
     }
     return Promise.reject(error);
   },
