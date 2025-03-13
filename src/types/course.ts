@@ -12,17 +12,23 @@ export interface Course {
   topic: Topic[];
 }
 
+export interface Contents {
+  id :string,
+  contentName:string
+}
+
 export interface Module {
   id: string;
   moduleName: string;
   courseId: string;
-  createdAt: string; // ISO date string
-  updatedAt: string; // ISO date string
+  createdAt: string; 
+  updatedAt: string; 
+  contents:Contents[]
 }
 
 export interface CourseData {
   courseName: string;
-  courseThumbnail:string
+  courseThumbnail: string;
   totalTopicsCount: number;
   modules: Module[];
 }
@@ -33,3 +39,5 @@ export interface SelectedCourse {
   projectProgress: number;
   quizProgress: number;
 }
+
+

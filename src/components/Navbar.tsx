@@ -8,7 +8,7 @@ import {
   User,
   HomeIcon,
   MessageCircle,
-  Phone,
+  PenBox
 } from "lucide-react";
 import Logo from "@assets/images/logo.png";
 import { useState } from "react";
@@ -23,12 +23,15 @@ export default function Navbar() {
   const currentRouteName = useLocation();
   const { isAuthenticated } = useAuthStore();
 
-  // Define menu items with icons
+  // Define menu items with icons (filtering Home & Messages if not authenticated)
   const menuItems = [
-    { name: "Home", href: "/home", icon: <HomeIcon size={20} /> },
-    { name: "Messages", href: "/services", icon: <MessageCircle size={20} /> },
-    // { name: "Instructions", href: "#portfolio", icon: <Image size={20} /> },
-    { name: "Contact", href: "/contact", icon: <Phone size={20} /> },
+    ...(isAuthenticated
+      ? [
+          { name: "Home", href: "/home", icon: <HomeIcon size={20} /> },
+          { name: "Messages", href: "/services", icon: <MessageCircle size={20} /> },
+        ]
+      : []),
+    { name: "Blogs", href: "/blogs", icon: <PenBox size={20} /> },
   ];
 
   return (
@@ -45,7 +48,9 @@ export default function Navbar() {
             <a
               key={item.name}
               href={item.href}
-              className={`flex text-sm items-center gap-2 ${currentRouteName.pathname === item.href ? "text-primary" : ""} hover:text-primary dark:hover:text-primary text-gray-500 transition-all`}
+              className={`flex text-sm items-center gap-2 ${
+                currentRouteName.pathname === item.href ? "text-primary" : ""
+              } hover:text-primary dark:hover:text-primary text-gray-500 transition-all`}
             >
               {item.icon}
               {item.name}
@@ -80,8 +85,8 @@ export default function Navbar() {
               </button>
             </>
           ) : (
-            <Link to="/login">
-              <button className="p-3 text-md  cursor-pointer rounded-full bg-secondary text-primary hidden md:flex">
+            <Link to="/profile">
+              <button className="p-3 text-md cursor-pointer rounded-full bg-secondary text-primary hidden md:flex">
                 <User />
               </button>
             </Link>

@@ -10,7 +10,7 @@ export default function Header({ title }: { title: string }) {
   const hiddenRoutes = ["/", "/home"];
 
   return (
-    <div className="flex items-center gap-4 p-4 bg-white dark:bg-gray-900">
+    <div className="flex items-center gap-4 p-4 bg-white rounded-2xl mb-3 dark:bg-gray-900">
       {/* Back Button (Hidden for specific routes) */}
       {!hiddenRoutes.includes(location.pathname) && (
         <button

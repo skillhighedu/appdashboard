@@ -5,7 +5,6 @@ import Button from "@components/Button";
 import { ArrowRight } from "lucide-react";
 import Logo from "@assets/images/logo.png";
 
-
 export default function Hero() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -27,7 +26,6 @@ export default function Hero() {
           : {}
       }
     >
- 
       {/* Animated Title */}
       <motion.h1
         className="text-4xl  md:text-5xl font-bold text-primary"

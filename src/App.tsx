@@ -4,7 +4,12 @@ import "./App.css";
 import Layout from "./layouts/Layout";
 import { ProtectedRoute } from "@components/ProtectedRoute";
 import CourseDashboard from "@pages/CourseDashboard";
-
+import PlayLayout from './layouts/PlayLayout'
+import Profile from "@pages/Profile";
+import Quiz from "@pages/QuizList";
+import VerifyUser from "@pages/VerifyUser";
+import OTP from "@pages/OTP";
+import Projects from "@pages/Projects";
 // ✅ Lazy load pages
 const Landing = lazy(() => import("@pages/Landing"));
 const Login = lazy(() => import("@pages/Login"));
@@ -37,6 +42,22 @@ function App() {
                   </Layout>
                 }
               />
+                 <Route
+                  path="/verification"
+                  element={
+                    <Layout>
+                      <VerifyUser/>
+                    </Layout>
+                  }
+                />
+                  <Route
+                  path="/otp"
+                  element={
+                    <Layout>
+                      <OTP/>
+                    </Layout>
+                  }
+                />
 
               {/* Protected Routes */}
               <Route element={<ProtectedRoute />}>
@@ -56,6 +77,40 @@ function App() {
                     </Layout>
                   }
                 />
+                 <Route
+                  path="/course_player"
+                  element={
+                    <Layout>
+                      <PlayLayout/>
+                    </Layout>
+                  }
+                />
+                  <Route
+                  path="/profile"
+                  element={
+                    <Layout>
+                      <Profile/>
+                    </Layout>
+                  }
+                />
+                  <Route
+                  path="/quizList"
+                  element={
+                    <Layout>
+                      <Quiz/>
+                    </Layout>
+                  }
+                />
+                 <Route
+                  path="/projects"
+                  element={
+                    <Layout>
+                      <Projects/>
+                    </Layout>
+                  }
+                />
+               
+                
               </Route>
             </Routes>
           </Suspense>

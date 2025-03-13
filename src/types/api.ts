@@ -2,7 +2,7 @@ export interface ApiResponse<T> {
   success: boolean;
   data: T;
   message?: string;
-  additional?:T
+  additional?: T;
 }
 
 export interface ApiError {

@@ -6,7 +6,7 @@ import Input from "../components/Input";
 import { useAuthStore } from "@context/authStore";
 import { useNavigate } from "react-router-dom";
 import { handleApiError } from "@utils/errorHandler";
-
+import { Link } from "react-router-dom";
 //FIX PAGE REFRESH AFTER INCORRECT PASSWORD AND TYPES
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -40,8 +40,7 @@ export default function Login() {
       setTimeout(() => {
         toast.error(handleApiError(error));
       }, 4000);
-    }
-     finally {
+    } finally {
       setLoading(false);
     }
   };
@@ -94,9 +93,11 @@ export default function Login() {
 
         <p className="text-center text-sm text-gray-600 dark:text-gray-400 mt-4">
           Don't have an account?{" "}
-          <a href="#" className="text-primary hover:underline">
+         <Link to="/verification">
+         <a className="text-primary hover:underline">
             Verify Email
           </a>
+         </Link>
         </p>
       </motion.div>
     </div>
