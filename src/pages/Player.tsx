@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { useStore } from "@context/useStore";
 import { fetchCourseTopics } from "../services/lessonsService";
-import {MessageCircle} from 'lucide-react'
+import { MessageCircle } from "lucide-react";
 export default function Content() {
   const [isLoading, setIsLoading] = useState(true);
   const { selectedLesson, setCourseLessons } = useStore();
-  console.log(selectedLesson)
+  console.log(selectedLesson);
   useEffect(() => {
     const loadCourses = async () => {
       try {
@@ -24,7 +24,10 @@ export default function Content() {
     <div className="w-full max-w-6xl bg-white dark:bg-darkBg shadow-sm border-0 rounded-xl overflow-hidden mx-auto">
       {/* Video Embed */}
       {isLoading || !selectedLesson ? (
-        <div className="w-full" style={{ position: "relative", paddingTop: "56.25%" }}>
+        <div
+          className="w-full"
+          style={{ position: "relative", paddingTop: "56.25%" }}
+        >
           <div className="animate-pulse bg-gray-300 dark:bg-gray-700 w-full h-full rounded-lg"></div>
         </div>
       ) : (
@@ -60,7 +63,10 @@ export default function Content() {
         <div className="flex items-center gap-3 mt-6 p-4 bg-white dark:bg-darkBg rounded-lg shadow">
           <MessageCircle className="w-6 h-6 text-primary dark:text-secondary" />
           <p className="text-lg font-medium text-gray-800 dark:text-gray-200">
-            Have doubts on this topic? <span className="text-primary">Raise a question for your mentor.</span>
+            Have doubts on this topic?{" "}
+            <span className="text-primary">
+              Raise a question for your mentor.
+            </span>
           </p>
         </div>
       </div>

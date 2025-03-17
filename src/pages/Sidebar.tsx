@@ -27,30 +27,37 @@ export default function Sidebar() {
         {/* Sidebar Header */}
         <div className="flex justify-between text-primary items-center p-4 border-b border-secondary dark:border-gray-700 bg-secondary/15 dark:bg-gray-800">
           <h2 className="text-lg font-semibold">Course Lessons</h2>
-          <button onClick={toggleSidebar} className="lg:hidden text-gray-600 dark:text-gray-300">
+          <button
+            onClick={toggleSidebar}
+            className="lg:hidden text-gray-600 dark:text-gray-300"
+          >
             <X size={22} />
           </button>
         </div>
 
         {/* Lessons List */}
         <div className="overflow-y-auto max-h-[580px] px-4 py-2 space-y-3 relative">
-          {courseLessons && courseLessons.map((topic) => (
-            <div
-              key={topic.id}
-              onClick={() => setSelectedLesson(topic)}
-              className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-900 rounded-lg shadow-sm hover:bg-primary hover:text-secondary dark:hover:bg-gray-800 transition cursor-pointer"
-            >
-              <span className="text-sm font-medium text-gray-800 dark:text-gray-200">
-                {topic.title}
-              </span>
-            </div>
-          ))}
+          {courseLessons &&
+            courseLessons.map((topic) => (
+              <div
+                key={topic.id}
+                onClick={() => setSelectedLesson(topic)}
+                className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-900 rounded-lg shadow-sm hover:bg-primary hover:text-secondary dark:hover:bg-gray-800 transition cursor-pointer"
+              >
+                <span className="text-sm font-medium text-gray-800 dark:text-gray-200">
+                  {topic.title}
+                </span>
+              </div>
+            ))}
         </div>
       </div>
 
       {/* Overlay for Sidebar on Mobile */}
       {isSidebarOpen && (
-        <div onClick={toggleSidebar} className="fixed inset-0 bg-black opacity-50 lg:hidden z-30 transition-opacity"></div>
+        <div
+          onClick={toggleSidebar}
+          className="fixed inset-0 bg-black opacity-50 lg:hidden z-30 transition-opacity"
+        ></div>
       )}
     </>
   );

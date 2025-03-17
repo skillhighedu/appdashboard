@@ -8,7 +8,7 @@ import {
   User,
   HomeIcon,
   MessageCircle,
-  PenBox
+  PenBox,
 } from "lucide-react";
 import Logo from "@assets/images/logo.png";
 import { useState } from "react";
@@ -28,7 +28,11 @@ export default function Navbar() {
     ...(isAuthenticated
       ? [
           { name: "Home", href: "/home", icon: <HomeIcon size={20} /> },
-          { name: "Messages", href: "/services", icon: <MessageCircle size={20} /> },
+          {
+            name: "Messages",
+            href: "/services",
+            icon: <MessageCircle size={20} />,
+          },
         ]
       : []),
     { name: "Blogs", href: "/blogs", icon: <PenBox size={20} /> },

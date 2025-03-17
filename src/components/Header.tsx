@@ -24,7 +24,7 @@ export default function Header({ title }: { title: string }) {
       )}
 
       {/* Page Title */}
-      <h1 className="text-lg md:text-3xl font-semibold text-primary dark:text-white">
+      <h1 className="text-lg md:text-xl font-semibold text-primary dark:text-white">
         {title}
       </h1>
     </div>

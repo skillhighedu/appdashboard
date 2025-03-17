@@ -13,9 +13,21 @@ export default function Footer() {
   }
 
   const socialMediaIcons = [
-    { icon: <Linkedin size={20} />, text: "LinkedIn", link: "https://linkedin.com" },
-    { icon: <Mail size={20} />, text: "Mail", link: "mailto:someone@example.com" },
-    { icon: <Instagram size={20} />, text: "Instagram", link: "https://instagram.com" },
+    {
+      icon: <Linkedin size={20} />,
+      text: "LinkedIn",
+      link: "https://linkedin.com",
+    },
+    {
+      icon: <Mail size={20} />,
+      text: "Mail",
+      link: "mailto:someone@example.com",
+    },
+    {
+      icon: <Instagram size={20} />,
+      text: "Instagram",
+      link: "https://instagram.com",
+    },
   ];
 
   return (
@@ -25,15 +37,22 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left md:text-left">
           {/* Company Info */}
           <div>
-            <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+            <a
+              href="/"
+              className="flex items-center space-x-3 rtl:space-x-reverse"
+            >
               <img src={Logo} className="h-auto w-[200px]" alt="Logo" />
             </a>
-            <p className="mt-3 ml-6 text-sm">Gain Skills. Get Certified. Reach Higher.</p>
+            <p className="mt-3 ml-6 text-sm">
+              Gain Skills. Get Certified. Reach Higher.
+            </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-black">Quick Links</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-black">
+              Quick Links
+            </h3>
             <ul className="mt-4 space-y-2">
               {["Home", "Services", "Portfolio", "Contact"].map((item) => (
                 <li key={item}>
@@ -50,7 +69,9 @@ export default function Footer() {
 
           {/* Social Links */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-900">Connect with Us</h3>
+            <h3 className="text-lg font-semibold text-gray-900">
+              Connect with Us
+            </h3>
             <div className="flex justify-center md:justify-start gap-4 mt-4">
               {socialMediaIcons.map((socialMedia, index) => (
                 <Tooltip key={index} text={socialMedia.text} position="top">
@@ -72,7 +93,9 @@ export default function Footer() {
         <div className="border-t border-gray-300 dark:border-gray-700 my-6"></div>
 
         {/* Copyright */}
-        <div className="text-center text-sm">© {new Date().getFullYear()} SkillHigh. All rights reserved.</div>
+        <div className="text-center text-sm">
+          © {new Date().getFullYear()} SkillHigh. All rights reserved.
+        </div>
       </div>
     </footer>
   );

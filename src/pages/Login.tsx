@@ -7,7 +7,9 @@ import { useAuthStore } from "@context/authStore";
 import { useNavigate } from "react-router-dom";
 import { handleApiError } from "@utils/errorHandler";
 import { Link } from "react-router-dom";
-//FIX PAGE REFRESH AFTER INCORRECT PASSWORD AND TYPES
+
+
+
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,18 +17,13 @@ export default function Login() {
   const { login } = useAuthStore();
   const navigate = useNavigate();
   const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault(); // ✅ Stop form from refreshing
-    console.log("Form submitted - Preventing refresh!"); // Debug Log
-
+    e.preventDefault();
     setLoading(true);
-
     try {
       const response = await axios.post("/dashboardUsers/login", {
         email,
         password,
       });
-
-      console.log("Response received:", response); // Debug Log
 
       if (response.data.success) {
         toast.success(response.data.message);
@@ -93,11 +90,9 @@ export default function Login() {
 
         <p className="text-center text-sm text-gray-600 dark:text-gray-400 mt-4">
           Don't have an account?{" "}
-         <Link to="/verification">
-         <a className="text-primary hover:underline">
-            Verify Email
-          </a>
-         </Link>
+          <Link to="/verification">
+            <a className="text-primary hover:underline">Verify Email</a>
+          </Link>
         </p>
       </motion.div>
     </div>

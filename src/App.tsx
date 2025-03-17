@@ -4,13 +4,18 @@ import "./App.css";
 import Layout from "./layouts/Layout";
 import { ProtectedRoute } from "@components/ProtectedRoute";
 import CourseDashboard from "@pages/CourseDashboard";
-import PlayLayout from './layouts/PlayLayout'
+import PlayLayout from "./layouts/PlayLayout";
 import Profile from "@pages/Profile";
-import Quiz from "@pages/QuizList";
+import QuizList from "@pages/QuizList";
+import Quiz from "@pages/Quiz";
 import VerifyUser from "@pages/VerifyUser";
 import OTP from "@pages/OTP";
 import Projects from "@pages/Projects";
-// ✅ Lazy load pages
+import Blogs from "@pages/Blogs";
+import NotFound from "@pages/NotFound";
+
+
+
 const Landing = lazy(() => import("@pages/Landing"));
 const Login = lazy(() => import("@pages/Login"));
 const Home = lazy(() => import("@pages/Home"));
@@ -34,6 +39,15 @@ function App() {
                   </Layout>
                 }
               />
+
+<Route
+                path="*"
+                element={
+                  <Layout>
+                    <NotFound />
+                  </Layout>
+                }
+              />
               <Route
                 path="/login"
                 element={
@@ -42,22 +56,30 @@ function App() {
                   </Layout>
                 }
               />
-                 <Route
-                  path="/verification"
-                  element={
-                    <Layout>
-                      <VerifyUser/>
-                    </Layout>
-                  }
-                />
-                  <Route
-                  path="/otp"
-                  element={
-                    <Layout>
-                      <OTP/>
-                    </Layout>
-                  }
-                />
+              <Route
+                path="/verification"
+                element={
+                  <Layout>
+                    <VerifyUser />
+                  </Layout>
+                }
+              />
+                <Route
+                path="/blogs"
+                element={
+                  <Layout>
+                    <Blogs />
+                  </Layout>
+                }
+              />
+              <Route
+                path="/otp"
+                element={
+                  <Layout>
+                    <OTP />
+                  </Layout>
+                }
+              />
 
               {/* Protected Routes */}
               <Route element={<ProtectedRoute />}>
@@ -77,40 +99,46 @@ function App() {
                     </Layout>
                   }
                 />
-                 <Route
+                <Route
                   path="/course_player"
                   element={
                     <Layout>
-                      <PlayLayout/>
+                      <PlayLayout />
                     </Layout>
                   }
                 />
-                  <Route
+                <Route
                   path="/profile"
                   element={
                     <Layout>
-                      <Profile/>
+                      <Profile />
                     </Layout>
                   }
                 />
-                  <Route
+                <Route
                   path="/quizList"
                   element={
                     <Layout>
-                      <Quiz/>
+                      <QuizList />
                     </Layout>
                   }
                 />
                  <Route
-                  path="/projects"
+                  path="/quiz"
                   element={
                     <Layout>
-                      <Projects/>
+                      <Quiz />
                     </Layout>
                   }
                 />
-               
-                
+                <Route
+                  path="/projects"
+                  element={
+                    <Layout>
+                      <Projects />
+                    </Layout>
+                  }
+                />
               </Route>
             </Routes>
           </Suspense>

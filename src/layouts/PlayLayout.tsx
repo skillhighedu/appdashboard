@@ -5,9 +5,8 @@ import Sidebar from "@pages/Sidebar";
 const PlayerLayout = () => {
   return (
     <div className="flex flex-col h-screen">
-         <Header title="Course Name" ></Header>
+      <Header title="Course Name"></Header>
       <div className="flex flex-row gap-4 w-full">
-       
         <div className="w-3/4">
           <Player />
         </div>

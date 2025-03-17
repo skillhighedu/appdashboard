@@ -5,7 +5,10 @@ export default function OTP() {
   const [otp, setOtp] = useState<string[]>(Array(otpLength).fill(""));
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
-  const handleChange = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    index: number,
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     const value = event.target.value;
     if (!/^\d*$/.test(value)) return; // Allow only numbers
 
@@ -19,7 +22,10 @@ export default function OTP() {
     }
   };
 
-  const handleKeyDown = (index: number, event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (
+    index: number,
+    event: React.KeyboardEvent<HTMLInputElement>,
+  ) => {
     if (event.key === "Backspace" && !otp[index] && index > 0) {
       inputRefs.current[index - 1]?.focus();
     }
@@ -29,8 +35,10 @@ export default function OTP() {
     <div className="flex items-center justify-center min-h-screen ">
       <div className="bg-white w-96 p-8 rounded-3xl shadow-xl border border-gray-200 text-center">
         <h2 className="text-2xl font-bold text-gray-900 mb-4">Enter OTP</h2>
-        <p className="text-gray-500 mb-6 text-sm">We've sent a 6-digit OTP to your email.</p>
-        
+        <p className="text-gray-500 mb-6 text-sm">
+          We've sent a 6-digit OTP to your email.
+        </p>
+
         <div className="flex justify-center gap-3">
           {otp.map((digit, index) => (
             <input
@@ -55,9 +63,12 @@ export default function OTP() {
         >
           Verify OTP
         </button>
-        
+
         <p className="mt-4 text-sm text-gray-500">
-          Didn't receive the code? <span className="text-primary cursor-pointer hover:underline">Resend</span>
+          Didn't receive the code?{" "}
+          <span className="text-primary cursor-pointer hover:underline">
+            Resend
+          </span>
         </p>
       </div>
     </div>

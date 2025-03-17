@@ -18,9 +18,12 @@ export default function Greeting({ name }: { name: string }) {
   const [greeting, setGreeting] = useState(getGreeting());
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setGreeting(getGreeting()); // Update greeting every hour
-    }, 1000 * 60 * 60);
+    const interval = setInterval(
+      () => {
+        setGreeting(getGreeting()); // Update greeting every hour
+      },
+      1000 * 60 * 60,
+    );
 
     return () => clearInterval(interval); // Cleanup on unmount
   }, []);

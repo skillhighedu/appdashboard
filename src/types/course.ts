@@ -13,17 +13,17 @@ export interface Course {
 }
 
 export interface Contents {
-  id :string,
-  contentName:string
+  id: string;
+  contentName: string;
 }
 
 export interface Module {
   id: string;
   moduleName: string;
   courseId: string;
-  createdAt: string; 
-  updatedAt: string; 
-  contents:Contents[]
+  createdAt: string;
+  updatedAt: string;
+  contents: Contents[];
 }
 
 export interface CourseData {
@@ -39,5 +39,3 @@ export interface SelectedCourse {
   projectProgress: number;
   quizProgress: number;
 }
-
-

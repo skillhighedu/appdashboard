@@ -7,7 +7,7 @@ import Header from "@components/Header";
 import CircleProgress from "@components/CircleProgress";
 import Button from "@components/Button";
 import Loading from "@components/Loading";
-import { Zap, Brain, Folder } from 'lucide-react'
+import { Zap, Brain, Folder } from "lucide-react";
 import Tooltip from "@components/ToolTip";
 import { Link } from "react-router-dom";
 
@@ -79,8 +79,6 @@ export default function CourseDashboard() {
                 <Button name="Start Project" icon={<Folder />} />
               </Tooltip>
             </Link>
-
-
           </div>
         </div>
       </motion.div>
@@ -131,7 +129,6 @@ export default function CourseDashboard() {
                 {module.moduleName}
               </h4>
 
-
               {/* 📜 Module Contents List */}
               <ul className="mt-4 space-y-2">
                 {module.contents?.map((content) => (
@@ -148,7 +145,6 @@ export default function CourseDashboard() {
           ))}
         </div>
       </div>
-
     </div>
   );
 }
