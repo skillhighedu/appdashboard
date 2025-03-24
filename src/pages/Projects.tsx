@@ -1,35 +1,25 @@
 import { useState, useEffect } from "react";
-import { FileText, CheckCircle, Clock, XCircle, Upload } from "lucide-react";
+import { FileText, Upload} from "lucide-react";
 import Button from "@components/Button";
 import Header from "@components/Header";
 import { useStore } from "@context/useStore";
 import { fetchProjects } from "../services/projectService";
 import { Project } from "../types/projects";
 import SubmitModal from "@components/Model";
-import { toast } from "sonner";
-
-const statusIcons = {
-  Submitted: <CheckCircle className="text-green-500 w-5 h-5" />,
-  Pending: <Clock className="text-yellow-500 w-5 h-5" />,
-  "In Progress": <XCircle className="text-blue-500 w-5 h-5" />,
-};
-
-const getStatus = (project: Project) => {
-  if (!project.solutions || project.solutions.length === 0) return "Pending";
-  return project.solutions[0]?.reviewState === "SUCCESSFUL" ? "Submitted" : "In Progress";
-};
+import { Storage } from "@utils/storage";
 
 export default function Projects() {
   const { projects, setProjects } = useStore();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const courseId = Storage.get("selectedCourseId");
 
   useEffect(() => {
     const loadProjects = async () => {
       try {
-        const data = await fetchProjects("676c2e3cc2820bb3509dda25");
+        const data = await fetchProjects(courseId);
         setProjects(data);
-        toast.success("Solution submitted successfully");
+        console.log(data);
       } catch (error) {
         console.log(error);
       }
@@ -42,19 +32,38 @@ export default function Projects() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen p-2">
+    <div className="flex flex-col min-h-screen px-4 py-6">
+      {/* Header */}
       <Header title="Projects" />
-      <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">Your Projects</h1>
+      <h1 className="text-4xl font-extrabold text-center text-gray-900 dark:text-primary mt-4">
+        Your Projects
+      </h1>
+      <p className="text-lg text-gray-600 dark:text-gray-200 text-center mt-2">
+        Manage and submit your project solutions.
+      </p>
 
-      {/* Grid Layout */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+      {/* Learn GitHub Button */}
+      {/* <div className="flex justify-center mt-6">
+        <a
+          href="https://docs.github.com/en/get-started"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Button name="Learn GitHub" icon={<GithubIcon />} />
+        </a>
+      </div> */}
+
+      {/* Project Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
         {projects?.map((project) => (
           <div
             key={project.id}
-            className="bg-white rounded-lg shadow-sm p-5 border border-gray-200 flex flex-col justify-between transition hover:shadow-md"
+            className="bg-white dark:bg-darkSecondary rounded-2xl shadow-md p-6 border border-gray-200 dark:border-darkPrimary flex flex-col justify-between transition hover:shadow-lg hover:-translate-y-1 duration-200"
           >
             {/* Project Title */}
-            <h2 className="text-lg font-semibold text-gray-800">{project.projectName}</h2>
+            <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-50">
+              {project.projectName}
+            </h2>
 
             {/* Project Link */}
             <a
@@ -67,10 +76,11 @@ export default function Projects() {
             </a>
 
             {/* Status & Submit */}
-            <div className="flex items-center justify-between mt-4">
+            <div className="flex items-center justify-between mt-6">
               <div className="flex items-center gap-2 text-gray-600 text-sm">
-                {statusIcons[getStatus(project)]}
-                <span>{getStatus(project)}</span>
+                <span className="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">
+                  {project.solutions[0]?.reviewState || "Pending"}
+                </span>
               </div>
 
               {!project.solutions[0]?.isCompleted ? (
@@ -83,7 +93,13 @@ export default function Projects() {
                   }}
                 />
               ) : (
-                <span className="text-sm font-medium text-green-600">Completed</span>
+                <Button
+                  name="Check Solution"
+                  onClick={() => {
+                    setSelectedProject(project);
+                    setIsModalOpen(true);
+                  }}
+                />
               )}
             </div>
           </div>
@@ -91,9 +107,9 @@ export default function Projects() {
       </div>
 
       {/* Submit GitHub Link Modal */}
-      <SubmitModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
+      <SubmitModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
         onSubmit={handleSubmit}
         selectedProject={selectedProject}
       />

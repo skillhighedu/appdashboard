@@ -5,6 +5,8 @@ interface AuthContextType {
   isAuthenticated: boolean;
   login: (token: string) => void;
   logout: () => void;
+
+ 
 }
 
 // Create Context

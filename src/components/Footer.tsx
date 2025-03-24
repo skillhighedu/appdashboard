@@ -1,87 +1,100 @@
 import { useLocation } from "react-router-dom";
-import { Linkedin, Mail, Instagram } from "lucide-react";
+import { Linkedin, Mail, Instagram, Twitter } from "lucide-react";
 import Logo from "@assets/images/logo.png";
 import Tooltip from "./ToolTip";
 
 export default function Footer() {
-  const router = useLocation(); // Get current route
-
+  const { pathname } = useLocation();
   const hiddenRoutes = ["/course_player"];
 
-  if (hiddenRoutes.includes(router.pathname)) {
-    return null; // Hide Footer if the current route is in hiddenRoutes
+  if (hiddenRoutes.includes(pathname)) {
+    return null;
   }
 
-  const socialMediaIcons = [
+  const socialMediaLinks = [
     {
       icon: <Linkedin size={20} />,
-      text: "LinkedIn",
-      link: "https://linkedin.com",
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/company/skillhigh/",
     },
     {
       icon: <Mail size={20} />,
-      text: "Mail",
-      link: "mailto:someone@example.com",
+      label: "Email",
+      href: "mailto:admin@skillhigh.in",
     },
     {
       icon: <Instagram size={20} />,
-      text: "Instagram",
-      link: "https://instagram.com",
+      label: "Instagram",
+      href: "https://www.instagram.com/_skillhigh_",
+    },
+    {
+      icon: <Twitter size={20} />,
+      label: "Twitter",
+      href: "https://x.com/SkillHighedu?t=IIeZAdbgRGMSyMejhx6v2A&s=08",
     },
   ];
 
+  const quickLinks = [
+    { label: "Home", href: "#home" },
+    { label: "Services", href: "#services" },
+    { label: "Portfolio", href: "#portfolio" },
+    { label: "Contact", href: "#contact" },
+  ];
+
   return (
-    <footer className="w-full bg-gradient-to-r from-white to-secondary dark:bg-gray-900 text-gray-700 dark:text-black rounded-t-3xl shadow-lg">
-      <div className="container mx-auto px-6 py-10">
-        {/* Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left md:text-left">
-          {/* Company Info */}
-          <div>
-            <a
-              href="/"
-              className="flex items-center space-x-3 rtl:space-x-reverse"
-            >
-              <img src={Logo} className="h-auto w-[200px]" alt="Logo" />
+    <footer className="w-full bg-gradient-to-r from-white rounded-t-4xl to-secondary text-gray-700 shadow-lg dark:bg-gradient-to-r dark:from-gray-900 dark:to-gray-800 dark:text-gray-200">
+      <div className="mx-auto max-w-7xl px-6 py-12">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
+          {/* Brand Section */}
+          <div className="space-y-4">
+            <a href="/" className="flex items-center space-x-3">
+              <img
+                src={Logo}
+                className="h-auto w-[200px]"
+                alt="SkillHigh Logo"
+                loading="lazy"
+              />
             </a>
-            <p className="mt-3 ml-6 text-sm">
+            <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-300">
               Gain Skills. Get Certified. Reach Higher.
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-black">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
               Quick Links
             </h3>
-            <ul className="mt-4 space-y-2">
-              {["Home", "Services", "Portfolio", "Contact"].map((item) => (
-                <li key={item}>
+            <ul className="mt-4 space-y-3">
+              {quickLinks.map((link) => (
+                <li key={link.label}>
                   <a
-                    href={`#${item.toLowerCase()}`}
-                    className="hover:text-primary dark:hover:text-primary transition-all"
+                    href={link.href}
+                    className="text-sm transition-colors hover:text-primary dark:hover:text-primary/80"
                   >
-                    {item}
+                    {link.label}
                   </a>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Social Links */}
+          {/* Social Connections */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-900">
-              Connect with Us
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+              Connect With Us
             </h3>
-            <div className="flex justify-center md:justify-start gap-4 mt-4">
-              {socialMediaIcons.map((socialMedia, index) => (
-                <Tooltip key={index} text={socialMedia.text} position="top">
+            <div className="mt-4 flex flex-wrap gap-4">
+              {socialMediaLinks.map((social) => (
+                <Tooltip key={social.label} text={social.label} position="top">
                   <a
-                    href={socialMedia.link}
+                    href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-primary dark:hover:bg-primary transition"
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-200 text-gray-700 transition-all hover:bg-primary hover:text-white dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-primary"
+                    aria-label={`Follow us on ${social.label}`}
                   >
-                    {socialMedia.icon}
+                    {social.icon}
                   </a>
                 </Tooltip>
               ))}
@@ -90,11 +103,14 @@ export default function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="border-t border-gray-300 dark:border-gray-700 my-6"></div>
+        <hr className="my-8 border-gray-200 dark:border-gray-700" />
 
-        {/* Copyright */}
-        <div className="text-center text-sm">
-          © {new Date().getFullYear()} SkillHigh. All rights reserved.
+        {/* Copyright & Additional Info */}
+        <div className="flex flex-col items-center justify-between gap-4 text-sm text-gray-600 dark:text-gray-400 md:flex-row">
+          <p>
+            © {new Date().getFullYear()} SkillHigh. All rights reserved.
+          </p>
+   
         </div>
       </div>
     </footer>

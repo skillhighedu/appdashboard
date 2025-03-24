@@ -1,64 +1,118 @@
-import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { useState, useEffect } from "react";
+import {  PlayIcon, Check } from "lucide-react";
 import { useStore } from "@context/useStore";
+import { Lesson } from "../types/lessons";
+import { updateLessonCheckbox } from "../services/lessonsService";
+import { Storage } from "@utils/storage"; // To fetch courseId
 
 export default function Sidebar() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const { courseLessons, setSelectedLesson } = useStore();
 
-  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+  const { courseLessons, setSelectedLesson, selectedLesson } = useStore();
+  const [checkedLessons, setCheckedLessons] = useState<Record<string, boolean>>({});
+  const courseId = Storage.get("selectedCourseId"); // Retrieve stored courseId
+
+  useEffect(() => {
+    if (Array.isArray(courseLessons) && courseLessons.length > 0) {
+      const initialChecked: Record<string, boolean> = {};
+      courseLessons.forEach((lesson) => {
+        initialChecked[lesson.id] = Array.isArray(lesson.topicCheckbox) ? lesson.topicCheckbox[0]?.completed || false : false;
+      });
+      setCheckedLessons(initialChecked);
+    }
+  }, [courseLessons]);
+
+
+
+  const handleCheckboxChange = async (lessonId: string) => {
+    try {
+      const newCheckedState = !checkedLessons[lessonId];
+
+      // Update UI Optimistically
+      setCheckedLessons((prevChecked) => ({
+        ...prevChecked,
+        [lessonId]: newCheckedState,
+      }));
+
+      // Call API to update checkbox status
+      await updateLessonCheckbox(lessonId, newCheckedState, courseId);
+    } catch (error) {
+      console.error("Failed to update lesson checkbox:", error);
+    }
+  };
 
   return (
     <>
-      {/* Mobile Sidebar Toggle Button */}
-      <button
-        onClick={toggleSidebar}
-        className="lg:hidden fixed top-12 left-4 bg-primary text-white rounded-full p-3 z-50 shadow-md transition-all hover:bg-opacity-80"
-      >
-        {isSidebarOpen ? <X size={22} /> : <Menu size={22} />}
-      </button>
+      
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 lg:relative bg-white dark:bg-darkBg text-gray-900 dark:text-white transition-all transform ${
-          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } lg:translate-x-0 h-full w-72 lg:w-full shadow-sm border-0 rounded-xl overflow-hidden z-40`}
+        className="fixed inset-y-0 left-0 lg:static w-auto rounded-lg bg-white dark:bg-darkSecondary transform transition-all duration-300 ease-in-out ${
+          
+         lg:translate-x-0 z-40"
       >
-        {/* Sidebar Header */}
-        <div className="flex justify-between text-primary items-center p-4 border-b border-secondary dark:border-gray-700 bg-secondary/15 dark:bg-gray-800">
-          <h2 className="text-lg font-semibold">Course Lessons</h2>
-          <button
-            onClick={toggleSidebar}
-            className="lg:hidden text-gray-600 dark:text-gray-300"
-          >
-            <X size={22} />
-          </button>
+        <div className="p-4 bg-gray-50 dark:bg-darkSecondary border-gray-200 rounded-lg flex items-center justify-between">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Course Lessons</h2>
+         
         </div>
 
-        {/* Lessons List */}
-        <div className="overflow-y-auto max-h-[580px] px-4 py-2 space-y-3 relative">
-          {courseLessons &&
-            courseLessons.map((topic) => (
-              <div
-                key={topic.id}
-                onClick={() => setSelectedLesson(topic)}
-                className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-900 rounded-lg shadow-sm hover:bg-primary hover:text-secondary dark:hover:bg-gray-800 transition cursor-pointer"
+        {/* Lesson List */}
+        <nav className="p-4 space-y-2 max-h-[calc(100vh-4rem)] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600">
+          {courseLessons?.map((lesson: Lesson) => (
+            <div
+              key={lesson.id}
+              className={`group flex items-center gap-3 p-3 rounded-lg transition-all duration-200 ${
+                selectedLesson?.id === lesson.id
+                  ? "bg-primary/10 border border-primary/20"
+                  : "bg-gray-50 dark:bg-darkPrimary hover:bg-gray-100"
+              }`}
+            >
+              {/* Checkbox */}
+              <input
+                type="checkbox"
+                id={`lesson-${lesson.id}`}
+                checked={checkedLessons[lesson.id] || false}
+                onChange={() => handleCheckboxChange(lesson.id)}
+                className="hidden"
+              />
+              <label
+                htmlFor={`lesson-${lesson.id}`}
+                className={`flex-shrink-0 w-5 h-5 flex items-center justify-center border-2 rounded-md cursor-pointer transition-all ${
+                  checkedLessons[lesson.id]
+                    ? "bg-primary border-primary text-white"
+                    : "border-gray-300 dark:border-gray-600 group-hover:border-gray-400 dark:group-hover:border-gray-500"
+                }`}
               >
-                <span className="text-sm font-medium text-gray-800 dark:text-gray-200">
-                  {topic.title}
+                {checkedLessons[lesson.id] && <Check size={14} />}
+              </label>
+
+              {/* Lesson Button */}
+              <button
+                onClick={() => setSelectedLesson(lesson)}
+                className="flex items-center gap-2 w-full text-left cursor-pointer"
+              >
+                <PlayIcon
+                  className={`w-4 h-4 flex-shrink-0 transition-colors ${
+                    selectedLesson?.id === lesson.id
+                      ? "text-primary"
+                      : "text-gray-500 dark:text-gray-400 group-hover:text-primary"
+                  }`}
+                />
+                <span
+                  className={`text-sm font-medium transition-colors ${
+                    selectedLesson?.id === lesson.id
+                      ? "text-primary"
+                      : "text-gray-700 dark:text-gray-200 group-hover:text-primary"
+                  }`}
+                >
+                  {lesson.title}
                 </span>
-              </div>
-            ))}
-        </div>
+              </button>
+            </div>
+          ))}
+        </nav>
       </div>
 
-      {/* Overlay for Sidebar on Mobile */}
-      {isSidebarOpen && (
-        <div
-          onClick={toggleSidebar}
-          className="fixed inset-0 bg-black opacity-50 lg:hidden z-30 transition-opacity"
-        ></div>
-      )}
+     
     </>
   );
 }

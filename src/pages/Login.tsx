@@ -8,8 +8,6 @@ import { useNavigate } from "react-router-dom";
 import { handleApiError } from "@utils/errorHandler";
 import { Link } from "react-router-dom";
 
-
-
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,14 +18,14 @@ export default function Login() {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post("/dashboardUsers/login", {
+      const response = await axios.post("/dashboardUsers/user/login", {
         email,
         password,
       });
 
-      if (response.data.success) {
+      if (response.data) {
         toast.success(response.data.message);
-        login(response.data.token);
+        login(response.data.additional);
         navigate("/home");
       } else {
         toast.error("Invalid credentials! Please try again.");
@@ -36,7 +34,7 @@ export default function Login() {
       console.error("Login error:", error);
       setTimeout(() => {
         toast.error(handleApiError(error));
-      }, 4000);
+      }, 1000);
     } finally {
       setLoading(false);
     }
@@ -70,19 +68,17 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <div className="flex items-center justify-between text-sm">
-            <label className="flex items-center gap-2">
-              <input type="checkbox" className="accent-primary" /> Remember me
-            </label>
-            <a href="#" className="text-primary hover:underline">
+          <div className="flex items-end justify-end text-sm">
+        
+            <Link to="/forgot-password" className="text-primary hover:underline">
               Forgot password?
-            </a>
+            </Link>
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full mt-4 px-4 py-3 text-white font-medium rounded-lg bg-gradient-to-r from-[#0D8267] to-[#031C16] shadow-md hover:opacity-90 transition-all disabled:opacity-50"
+            className="w-full mt-4 px-4 py-3 text-white font-medium rounded-lg bg-gradient-to-r from-[#0D8267] to-[#031C16] shadow-md hover:opacity-90 transition-all disabled:opacity-50 cursor-pointer"
           >
             {loading ? "Logging in..." : "Login"}
           </button>

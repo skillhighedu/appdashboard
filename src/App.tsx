@@ -13,8 +13,8 @@ import OTP from "@pages/OTP";
 import Projects from "@pages/Projects";
 import Blogs from "@pages/Blogs";
 import NotFound from "@pages/NotFound";
-
-
+import DetailsForm from "@pages/DetailsForm";
+import ForgotPassword from "@pages/ForgotPassword";
 
 const Landing = lazy(() => import("@pages/Landing"));
 const Login = lazy(() => import("@pages/Login"));
@@ -22,8 +22,8 @@ const Home = lazy(() => import("@pages/Home"));
 
 function App() {
   return (
-    <div className="min-h-screen dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
-      <div className="w-full max-w-7xl mx-auto px-2">
+    <div className="min-h-screen  flex items-center justify-center">
+      <div className="w-full max-w-screen mx-auto px-2 lg:px-6">
         <Router>
           {/* ✅ Suspense provides a fallback UI while components load */}
           <Suspense
@@ -40,7 +40,7 @@ function App() {
                 }
               />
 
-<Route
+              <Route
                 path="*"
                 element={
                   <Layout>
@@ -64,11 +64,19 @@ function App() {
                   </Layout>
                 }
               />
-                <Route
+              <Route
                 path="/blogs"
                 element={
                   <Layout>
                     <Blogs />
+                  </Layout>
+                }
+              />
+               <Route
+                path="/forgot-password"
+                element={
+                  <Layout>
+                    <ForgotPassword />
                   </Layout>
                 }
               />
@@ -123,7 +131,7 @@ function App() {
                     </Layout>
                   }
                 />
-                 <Route
+                <Route
                   path="/quiz"
                   element={
                     <Layout>
@@ -136,6 +144,14 @@ function App() {
                   element={
                     <Layout>
                       <Projects />
+                    </Layout>
+                  }
+                />
+                 <Route
+                  path="/setup-details"
+                  element={
+                    <Layout>
+                      <DetailsForm />
                     </Layout>
                   }
                 />

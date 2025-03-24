@@ -1,4 +1,5 @@
 export interface Lesson {
+  topicCheckbox: boolean;
   id: string;
   title: string;
   description: string;

@@ -1,8 +1,17 @@
 import axios from "axios";
+import { toast } from "sonner";
 
 export const handleApiError = (error: unknown): string => {
+  console.log(error)
   if (axios.isAxiosError(error)) {
-    console.log(error);
+    const errors = error.response?.data?.errors;
+
+    if (Array.isArray(errors)) {
+      errors.forEach((err) => toast.error(err.message)); // Show all validation messages
+    } else {
+      toast.error(error.response?.data?.message || "An error occurred");
+    }
+
     return error.response?.data?.message || "An error occurred";
   }
   return "Unexpected error";

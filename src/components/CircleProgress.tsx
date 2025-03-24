@@ -33,7 +33,7 @@ export default function CircleProgress({ value, label }: CircleProgressProps) {
             strokeWidth="6"
             fill="transparent"
             strokeLinecap="round"
-            className="text-primary dark:text-blue-400"
+            className="text-primary dark:text-primary"
             strokeDasharray={circumference}
             strokeDashoffset={offset}
             animate={{ strokeDashoffset: offset }}

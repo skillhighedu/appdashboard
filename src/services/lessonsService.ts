@@ -17,3 +17,22 @@ export const fetchCourseTopics = async (
     throw handleApiError(error);
   }
 };
+
+//UPDATE THE CHECKBOX TRUE OR FALSE
+export const updateLessonCheckbox = async (topicId: string, completed:boolean, courseId:string): Promise<Lesson[]> => {
+  try {
+
+    const response = await apiClient.post<ApiResponse<Lesson[]>>(
+      `dashboardUsers/user/lessons/lessonCheckbox/${topicId}`, {completed,courseId}
+    );
+
+    return response.data.additional ?? [];
+  } catch (error) {
+    throw handleApiError(error);
+  }
+};
+
+
+
+
+

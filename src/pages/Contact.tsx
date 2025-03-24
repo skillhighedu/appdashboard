@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-
+import ContactUs from '@assets/images/contact.png'
 export default function Contact() {
   return (
-    <div className="flex flex-col md:flex-row justify-center items-center min-h-screen px-4 dark:bg-gray-900">
+    <div className="flex flex-col md:flex-row justify-center items-center min-h-screen px-4 dark:bg-darkPrimary">
       {/* Illustration */}
       <motion.div
         initial={{ opacity: 0, x: -50 }}
@@ -11,7 +11,7 @@ export default function Contact() {
         className="w-full md:w-1/2 flex justify-center"
       >
         <img
-          src="https://illustrations.popsy.co/white/contact.svg"
+          src={ContactUs}
           alt="Contact Illustration"
           className="max-w-xs md:max-w-md"
         />
@@ -22,7 +22,7 @@ export default function Contact() {
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-8 w-full max-w-md mt-8 md:mt-0"
+        className="bg-white dark:bg-darkSecondary shadow-lg rounded-2xl p-8 w-full max-w-md mt-8 md:mt-0"
       >
         <h2 className="text-3xl font-bold text-center text-primary dark:text-white">
           Contact Us

@@ -7,8 +7,9 @@ import {
   Moon,
   User,
   HomeIcon,
-  MessageCircle,
+  // MessageCircle,
   PenBox,
+
 } from "lucide-react";
 import Logo from "@assets/images/logo.png";
 import { useState } from "react";
@@ -25,16 +26,17 @@ export default function Navbar() {
 
   // Define menu items with icons (filtering Home & Messages if not authenticated)
   const menuItems = [
+    { name: "Home", href: "/home", icon: <HomeIcon size={20} /> },
     ...(isAuthenticated
       ? [
-          { name: "Home", href: "/home", icon: <HomeIcon size={20} /> },
-          {
-            name: "Messages",
-            href: "/services",
-            icon: <MessageCircle size={20} />,
-          },
-        ]
+        // {
+        //   name: "Messages",
+        //   href: "/services",
+        //   icon: <MessageCircle size={20} />,
+        // },
+      ]
       : []),
+
     { name: "Blogs", href: "/blogs", icon: <PenBox size={20} /> },
   ];
 
@@ -52,9 +54,8 @@ export default function Navbar() {
             <a
               key={item.name}
               href={item.href}
-              className={`flex text-sm items-center gap-2 ${
-                currentRouteName.pathname === item.href ? "text-primary" : ""
-              } hover:text-primary dark:hover:text-primary text-gray-500 transition-all`}
+              className={`flex text-sm items-center gap-2 ${currentRouteName.pathname === item.href ? "text-primary" : ""
+                } hover:text-primary dark:hover:text-primary text-gray-500 dark:text-gray-100 transition-all`}
             >
               {item.icon}
               {item.name}
@@ -63,7 +64,7 @@ export default function Navbar() {
         </div>
 
         {/* Right Section (Dark Mode & Mobile Menu) */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-1 md:gap-4">
           {/* Dark Mode Toggle */}
           <Tooltip
             text={theme === "dark" ? "Turn off DarkMode" : "Turn on DarkMode"}
@@ -97,7 +98,7 @@ export default function Navbar() {
           )}
 
           {/* Mobile Menu Toggle */}
-          <button onClick={() => setIsOpen(true)} className="md:hidden p-2">
+          <button onClick={() => setIsOpen(true)} className="md:hidden p-2 cursor-pointer">
             <Menu size={28} />
           </button>
         </div>
@@ -109,7 +110,7 @@ export default function Navbar() {
           <>
             {/* Backdrop */}
             <motion.div
-              className="fixed inset-0 bg-black bg-opacity-50 z-40"
+              className="fixed inset-0  bg-opacity-50 z-40"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -118,7 +119,7 @@ export default function Navbar() {
 
             {/* Sliding Menu from Top */}
             <motion.div
-              className="fixed top-0 left-0 w-full bg-white dark:bg-darkPrimary dark:text-white shadow-lg z-50 flex flex-col p-6 space-y-6"
+              className="fixed top-0 left-0 w-full bg-white dark:bg-darkSecondary dark:text-white shadow-lg z-50 flex flex-col p-6  space-y-6"
               initial={{ y: "-100%" }}
               animate={{ y: 0 }}
               exit={{ y: "-100%" }}
@@ -127,7 +128,7 @@ export default function Navbar() {
               {/* Close Button */}
               <button
                 onClick={() => setIsOpen(false)}
-                className="self-end p-2 text-gray-700 dark:text-gray-300"
+                className="self-end p-2 text-gray-700 dark:text-gray-300 cursor-pointer"
               >
                 <X size={28} />
               </button>
@@ -147,13 +148,24 @@ export default function Navbar() {
 
               {/* Mobile Buttons */}
               <div className="flex flex-row space-x-4">
-                <button className="px-6 py-3 text-md rounded-lg transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer bg-secondary text-primary">
-                  Login
-                </button>
-                <button className="px-6 py-3 text-md rounded-lg transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer bg-gradient-to-r from-[#0D8267] to-[#031C16] text-white">
-                  Join Now
-                </button>
+                {isAuthenticated ? (
+                  <Link to="/profile">
+                    <button className="p-3 text-md cursor-pointer rounded-full bg-secondary text-primary flex md:hidden">
+                      <User />
+                    </button>
+                  </Link>
+                ) : (
+                  <div className="flex space-x-4">
+                    <button className="px-6 py-3 text-md rounded-lg transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer bg-secondary text-primary">
+                      Login
+                    </button>
+                    <button className="px-6 py-3 text-md rounded-lg transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer bg-gradient-to-r from-[#0D8267] to-[#031C16] text-white">
+                      Join Now
+                    </button>
+                  </div>
+                )}
               </div>
+
             </motion.div>
           </>
         )}
