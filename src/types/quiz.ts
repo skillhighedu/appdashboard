@@ -40,4 +40,3 @@ interface Quizzes {
 
 // Since your data is an array of quizzes
 export type QuizArray = Quizzes[];
-

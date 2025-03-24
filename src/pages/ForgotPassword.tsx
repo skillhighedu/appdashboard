@@ -1,7 +1,7 @@
 import Input from "@components/Input";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { forgotOtpService, resetPassword } from '../services/accountServices';
+import { forgotOtpService, resetPassword } from "../services/accountServices";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { useStore } from "@context/useStore";
@@ -12,7 +12,8 @@ interface FormData {
 }
 
 export default function ForgotPassword() {
-  const { setEmail, setIsForgotPassword,isVerified,setIsVerified } = useStore();
+  const { setEmail, setIsForgotPassword, isVerified, setIsVerified } =
+    useStore();
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const navigate = useNavigate();
@@ -42,24 +43,25 @@ export default function ForgotPassword() {
     }
 
     if (isVerified && formData.newPassword.length < 8) {
-      toast.error("C’mon, your password’s shorter than a T-Rex’s arms! 8+ characters, please!");
+      toast.error(
+        "C’mon, your password’s shorter than a T-Rex’s arms! 8+ characters, please!",
+      );
       return;
     }
 
     setIsSubmitting(true);
 
-      const response = await forgotOtpService(formData.email);
-      
-      if (response.success) {
-        setEmail(formData.email); // Store email in global state
-        setIsForgotPassword(true);
-        setIsVerified(true);
-        toast.success(response.message);
-        navigate("/otp");
-      }
+    const response = await forgotOtpService(formData.email);
 
-      setIsSubmitting(false);
-    
+    if (response.success) {
+      setEmail(formData.email); // Store email in global state
+      setIsForgotPassword(true);
+      setIsVerified(true);
+      toast.success(response.message);
+      navigate("/otp");
+    }
+
+    setIsSubmitting(false);
   };
 
   const handleResetPassword = async () => {
@@ -74,22 +76,24 @@ export default function ForgotPassword() {
     }
 
     if (isVerified && formData.newPassword.length < 8) {
-      toast.error("C’mon, your password’s shorter than a T-Rex’s arms! 8+ characters, please!");
+      toast.error(
+        "C’mon, your password’s shorter than a T-Rex’s arms! 8+ characters, please!",
+      );
       return;
     }
 
     setIsSubmitting(true);
 
-      const response = await resetPassword(formData.email,formData.newPassword);
-      
-      if (response) {
-        setEmail(formData.email); // Store email in global state
-        setIsForgotPassword(false);
-        setIsVerified(false);
-        toast.success(response.message);
-        navigate("/login");
-      }
-      setIsSubmitting(false);
+    const response = await resetPassword(formData.email, formData.newPassword);
+
+    if (response) {
+      setEmail(formData.email); // Store email in global state
+      setIsForgotPassword(false);
+      setIsVerified(false);
+      toast.success(response.message);
+      navigate("/login");
+    }
+    setIsSubmitting(false);
   };
   return (
     <div className="flex min-h-screen items-center justify-center p-4">
@@ -104,7 +108,8 @@ export default function ForgotPassword() {
             Password Reset
           </h2>
           <p className="mb-6 text-sm text-gray-500">
-            Forgot your password? No worries, we’ll ninja-kick it back to life with your email and a shiny new one!
+            Forgot your password? No worries, we’ll ninja-kick it back to life
+            with your email and a shiny new one!
           </p>
 
           {/* Form Fields */}
@@ -145,15 +150,18 @@ export default function ForgotPassword() {
               {isSubmitting
                 ? "Doing the magic..."
                 : isVerified
-                ? "Unleash the New Password!"
-                : "Verify Email"}
+                  ? "Unleash the New Password!"
+                  : "Verify Email"}
             </button>
           </div>
 
           {/* Optional Hint */}
-          {isVerified && <p className="mt-4 text-center text-xs text-gray-400">
-            Pro tip: Make it 8+ characters or the password police will come for you!
-          </p> }
+          {isVerified && (
+            <p className="mt-4 text-center text-xs text-gray-400">
+              Pro tip: Make it 8+ characters or the password police will come
+              for you!
+            </p>
+          )}
         </div>
       </motion.div>
     </div>

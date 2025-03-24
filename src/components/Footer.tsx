@@ -107,10 +107,7 @@ export default function Footer() {
 
         {/* Copyright & Additional Info */}
         <div className="flex flex-col items-center justify-between gap-4 text-sm text-gray-600 dark:text-gray-400 md:flex-row">
-          <p>
-            © {new Date().getFullYear()} SkillHigh. All rights reserved.
-          </p>
-   
+          <p>© {new Date().getFullYear()} SkillHigh. All rights reserved.</p>
         </div>
       </div>
     </footer>

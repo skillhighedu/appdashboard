@@ -1,27 +1,28 @@
 import { useState, useEffect } from "react";
-import {  PlayIcon, Check } from "lucide-react";
+import { PlayIcon, Check } from "lucide-react";
 import { useStore } from "@context/useStore";
 import { Lesson } from "../types/lessons";
 import { updateLessonCheckbox } from "../services/lessonsService";
 import { Storage } from "@utils/storage"; // To fetch courseId
 
 export default function Sidebar() {
-
   const { courseLessons, setSelectedLesson, selectedLesson } = useStore();
-  const [checkedLessons, setCheckedLessons] = useState<Record<string, boolean>>({});
+  const [checkedLessons, setCheckedLessons] = useState<Record<string, boolean>>(
+    {},
+  );
   const courseId = Storage.get("selectedCourseId"); // Retrieve stored courseId
 
   useEffect(() => {
     if (Array.isArray(courseLessons) && courseLessons.length > 0) {
       const initialChecked: Record<string, boolean> = {};
       courseLessons.forEach((lesson) => {
-        initialChecked[lesson.id] = Array.isArray(lesson.topicCheckbox) ? lesson.topicCheckbox[0]?.completed || false : false;
+        initialChecked[lesson.id] = Array.isArray(lesson.topicCheckbox)
+          ? lesson.topicCheckbox[0]?.completed || false
+          : false;
       });
       setCheckedLessons(initialChecked);
     }
   }, [courseLessons]);
-
-
 
   const handleCheckboxChange = async (lessonId: string) => {
     try {
@@ -42,8 +43,6 @@ export default function Sidebar() {
 
   return (
     <>
-      
-
       {/* Sidebar */}
       <div
         className="fixed inset-y-0 left-0 lg:static w-auto rounded-lg bg-white dark:bg-darkSecondary transform transition-all duration-300 ease-in-out ${
@@ -51,8 +50,9 @@ export default function Sidebar() {
          lg:translate-x-0 z-40"
       >
         <div className="p-4 bg-gray-50 dark:bg-darkSecondary border-gray-200 rounded-lg flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Course Lessons</h2>
-         
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+            Course Lessons
+          </h2>
         </div>
 
         {/* Lesson List */}
@@ -111,8 +111,6 @@ export default function Sidebar() {
           ))}
         </nav>
       </div>
-
-     
     </>
   );
 }

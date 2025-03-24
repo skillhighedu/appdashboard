@@ -4,7 +4,7 @@ import Dot_Pattern from "@assets/images/dot-pattern.png";
 import Button from "@components/Button";
 import { ArrowRight } from "lucide-react";
 import Logo from "@assets/images/logo.png";
-
+import { Link } from "react-router-dom";
 export default function Hero() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -41,7 +41,7 @@ export default function Hero() {
 
       {/* Animated Subtitle */}
       <motion.h2
-        className="text-lg text-darkSecondary md:text-4xl font-medium mt-7 max-w-4xl"
+        className="text-lg text-darkSecondary dark:text-gray-200 md:text-4xl font-medium mt-7 max-w-4xl"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
@@ -56,7 +56,9 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeOut", delay: 0.6 }}
       >
-        <Button name="Get Started" icon={<ArrowRight />} />
+       <Link to="/login">
+       <Button name="Get Started" icon={<ArrowRight />} />
+       </Link>
       </motion.div>
     </div>
   );

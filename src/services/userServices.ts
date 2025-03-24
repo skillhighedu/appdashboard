@@ -1,8 +1,7 @@
 import apiClient from "@config/axiosConfig";
 import { ApiResponse } from "../types/api";
-import { userProfile,Details } from "../types/user";
+import { userProfile, Details } from "../types/user";
 import { handleApiError } from "@utils/errorHandler";
-
 
 //FETCH THE USE PROFILE
 export const fetchUserProfile = async (): Promise<userProfile> => {
@@ -11,7 +10,6 @@ export const fetchUserProfile = async (): Promise<userProfile> => {
       "/dashboardUsers/user/user-profile",
     );
 
-  
     if (!response.data.additional) {
       throw new Error("Details data is undefined");
     }
@@ -21,17 +19,16 @@ export const fetchUserProfile = async (): Promise<userProfile> => {
   }
 };
 
-
 export const setDetails = async (
   name: string,
-  password: string
+  password: string,
 ): Promise<Details> => {
   try {
     const response = await apiClient.post<ApiResponse<Details>>(
       "/dashboardUsers/user/set-details",
-      { name, password }
+      { name, password },
     );
-    console.log(response)
+    console.log(response);
     if (!response.data.additional) {
       throw new Error("Details data is undefined");
     }

@@ -9,7 +9,6 @@ import {
   HomeIcon,
   // MessageCircle,
   PenBox,
-
 } from "lucide-react";
 import Logo from "@assets/images/logo.png";
 import { useState } from "react";
@@ -29,12 +28,12 @@ export default function Navbar() {
     { name: "Home", href: "/home", icon: <HomeIcon size={20} /> },
     ...(isAuthenticated
       ? [
-        // {
-        //   name: "Messages",
-        //   href: "/services",
-        //   icon: <MessageCircle size={20} />,
-        // },
-      ]
+          // {
+          //   name: "Messages",
+          //   href: "/services",
+          //   icon: <MessageCircle size={20} />,
+          // },
+        ]
       : []),
 
     { name: "Blogs", href: "/blogs", icon: <PenBox size={20} /> },
@@ -54,8 +53,9 @@ export default function Navbar() {
             <a
               key={item.name}
               href={item.href}
-              className={`flex text-sm items-center gap-2 ${currentRouteName.pathname === item.href ? "text-primary" : ""
-                } hover:text-primary dark:hover:text-primary text-gray-500 dark:text-gray-100 transition-all`}
+              className={`flex text-sm items-center gap-2 ${
+                currentRouteName.pathname === item.href ? "text-primary" : ""
+              } hover:text-primary dark:hover:text-primary text-gray-500 dark:text-gray-100 transition-all`}
             >
               {item.icon}
               {item.name}
@@ -98,7 +98,10 @@ export default function Navbar() {
           )}
 
           {/* Mobile Menu Toggle */}
-          <button onClick={() => setIsOpen(true)} className="md:hidden p-2 cursor-pointer">
+          <button
+            onClick={() => setIsOpen(true)}
+            className="md:hidden p-2 cursor-pointer"
+          >
             <Menu size={28} />
           </button>
         </div>
@@ -156,16 +159,17 @@ export default function Navbar() {
                   </Link>
                 ) : (
                   <div className="flex space-x-4">
+                     <Link to="/login">
                     <button className="px-6 py-3 text-md rounded-lg transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer bg-secondary text-primary">
                       Login
                     </button>
+                    </Link>
                     <button className="px-6 py-3 text-md rounded-lg transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer bg-gradient-to-r from-[#0D8267] to-[#031C16] text-white">
                       Join Now
                     </button>
                   </div>
                 )}
               </div>
-
             </motion.div>
           </>
         )}

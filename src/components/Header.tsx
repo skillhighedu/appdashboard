@@ -5,10 +5,14 @@ import Tooltip from "./ToolTip";
 interface HeaderProps {
   title: string;
   onSidebarToggle?: () => void; // Optional sidebar toggle for mobile
-  isSidebarOpen?: boolean;      // Optional sidebar state
+  isSidebarOpen?: boolean; // Optional sidebar state
 }
 
-export default function Header({ title, onSidebarToggle, isSidebarOpen }: HeaderProps) {
+export default function Header({
+  title,
+  onSidebarToggle,
+  isSidebarOpen,
+}: HeaderProps) {
   const navigate = useNavigate();
   const location = useLocation();
 

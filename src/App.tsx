@@ -72,7 +72,7 @@ function App() {
                   </Layout>
                 }
               />
-               <Route
+              <Route
                 path="/forgot-password"
                 element={
                   <Layout>
@@ -147,7 +147,7 @@ function App() {
                     </Layout>
                   }
                 />
-                 <Route
+                <Route
                   path="/setup-details"
                   element={
                     <Layout>

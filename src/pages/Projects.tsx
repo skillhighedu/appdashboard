@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { FileText, Upload} from "lucide-react";
+import { FileText, Upload } from "lucide-react";
 import Button from "@components/Button";
 import Header from "@components/Header";
 import { useStore } from "@context/useStore";

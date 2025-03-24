@@ -25,10 +25,10 @@ export default function Quiz() {
     loadCourses();
   }, [courseId]);
 
-  const handleSelectedQuiz = (quizId:string) => {
+  const handleSelectedQuiz = (quizId: string) => {
     Storage.set("quizid", quizId);
     navigate("/quiz");
-  }
+  };
 
   return (
     <div className="flex flex-col min-h-screen p-2">
@@ -57,9 +57,12 @@ export default function Quiz() {
                 <p className="text-lg text-gray-600 mb-6">
                   Total Questions: {quiz.questions.length}
                 </p>
-              
-                  <Button  onClick={()=>handleSelectedQuiz(quiz.id)} name="Start Quiz" icon={<ArrowUpRight />} />
-           
+
+                <Button
+                  onClick={() => handleSelectedQuiz(quiz.id)}
+                  name="Start Quiz"
+                  icon={<ArrowUpRight />}
+                />
               </div>
             );
           })}

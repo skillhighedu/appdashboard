@@ -1,15 +1,12 @@
 import apiClient from "@config/axiosConfig";
 import { ApiResponse } from "../types/api";
-import {  QuizArray,Quiz } from "../types/quiz";
+import { QuizArray, Quiz } from "../types/quiz";
 import { handleApiError } from "@utils/errorHandler";
 
-interface Answers  {
-  questionId :string;
-  answerId:string;
+interface Answers {
+  questionId: string;
+  answerId: string;
 }
-
-
-
 
 // FETCH QUIZZES USING COURSE ID
 export const fetchAllQuizzes = async (courseId: string): Promise<QuizArray> => {
@@ -34,7 +31,7 @@ export const fetchQuizQuestions = async (quizId: string): Promise<Quiz> => {
     const response = await apiClient.get<ApiResponse<Quiz>>(
       `quiz/quizzes/${quizId}`,
     );
-    console.log(response)
+    console.log(response);
 
     if (!response.data.additional) {
       throw new Error("Quiz Questions data is undefined");
@@ -47,13 +44,17 @@ export const fetchQuizQuestions = async (quizId: string): Promise<Quiz> => {
 };
 
 // FETCH QUIZZES USING COURSE ID
-export const submitQuiz = async (quizId: string,answers:Answers[]): Promise<string> => {
-  console.log(answers)
+export const submitQuiz = async (
+  quizId: string,
+  answers: Answers[],
+): Promise<string> => {
+  console.log(answers);
   try {
     const response = await apiClient.post<ApiResponse<string>>(
-      `quiz/quizzes/submitResult/${quizId}`,{answers}
+      `quiz/quizzes/submitResult/${quizId}`,
+      { answers },
     );
-    console.log(response)
+    console.log(response);
     if (!response.data.additional) {
       throw new Error("Quiz Answers data is undefined");
     }

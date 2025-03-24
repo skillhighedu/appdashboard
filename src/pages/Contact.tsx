@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import ContactUs from '@assets/images/contact.png'
+import ContactUs from "@assets/images/contact.png";
 export default function Contact() {
   return (
     <div className="flex flex-col md:flex-row justify-center items-center min-h-screen px-4 dark:bg-darkPrimary">

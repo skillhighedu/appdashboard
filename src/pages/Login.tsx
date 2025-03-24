@@ -69,8 +69,10 @@ export default function Login() {
           />
 
           <div className="flex items-end justify-end text-sm">
-        
-            <Link to="/forgot-password" className="text-primary hover:underline">
+            <Link
+              to="/forgot-password"
+              className="text-primary hover:underline"
+            >
               Forgot password?
             </Link>
           </div>

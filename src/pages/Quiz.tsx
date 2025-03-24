@@ -6,7 +6,6 @@ import Header from "@components/Header";
 import Loading from "@components/Loading";
 import { Storage } from "@utils/storage";
 
-
 interface Option {
   id: string;
   text: string;
@@ -30,7 +29,7 @@ export default function Quiz() {
   useEffect(() => {
     const loadQuizQuestions = async () => {
       try {
-        const data = await fetchQuizQuestions(quizId); 
+        const data = await fetchQuizQuestions(quizId);
         setQuizQuestion(data);
       } catch (error) {
         console.error("Error fetching quiz questions:", error);
@@ -43,7 +42,8 @@ export default function Quiz() {
 
   const currentQuestion = quizQuestions?.questions?.[currentQuestionIndex];
   const progress =
-    ((currentQuestionIndex + 1) / (quizQuestions?.questions?.length || 1)) * 100;
+    ((currentQuestionIndex + 1) / (quizQuestions?.questions?.length || 1)) *
+    100;
 
   const handleOptionSelect = (option: Option) => setSelectedOption(option);
 
@@ -67,7 +67,7 @@ export default function Quiz() {
   const handleQuizResult = async () => {
     try {
       const result = await submitQuiz(quizId, userAnswers);
-      console.log(result)
+      console.log(result);
       setQuizScore(result);
     } catch (error) {
       console.error("Error submitting quiz results:", error);
@@ -91,7 +91,8 @@ export default function Quiz() {
           <>
             <div className="mb-6">
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                Question {currentQuestionIndex + 1} of {quizQuestions.questions.length}
+                Question {currentQuestionIndex + 1} of{" "}
+                {quizQuestions.questions.length}
               </p>
               <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                 <div

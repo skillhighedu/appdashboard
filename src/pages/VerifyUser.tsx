@@ -1,6 +1,6 @@
 import Button from "@components/Button";
 import { useState } from "react";
-import {useStore} from '@context/useStore'
+import { useStore } from "@context/useStore";
 import { Mail } from "lucide-react";
 import { motion } from "framer-motion";
 import Input from "@components/Input";
@@ -9,11 +9,10 @@ import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 
 export default function VerifyUser() {
-
-  const [otpMessage, setOtpMessage] = useState(""); 
+  const [otpMessage, setOtpMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const {email,setEmail} = useStore()
+  const { email, setEmail } = useStore();
 
   const handleVerifyEmail = async () => {
     if (!email) {
@@ -23,17 +22,13 @@ export default function VerifyUser() {
 
     setLoading(true);
 
-      const message = await sendEmailOtp(email);
-      toast.success(message)
-      if(message)
-      {
-        navigate('/otp')
-      }
+    const message = await sendEmailOtp(email);
+    toast.success(message);
+    if (message) {
+      navigate("/otp");
+    }
 
-
- 
-      setLoading(false);
-    
+    setLoading(false);
   };
 
   return (
@@ -60,7 +55,6 @@ export default function VerifyUser() {
           <Button
             name={loading ? "Sending..." : "Verify Email"}
             icon={<Mail />}
-            
             onClick={handleVerifyEmail}
           />
 

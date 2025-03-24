@@ -55,7 +55,8 @@ export default function CourseDashboard() {
             {selectedCourseData.courseData.courseName}
           </h1>
           <p className="text-base text-gray-600 dark:text-gray-300">
-            {selectedCourseData.courseData.totalTopicsCount} Topics • Explore Below
+            {selectedCourseData.courseData.totalTopicsCount} Topics • Explore
+            Below
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
             <Link to="/course_player">
@@ -65,12 +66,20 @@ export default function CourseDashboard() {
             </Link>
             <Link to="/quizList">
               <Tooltip text="Test Your Knowledge" position="bottom">
-                <Button name="Take Quiz" icon={<Brain size={18} />} variant="secondary" />
+                <Button
+                  name="Take Quiz"
+                  icon={<Brain size={18} />}
+                  variant="secondary"
+                />
               </Tooltip>
             </Link>
             <Link to="/projects">
               <Tooltip text="Build Something Cool" position="bottom">
-                <Button name="Start Project" icon={<Folder size={18} />} variant="outline" />
+                <Button
+                  name="Start Project"
+                  icon={<Folder size={18} />}
+                  variant="outline"
+                />
               </Tooltip>
             </Link>
           </div>

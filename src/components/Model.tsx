@@ -4,7 +4,10 @@ import Button from "@components/Button";
 import Input from "./Input";
 import TextArea from "./TextBox";
 import { Project, ProjectSolution } from "../types/projects";
-import { submitProjectSolution, updateProjectSolution } from "../services/projectService";
+import {
+  submitProjectSolution,
+  updateProjectSolution,
+} from "../services/projectService";
 
 interface SubmitModalProps {
   isOpen: boolean;
@@ -19,7 +22,7 @@ const SubmitModal = memo(
       githubLink: "",
       explanation: "",
     });
-    console.log(selectedProject)
+    console.log(selectedProject);
 
     // Populate state when a project is selected
     useEffect(() => {
@@ -52,13 +55,15 @@ const SubmitModal = memo(
         console.error("Project solution ID is missing.");
         return;
       }
-    
-      await updateProjectSolution(selectedProject.solutions[0].id, projectSolution);
+
+      await updateProjectSolution(
+        selectedProject.solutions[0].id,
+        projectSolution,
+      );
       onSubmit(projectSolution.githubLink, projectSolution.explanation);
       setProjectSolution({ githubLink: "", explanation: "" }); // Reset fields
       onClose();
     };
-    
 
     return (
       <div className="fixed inset-0 flex justify-center items-center z-50 bg-black/40">
@@ -117,20 +122,19 @@ const SubmitModal = memo(
             }
           />
 
-
           {/* Actions */}
           <div className="flex justify-end gap-3 mt-4">
-            {selectedProject?.solutions?.length && !selectedProject.solutions[0]?.isCompleted ? (
+            {selectedProject?.solutions?.length &&
+            !selectedProject.solutions[0]?.isCompleted ? (
               <Button name="Update" onClick={handleUpdateFormSubmit} />
             ) : !selectedProject?.solutions?.length ? (
               <Button name="Submit" onClick={handleFormSubmit} />
             ) : null}
           </div>
-
         </div>
       </div>
     );
-  }
+  },
 );
 
 export default SubmitModal;

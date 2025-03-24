@@ -18,7 +18,9 @@ export default function TextArea({
   return (
     <div className="flex flex-col gap-1">
       {label && (
-        <label className="text-sm font-medium text-gray-700 dark:text-gray-100 mb-3 ">{label}</label>
+        <label className="text-sm font-medium text-gray-700 dark:text-gray-100 mb-3 ">
+          {label}
+        </label>
       )}
       <textarea
         placeholder={placeholder}

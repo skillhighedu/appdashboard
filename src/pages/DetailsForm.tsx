@@ -1,7 +1,7 @@
 import Input from "@components/Input";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { setDetails } from '../services/userServices';
+import { setDetails } from "../services/userServices";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 
@@ -38,15 +38,12 @@ export default function DetailsForm() {
     }
 
     setIsSubmitting(true);
-      const response = await setDetails(formData.name, formData.password);
-      if(response)
-      {
-        navigate("/home");
-      }
+    const response = await setDetails(formData.name, formData.password);
+    if (response) {
+      navigate("/home");
+    }
 
-
-      setIsSubmitting(false);
-    
+    setIsSubmitting(false);
   };
 
   return (

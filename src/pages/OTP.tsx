@@ -1,8 +1,8 @@
 import { useState, useRef } from "react";
 import { verifyEmail } from "../services/auth-service";
-import { forgotEmailVerifyService } from "../services/accountServices"
+import { forgotEmailVerifyService } from "../services/accountServices";
 
-import {useStore} from '@context/useStore'
+import { useStore } from "@context/useStore";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "@context/authStore";
@@ -12,9 +12,9 @@ export default function OTP() {
   const [otp, setOtp] = useState<string[]>(Array(otpLength).fill(""));
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const [loading, setLoading] = useState(false);
-  const {email,isForgotPassword,setIsVerified} = useStore()
+  const { email, isForgotPassword, setIsVerified } = useStore();
   const { login } = useAuthStore();
-  
+
   const navigate = useNavigate();
 
   const handleChange = (
@@ -43,43 +43,38 @@ export default function OTP() {
     }
   };
 
-
-
-  
   const handleVerifyOTP = async () => {
     const enteredOTP = otp.join("");
-  
+
     if (enteredOTP.length !== otpLength) {
       toast.error(`Please enter a ${otpLength}-digit OTP`);
       return;
     }
-  
+
     setLoading(true);
 
-      const response = await verifyEmail(email, enteredOTP);
-      
-      console.log("Verification response:", response); // Debug log
-  
-      login(response.token);
-      navigate(response.isUpdated ? "/home" : "/setup-details");
+    const response = await verifyEmail(email, enteredOTP);
 
+    console.log("Verification response:", response); // Debug log
 
-      setLoading(false);
-    
+    login(response.token);
+    navigate(response.isUpdated ? "/home" : "/setup-details");
+
+    setLoading(false);
   };
 
   const handleVerifyForgotOTP = async () => {
     const enteredOTP = otp.join("");
-  
+
     if (enteredOTP.length !== otpLength) {
       toast.error(`Please enter a ${otpLength}-digit OTP`);
       return;
     }
-  
+
     setLoading(true);
     try {
       const response = await forgotEmailVerifyService(email, enteredOTP);
-      setIsVerified(true)
+      setIsVerified(true);
       navigate(response.verified ? "/forgot-password" : "/otp");
     } catch (error) {
       console.error("OTP verification failed:", error);

@@ -19,11 +19,15 @@ export const fetchCourseTopics = async (
 };
 
 //UPDATE THE CHECKBOX TRUE OR FALSE
-export const updateLessonCheckbox = async (topicId: string, completed:boolean, courseId:string): Promise<Lesson[]> => {
+export const updateLessonCheckbox = async (
+  topicId: string,
+  completed: boolean,
+  courseId: string,
+): Promise<Lesson[]> => {
   try {
-
     const response = await apiClient.post<ApiResponse<Lesson[]>>(
-      `dashboardUsers/user/lessons/lessonCheckbox/${topicId}`, {completed,courseId}
+      `dashboardUsers/user/lessons/lessonCheckbox/${topicId}`,
+      { completed, courseId },
     );
 
     return response.data.additional ?? [];
@@ -31,8 +35,3 @@ export const updateLessonCheckbox = async (topicId: string, completed:boolean, c
     throw handleApiError(error);
   }
 };
-
-
-
-
-

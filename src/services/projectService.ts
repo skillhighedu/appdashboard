@@ -5,7 +5,6 @@ import { handleApiError } from "../utils/errorHandler";
 import { ProjectSolution } from "../types/projects";
 import { toast } from "sonner";
 
-
 //FETCH PROJECTS
 export const fetchProjects = async (courseId: string): Promise<Project[]> => {
   try {
@@ -32,7 +31,6 @@ export const submitProjectSolution = async (
     toast.success(response.data.message);
     return response.data.additional ?? [];
   } catch (error) {
-    
     throw handleApiError(error);
   }
 };
@@ -43,7 +41,7 @@ export const updateProjectSolution = async (
   solution: ProjectSolution,
 ): Promise<ProjectSolution[]> => {
   try {
-    console.log(solution)
+    console.log(solution);
     const response = await apiClient.put<ApiResponse<ProjectSolution[]>>(
       `/courseProjects/projects/solutions/${solutionId}`,
       solution,
@@ -51,7 +49,6 @@ export const updateProjectSolution = async (
     toast.success(response.data.message);
     return response.data.additional ?? [];
   } catch (error) {
-    
     throw handleApiError(error);
   }
 };

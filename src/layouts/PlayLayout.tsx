@@ -14,8 +14,8 @@ const PlayerLayout = () => {
   return (
     <div className="flex flex-col min-h-screen bg-white dark:bg-darkPrimary">
       {/* Header with sidebar toggle button */}
-      <Header 
-        title="Course Dashboard" 
+      <Header
+        title="Course Dashboard"
         onSidebarToggle={toggleSidebar}
         isSidebarOpen={isSidebarOpen}
       />
@@ -45,7 +45,7 @@ const PlayerLayout = () => {
               ✕
             </button>
           </div>
-          
+
           {/* Sidebar Content */}
           <div className="h-[calc(100%-4rem)] lg:h-full overflow-y-auto">
             <Sidebar />
