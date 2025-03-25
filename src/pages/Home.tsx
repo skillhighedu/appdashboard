@@ -4,7 +4,7 @@ import Greeting from "@components/Greetings";
 function Home() {
   return (
     <div className="flex flex-col items-left  min-h-screen">
-      <Greeting name="Sai kiran" />
+      <Greeting  />
 
       <Courses />
     </div>

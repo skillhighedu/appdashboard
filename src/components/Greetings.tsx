@@ -30,7 +30,7 @@ export default function Greeting() {
 
   return (
     <div className="text-lg md:text-3xl lg:text-4xl font-semibold text-darkPrimary dark:text-white p-4 text-left mt-3">
-      {greeting} 
+      {greeting}
     </div>
   );
 }
