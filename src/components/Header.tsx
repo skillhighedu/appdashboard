@@ -20,7 +20,7 @@ export default function Header({
   const hiddenRoutes = ["/", "/home"];
 
   return (
-    <div className="flex items-center justify-between p-4 bg-white rounded-2xl mb-3 dark:bg-darkSecondary shadow-sm">
+    <div className="flex items-center justify-between p-2 bg-white rounded-2xl mb-2 dark:bg-darkSecondary ">
       {/* Left Section - Back Button and Title */}
       <div className="flex items-center gap-4">
         {/* Back Button (Hidden for specific routes) */}

@@ -40,7 +40,7 @@ interface StoreContextType {
   setIsVerified: React.Dispatch<React.SetStateAction<boolean>>;
 
   //Name
-  studentName : string | null ;
+  studentName: string | null;
   setStudentName: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
@@ -61,7 +61,6 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
   const [isForgotPassword, setIsForgotPassword] = useState<boolean>(false);
   const [isVerified, setIsVerified] = useState<boolean>(false);
   const [studentName, setStudentName] = useState<string | null>(null);
-
 
   const value = {
     enrolledCourses,
@@ -87,7 +86,7 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
     isVerified,
     setIsVerified,
     studentName,
-    setStudentName
+    setStudentName,
   };
 
   return (

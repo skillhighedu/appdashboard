@@ -154,7 +154,7 @@ export default function Navbar() {
                 {isAuthenticated ? (
                   <Link to="/profile">
                     <button className="p-3 text-md cursor-pointer rounded-full bg-secondary text-primary flex md:hidden">
-                      <User />
+                      <User  />
                     </button>
                   </Link>
                 ) : (

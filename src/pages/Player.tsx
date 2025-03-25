@@ -30,6 +30,7 @@ export default function Player() {
     loadCourses();
   }, []);
 
+ 
   return (
     <div className="w-full bg-white dark:bg-darkSecondary rounded-lg shadow-lg overflow-hidden">
       {/* Video Player */}
@@ -57,10 +58,15 @@ export default function Player() {
         </p>
       </div>
 
-      <div className="flex flex-row p-3">
-        <button>Previous</button>
-        <button>Next</button>
-      </div>
+      {/* <div className="flex justify-between p-3">
+        <button className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition-all cursor-pointer">
+          Previous
+        </button>
+        <button  className="px-4 py-2 text-sm font-medium text-white bg-primary rounded-lg hover:bg-primary-dark transition-all cursor-pointer">
+          Next
+        </button>
+      </div> */}
+
     </div>
   );
 }
