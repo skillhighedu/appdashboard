@@ -30,7 +30,6 @@ export default function Player() {
     loadCourses();
   }, []);
 
- 
   return (
     <div className="w-full bg-white dark:bg-darkSecondary rounded-lg shadow-lg overflow-hidden">
       {/* Video Player */}
@@ -66,7 +65,6 @@ export default function Player() {
           Next
         </button>
       </div> */}
-
     </div>
   );
 }

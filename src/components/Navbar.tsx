@@ -11,6 +11,7 @@ import {
   PenBox,
 } from "lucide-react";
 import Logo from "@assets/images/logo.png";
+import LogoWhite from "@assets/images/logpo-white.png";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuthStore } from "@context/authStore";
@@ -44,7 +45,7 @@ export default function Navbar() {
       <div className="container mx-auto flex justify-between items-center py-6">
         {/* Logo */}
         <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-          <img src={Logo} className="h-auto w-[180px]" alt="Logo" />
+          <img src={theme === "dark" ? LogoWhite : Logo} className="h-auto w-[180px]" alt="Logo" />
         </a>
 
         {/* Desktop Menu */}
@@ -154,7 +155,7 @@ export default function Navbar() {
                 {isAuthenticated ? (
                   <Link to="/profile">
                     <button className="p-3 text-md cursor-pointer rounded-full bg-secondary text-primary flex md:hidden">
-                      <User  />
+                      <User />
                     </button>
                   </Link>
                 ) : (

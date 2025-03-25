@@ -11,7 +11,7 @@ export default function Sidebar() {
     {},
   );
   const courseId = Storage.get("selectedCourseId");
-  console.log(checkedLessons)
+  console.log(checkedLessons);
   // Initialize checkedLessons only once when courseLessons changes
   useEffect(() => {
     if (!Array.isArray(courseLessons) || courseLessons.length === 0) return;
@@ -100,16 +100,17 @@ export default function Sidebar() {
 
   const filteredTrueLessons = Object.fromEntries(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    Object.entries(checkedLessons).filter(([_, value]) => value === true)
+    Object.entries(checkedLessons).filter(([_, value]) => value === true),
   );
 
   return (
     <div className="fixed inset-y-0 left-0 lg:static w-auto rounded-lg bg-white dark:bg-darkSecondary transform transition-all duration-300 ease-in-out z-40">
-    <div className="p-4 bg-gray-50 dark:bg-darkSecondary border-gray-200 rounded-lg flex items-center justify-between">
-  <h2 className="text-sm font-semibold text-gray-900 dark:text-white">
-    Progress: {Object.keys(filteredTrueLessons).length} / {Object.keys(checkedLessons).length} Lessons Completed
-  </h2>
-</div>
+      <div className="p-4 bg-gray-50 dark:bg-darkSecondary border-gray-200 rounded-lg flex items-center justify-between">
+        <h2 className="text-sm font-semibold text-gray-900 dark:text-white">
+          Progress: {Object.keys(filteredTrueLessons).length} /{" "}
+          {Object.keys(checkedLessons).length} Lessons Completed
+        </h2>
+      </div>
 
       <nav className="p-4 space-y-2 max-h-[calc(100vh-4rem)] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600">
         {lessonItems}
