@@ -5,7 +5,7 @@ import { Storage } from "@utils/storage";
 
 export default function Player() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const { selectedLesson, setCourseLessons } = useStore();
+  const { selectedLesson, setSelectedLesson, setCourseLessons } = useStore();
   const courseId = Storage.get("selectedCourseId");
 
   useEffect(() => {
@@ -13,14 +13,22 @@ export default function Player() {
       try {
         const data = await fetchCourseTopics(courseId);
         setCourseLessons(data);
+
+        // ✅ Select the first lesson ONLY if no lesson is currently selected
+        if (!selectedLesson && data.length > 0) {
+          if (data[0]) {
+            setSelectedLesson(data[0]);
+          }
+        }
+
         setIsLoading(false);
       } catch (error) {
-        console.error(error);
+        console.error("Error loading lessons:", error);
       }
     };
 
     loadCourses();
-  }, [setCourseLessons, courseId]);
+  }, []);
 
   return (
     <div className="w-full bg-white dark:bg-darkSecondary rounded-lg shadow-lg overflow-hidden">
@@ -33,7 +41,7 @@ export default function Player() {
             src={selectedLesson.video}
             loading="lazy"
             className="absolute inset-0 w-full h-full rounded-t-lg"
-            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
             allowFullScreen
           />
         )}
@@ -47,6 +55,11 @@ export default function Player() {
         <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
           {selectedLesson?.description || "No description available."}
         </p>
+      </div>
+
+      <div className="flex flex-row p-3">
+        <button>Previous</button>
+        <button>Next</button>
       </div>
     </div>
   );

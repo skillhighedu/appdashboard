@@ -5,6 +5,8 @@ import { fetchUserProfile } from "../services/userServices";
 import { useEffect, useState } from "react";
 import Loading from "@components/Loading";
 import { useAuthStore } from "@context/authStore";
+
+
 export default function Profile() {
   const { setUserProfile, userProfile } = useStore();
   const [loading, setLoading] = useState(true);
