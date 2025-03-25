@@ -14,7 +14,7 @@ const getGreeting = (): string => {
   }
 };
 
-export default function Greeting({ name }: { name: string }) {
+export default function Greeting() {
   const [greeting, setGreeting] = useState(getGreeting());
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export default function Greeting({ name }: { name: string }) {
 
   return (
     <div className="text-lg md:text-3xl lg:text-4xl font-semibold text-darkPrimary dark:text-white p-4 text-left mt-3">
-      {greeting} <span className="text-primary font-bold">{name}</span>
+      {greeting} 
     </div>
   );
 }

@@ -56,9 +56,9 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeOut", delay: 0.6 }}
       >
-       <Link to="/login">
-       <Button name="Get Started" icon={<ArrowRight />} />
-       </Link>
+        <Link to="/login">
+          <Button name="Get Started" icon={<ArrowRight />} />
+        </Link>
       </motion.div>
     </div>
   );
