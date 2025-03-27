@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchCourses } from "../services/courseService";
 import { Storage } from "@utils/storage";
 import Loading from "./Loading";
-
+import { Button } from "@components/ui/button";
 export default function Courses() {
   const { enrolledCourses, setEnrolledCourses } = useStore();
   const navigate = useNavigate();
@@ -100,23 +100,12 @@ export default function Courses() {
                   {course.courseName}
                 </h3>
 
-                <motion.button
-                  className={`cursor-pointer mt-4 text-sm sm:text-md text-white py-2 px-4 rounded-lg flex items-center justify-center ${
-                    course.topicCount === 0
-                      ? "bg-gray-400 cursor-not-allowed"
-                      : "bg-gradient-to-r from-[#0D8267] to-[#031C16]"
-                  }`}
-                  disabled={course.topicCount === 0}
-                  aria-label={`Go to Course ${course.courseName || course.id}`}
-                  whileHover={{ scale: 1.07 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => handleSelectedCourse(course.id)}
-                >
-                  {course.topicCount === 0
-                    ? "Lessons will be updated soon.."
-                    : "Go to Course"}
-                  {course.topicCount > 0 && <Rocket className="ml-3" />}
-                </motion.button>
+               
+     
+                  <Button size="default" className="text-white cursor-pointer mt-4" onClick={()=>handleSelectedCourse(course.id)}  >
+   Get Started <Rocket className="ml-3" />
+</Button>
+                
               </div>
             </motion.div>
           ))

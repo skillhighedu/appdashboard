@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { ArrowLeftIcon } from "lucide-react";
+import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 import Tooltip from "./ToolTip";
+import { Button } from "./ui/button";
 
 interface HeaderProps {
   title: string;
@@ -25,14 +26,11 @@ export default function Header({
       <div className="flex items-center gap-4">
         {/* Back Button (Hidden for specific routes) */}
         {!hiddenRoutes.includes(location.pathname) && (
-          <button
-            onClick={() => navigate(-1)}
-            className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-          >
+      
             <Tooltip text="Back">
-              <ArrowLeftIcon className="w-4 h-4 md:w-6 md:h-6 text-primary dark:text-white cursor-pointer" />
+              <Button variant="secondary" size="sm" className=" text-primary cursor-pointer rounded-full "  onClick={() => navigate(-1)}> <ChevronLeftIcon /> </Button>
             </Tooltip>
-          </button>
+       
         )}
 
         {/* Page Title */}

@@ -11,7 +11,7 @@ export default function Sidebar() {
     {},
   );
   const courseId = Storage.get("selectedCourseId");
-  console.log(checkedLessons);
+
   // Initialize checkedLessons only once when courseLessons changes
   useEffect(() => {
     if (!Array.isArray(courseLessons) || courseLessons.length === 0) return;

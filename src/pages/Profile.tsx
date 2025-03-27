@@ -5,6 +5,7 @@ import { fetchUserProfile } from "../services/userServices";
 import { useEffect, useState } from "react";
 import Loading from "@components/Loading";
 import { useAuthStore } from "@context/authStore";
+import {Button} from "@components/ui/button";
 
 export default function Profile() {
   const { setUserProfile, userProfile } = useStore();
@@ -47,14 +48,15 @@ export default function Profile() {
               {userProfile && userProfile.email}
             </p>
           </div>
-          <button
-            type="button"
-            onClick={() => handleLogout()}
-            className="px-4 flex items-center gap-2 py-3 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-600 transition cursor-pointer"
-          >
-            Logout
-            <LogOut size={16} />
-          </button>
+      
+          <Button  className="px-4 flex items-center gap-2 py-3 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-600 transition cursor-pointer" 
+                onClick={() => {
+                  handleLogout();
+                 
+                }}
+              >
+                 Logout <LogOut />
+              </Button>
         </div>
       )}
     </div>

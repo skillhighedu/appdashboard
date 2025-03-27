@@ -5,9 +5,9 @@ import { fetchSelectedCourse } from "../services/courseService";
 import { Storage } from "@utils/storage";
 import Header from "@components/Header";
 import CircleProgress from "@components/CircleProgress";
-import Button from "@components/Button";
+import {Button} from "@components/ui/button";
 import Loading from "@components/Loading";
-import { Zap, Brain, Folder } from "lucide-react";
+import { PlayCircle, Brain, Folder } from "lucide-react";
 import Tooltip from "@components/ToolTip";
 import { Link } from "react-router-dom";
 
@@ -61,25 +61,18 @@ export default function CourseDashboard() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
             <Link to="/course_player">
               <Tooltip text="Jump into Lessons" position="bottom">
-                <Button name="Start Learning" icon={<Zap size={18} />} />
+              
+                <Button className="text-white rounded-lg cursor-pointer" ><PlayCircle/> Start Learning  </Button>
               </Tooltip>
             </Link>
             <Link to="/quizList">
               <Tooltip text="Test Your Knowledge" position="bottom">
-                <Button
-                  name="Take Quiz"
-                  icon={<Brain size={18} />}
-                  variant="secondary"
-                />
+              <Button variant="outline" className="text-primary border-primary cursor-pointer rounded-lg"><Brain/>  Take Quiz </Button>
               </Tooltip>
             </Link>
             <Link to="/projects">
               <Tooltip text="Build Something Cool" position="bottom">
-                <Button
-                  name="Start Project"
-                  icon={<Folder size={18} />}
-                  variant="outline"
-                />
+              <Button variant="outline" className="text-primary border-primary cursor-pointer rounded-lg"><Folder/> Start Projects </Button>
               </Tooltip>
             </Link>
           </div>
@@ -100,14 +93,19 @@ export default function CourseDashboard() {
           <CircleProgress
             label="Topics Completed"
             value={selectedCourseData.topicProgress}
+            navigate="/course_player"
           />
           <CircleProgress
             label="Quiz Progress"
             value={selectedCourseData.quizProgress}
+            navigate="/quizList"
+
           />
           <CircleProgress
             label="Project Progress"
             value={selectedCourseData.projectProgress}
+            navigate="/projects"
+
           />
         </div>
       </motion.div>

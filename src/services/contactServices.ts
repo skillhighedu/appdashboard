@@ -16,29 +16,28 @@ export enum StudentCategory {
   NEWSTUDENT = "NEWSTUDENT",
 }
 
-
 type ContactResponse = {
   name: string;
   email: string;
   phone: string;
   message: string;
   category: string;
-}
+};
 
 // SEND CONTACT DATA TO THE SERVER
 export const sendContactService = async (
-  contact: ContactType
+  contact: ContactType,
 ): Promise<ContactResponse> => {
   try {
     const response = await apiClient.post<ApiResponse<ContactResponse>>(
       "/contacts/addContact",
-      contact
+      contact,
     );
 
     if (!response.data.additional) {
       throw new Error("Data is undefined");
     }
-    toast.success(response.data.message)
+    toast.success(response.data.message);
     return response.data.additional;
   } catch (error) {
     throw handleApiError(error);

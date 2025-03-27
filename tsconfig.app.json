@@ -11,6 +11,7 @@
       "@context/*": ["context/*"],
       "@config/*": ["config/*"]
     },
+    
     "tsBuildInfoFile": "./node_modules/.tsbuildinfo",
 
     /* Target & Modules */
@@ -40,6 +41,6 @@
     "skipLibCheck": true,
     "noEmit": true
   },
-  "include": ["src"],
+  "include": ["src", "src/types"],
   "exclude": ["node_modules", "dist"]
 }

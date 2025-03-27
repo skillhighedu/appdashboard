@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { FileText, Upload } from "lucide-react";
-import Button from "@components/Button";
+import {Button} from "@components/ui/button";
 import Header from "@components/Header";
 import { useStore } from "@context/useStore";
 import { fetchProjects } from "../services/projectService";
@@ -84,22 +84,26 @@ export default function Projects() {
               </div>
 
               {!project.solutions[0]?.isCompleted ? (
-                <Button
-                  name="Submit"
-                  icon={<Upload />}
+                <Button className="text-white rounded-lg cursor-pointer"
                   onClick={() => {
                     setSelectedProject(project);
                     setIsModalOpen(true);
                   }}
-                />
+                >
+                  Submit <Upload />
+                </Button>
+              
               ) : (
-                <Button
-                  name="Check Solution"
-                  onClick={() => {
-                    setSelectedProject(project);
-                    setIsModalOpen(true);
-                  }}
-                />
+
+                <Button className="text-white rounded-lg cursor-pointer"
+                onClick={() => {
+                  setSelectedProject(project);
+                  setIsModalOpen(true);
+                }}
+              >
+                Check Solution <Upload />
+              </Button>
+               
               )}
             </div>
           </div>

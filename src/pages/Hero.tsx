@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Dot_Pattern from "@assets/images/dot-pattern.png";
-import Button from "@components/Button";
+import {Button} from "@components/ui/button";
 import { ArrowRight } from "lucide-react";
 import Logo from "@assets/images/logo.png";
 import { Link } from "react-router-dom";
@@ -57,7 +57,9 @@ export default function Hero() {
         transition={{ duration: 1, ease: "easeOut", delay: 0.6 }}
       >
         <Link to="/login">
-          <Button name="Get Started" icon={<ArrowRight />} />
+        <Button size="lg" className="text-white cursor-pointer"  >
+   Get Started <ArrowRight/>
+</Button>
         </Link>
       </motion.div>
     </div>

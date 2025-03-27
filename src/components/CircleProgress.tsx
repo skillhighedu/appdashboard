@@ -1,52 +1,55 @@
 import { motion } from "framer-motion";
-
+import { Link } from "react-router-dom";
 interface CircleProgressProps {
   value: number;
   label: string;
+  navigate:string
 }
 
-export default function CircleProgress({ value, label }: CircleProgressProps) {
-  const radius = 40;
+export default function CircleProgress({ value, label ,navigate}: CircleProgressProps) {
+  const radius = 45;
+  const strokeWidth = 8;
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - (value / 100) * circumference;
 
   return (
     <div className="flex flex-col items-center">
-      <div className="relative w-24 h-24">
-        <svg className="w-full h-full transform -rotate-90">
+     <Link to={navigate}>
+     <div className="relative w-24 h-24 sm:w-32 sm:h-32">
+        <svg className="w-full h-full" viewBox="0 0 100 100">
           {/* Background Circle */}
           <circle
-            cx="50%"
-            cy="50%"
+            cx="50"
+            cy="50"
             r={radius}
-            stroke="currentColor"
-            strokeWidth="6"
+            stroke="#c3ded8"
+            strokeWidth={strokeWidth}
             fill="transparent"
-            className="text-gray-200 dark:text-gray-700"
           />
-          {/* Progress Circle */}
+          {/* Animated Progress Circle */}
           <motion.circle
-            cx="50%"
-            cy="50%"
+            cx="50"
+            cy="50"
             r={radius}
-            stroke="currentColor"
-            strokeWidth="6"
+            stroke="#0d8267"
+            strokeWidth={strokeWidth}
             fill="transparent"
             strokeLinecap="round"
-            className="text-primary dark:text-primary"
             strokeDasharray={circumference}
             strokeDashoffset={offset}
+            initial={{ strokeDashoffset: circumference }}
             animate={{ strokeDashoffset: offset }}
-            transition={{ duration: 1, ease: "easeInOut" }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
           />
         </svg>
         {/* Percentage Text */}
-        <span className="absolute inset-0 flex items-center justify-center text-lg font-semibold text-gray-900 dark:text-white">
-          {value}%
+        <span className="absolute inset-0 flex items-center justify-center text-md sm:text-2xl font-bold text-gray-900 dark:text-white">
+          {Math.round(value)}%
         </span>
       </div>
+     </Link>
       {/* Label */}
-      <h3 className="mt-2 text-lg font-semibold">{label}</h3>
+      <h3 className="mt-4 text-lg font-medium text-gray-800 dark:text-gray-200">{label}</h3>
     </div>
   );
-}
+} 

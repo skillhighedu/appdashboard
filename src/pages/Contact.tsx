@@ -8,15 +8,13 @@ interface ContactFormState {
   name: string;
   email: string;
   phone: string;
-  category: StudentCategory ;
+  category: StudentCategory;
   message: string;
 }
 export enum StudentCategory {
   EXISTING = "EXISTING",
   NEWSTUDENT = "NEWSTUDENT",
 }
-
-
 
 export default function Contact() {
   const [formData, setFormData] = useState<ContactFormState>({
@@ -28,7 +26,11 @@ export default function Contact() {
   });
 
   // Handle form input change
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -36,20 +38,19 @@ export default function Contact() {
   // Handle form submission
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-     async function submitContact() {
-     const response = await sendContactService(formData);
-     if(response)
-     {
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        category: StudentCategory.EXISTING,
-        message: "",
-      })
-     }
-     } 
-     submitContact()
+    async function submitContact() {
+      const response = await sendContactService(formData);
+      if (response) {
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          category: StudentCategory.EXISTING,
+          message: "",
+        });
+      }
+    }
+    submitContact();
   };
 
   return (

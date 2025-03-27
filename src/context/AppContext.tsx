@@ -42,8 +42,6 @@ interface StoreContextType {
   //Name
   studentName: string | null;
   setStudentName: React.Dispatch<React.SetStateAction<string | null>>;
-
-
 }
 
 // Create Context
