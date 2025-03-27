@@ -5,7 +5,7 @@ import { fetchSelectedCourse } from "../services/courseService";
 import { Storage } from "@utils/storage";
 import Header from "@components/Header";
 import CircleProgress from "@components/CircleProgress";
-import {Button} from "@components/ui/button";
+import { Button } from "@components/ui/button";
 import Loading from "@components/Loading";
 import { PlayCircle, Brain, Folder } from "lucide-react";
 import Tooltip from "@components/ToolTip";
@@ -61,18 +61,29 @@ export default function CourseDashboard() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
             <Link to="/course_player">
               <Tooltip text="Jump into Lessons" position="bottom">
-              
-                <Button className="text-white rounded-lg cursor-pointer" ><PlayCircle/> Start Learning  </Button>
+                <Button className="text-white rounded-lg cursor-pointer">
+                  <PlayCircle /> Start Learning{" "}
+                </Button>
               </Tooltip>
             </Link>
             <Link to="/quizList">
               <Tooltip text="Test Your Knowledge" position="bottom">
-              <Button variant="outline" className="text-primary border-primary cursor-pointer rounded-lg"><Brain/>  Take Quiz </Button>
+                <Button
+                  variant="outline"
+                  className="text-primary border-primary cursor-pointer rounded-lg"
+                >
+                  <Brain /> Take Quiz{" "}
+                </Button>
               </Tooltip>
             </Link>
             <Link to="/projects">
               <Tooltip text="Build Something Cool" position="bottom">
-              <Button variant="outline" className="text-primary border-primary cursor-pointer rounded-lg"><Folder/> Start Projects </Button>
+                <Button
+                  variant="outline"
+                  className="text-primary border-primary cursor-pointer rounded-lg"
+                >
+                  <Folder /> Start Projects{" "}
+                </Button>
               </Tooltip>
             </Link>
           </div>
@@ -99,13 +110,11 @@ export default function CourseDashboard() {
             label="Quiz Progress"
             value={selectedCourseData.quizProgress}
             navigate="/quizList"
-
           />
           <CircleProgress
             label="Project Progress"
             value={selectedCourseData.projectProgress}
             navigate="/projects"
-
           />
         </div>
       </motion.div>

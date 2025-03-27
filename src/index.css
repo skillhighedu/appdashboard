@@ -6,7 +6,6 @@
   --color-bermuda: #78dcca;
   --color-darkPrimary: #121213;
   --color-darkSecondary: #1b1b1a;
-  
 }
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));

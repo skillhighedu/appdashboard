@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes,  } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import "./App.css";
 import Layout from "./layouts/Layout";
@@ -79,16 +79,67 @@ function App() {
     <div className="min-h-screen flex items-center justify-center">
       <div className="w-full max-w-screen mx-auto px-2 lg:px-6">
         <Router>
-          <Suspense fallback={<div className="text-white text-center">Loading...</div>}>
+          <Suspense
+            fallback={<div className="text-white text-center">Loading...</div>}
+          >
             <Routes>
               {/* Public Routes */}
-              <Route path="/" element={<Layout><Landing /></Layout>} />
-              <Route path="*" element={<Layout><NotFound /></Layout>} />
-              <Route path="/login" element={<Layout><Login /></Layout>} />
-              <Route path="/verification" element={<Layout><VerifyUser /></Layout>} />
-              <Route path="/blogs" element={<Layout><Blogs /></Layout>} />
-              <Route path="/forgot-password" element={<Layout><ForgotPassword /></Layout>} />
-              <Route path="/otp" element={<Layout><OTP /></Layout>} />
+              <Route
+                path="/"
+                element={
+                  <Layout>
+                    <Landing />
+                  </Layout>
+                }
+              />
+              <Route
+                path="*"
+                element={
+                  <Layout>
+                    <NotFound />
+                  </Layout>
+                }
+              />
+              <Route
+                path="/login"
+                element={
+                  <Layout>
+                    <Login />
+                  </Layout>
+                }
+              />
+              <Route
+                path="/verification"
+                element={
+                  <Layout>
+                    <VerifyUser />
+                  </Layout>
+                }
+              />
+              <Route
+                path="/blogs"
+                element={
+                  <Layout>
+                    <Blogs />
+                  </Layout>
+                }
+              />
+              <Route
+                path="/forgot-password"
+                element={
+                  <Layout>
+                    <ForgotPassword />
+                  </Layout>
+                }
+              />
+              <Route
+                path="/otp"
+                element={
+                  <Layout>
+                    <OTP />
+                  </Layout>
+                }
+              />
 
               {/* Protected Routes */}
               <Route element={<ProtectedRoute />}>
@@ -96,7 +147,6 @@ function App() {
                   path="/home"
                   element={
                     <Layout>
-              
                       <Home />
                     </Layout>
                   }
@@ -105,7 +155,6 @@ function App() {
                   path="/courseDashboard"
                   element={
                     <Layout>
-                  
                       <CourseDashboard />
                     </Layout>
                   }
@@ -114,7 +163,6 @@ function App() {
                   path="/course_player"
                   element={
                     <Layout>
-                     
                       <PlayLayout />
                     </Layout>
                   }
@@ -123,7 +171,6 @@ function App() {
                   path="/profile"
                   element={
                     <Layout>
-                    
                       <Profile />
                     </Layout>
                   }
@@ -132,7 +179,6 @@ function App() {
                   path="/quizList"
                   element={
                     <Layout>
-                  
                       <QuizList />
                     </Layout>
                   }
@@ -141,7 +187,6 @@ function App() {
                   path="/quiz"
                   element={
                     <Layout>
-                   
                       <Quiz />
                     </Layout>
                   }
@@ -150,7 +195,6 @@ function App() {
                   path="/projects"
                   element={
                     <Layout>
-                  
                       <Projects />
                     </Layout>
                   }
@@ -159,7 +203,6 @@ function App() {
                   path="/setup-details"
                   element={
                     <Layout>
-                     
                       <DetailsForm />
                     </Layout>
                   }

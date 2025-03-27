@@ -26,11 +26,17 @@ export default function Header({
       <div className="flex items-center gap-4">
         {/* Back Button (Hidden for specific routes) */}
         {!hiddenRoutes.includes(location.pathname) && (
-      
-            <Tooltip text="Back">
-              <Button variant="secondary" size="sm" className=" text-primary cursor-pointer rounded-full "  onClick={() => navigate(-1)}> <ChevronLeftIcon /> </Button>
-            </Tooltip>
-       
+          <Tooltip text="Back">
+            <Button
+              variant="secondary"
+              size="sm"
+              className=" text-primary cursor-pointer rounded-full "
+              onClick={() => navigate(-1)}
+            >
+              {" "}
+              <ChevronLeftIcon />{" "}
+            </Button>
+          </Tooltip>
         )}
 
         {/* Page Title */}

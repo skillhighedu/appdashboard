@@ -7,7 +7,7 @@ export default function Player() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { selectedLesson, setSelectedLesson, setCourseLessons } = useStore();
   const courseId = Storage.get("selectedCourseId");
-  console.log(selectedLesson)
+  console.log(selectedLesson);
   useEffect(() => {
     const loadCourses = async () => {
       try {
@@ -57,14 +57,14 @@ export default function Player() {
         </p>
       </div>
 
-      <div className="flex justify-between p-3">
+      {/* <div className="flex justify-between p-3">
         <button className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition-all cursor-pointer">
           Previous
         </button>
-        <button  className="px-4 py-2 text-sm font-medium text-white bg-primary rounded-lg hover:bg-primary-dark transition-all cursor-pointer">
+        <button className="px-4 py-2 text-sm font-medium text-white bg-primary rounded-lg hover:bg-primary-dark transition-all cursor-pointer">
           Next
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -100,12 +100,13 @@ export default function Courses() {
                   {course.courseName}
                 </h3>
 
-               
-     
-                  <Button size="default" className="text-white cursor-pointer mt-4" onClick={()=>handleSelectedCourse(course.id)}  >
-   Get Started <Rocket className="ml-3" />
-</Button>
-                
+                <Button
+                  size="default"
+                  className="text-white cursor-pointer mt-4"
+                  onClick={() => handleSelectedCourse(course.id)}
+                >
+                  Get Started <Rocket className="ml-3" />
+                </Button>
               </div>
             </motion.div>
           ))

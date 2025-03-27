@@ -11,7 +11,7 @@
       "@context/*": ["context/*"],
       "@config/*": ["config/*"]
     },
-    
+
     "tsBuildInfoFile": "./node_modules/.tsbuildinfo",
 
     /* Target & Modules */
