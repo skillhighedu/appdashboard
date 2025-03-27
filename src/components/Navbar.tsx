@@ -45,7 +45,11 @@ export default function Navbar() {
       <div className="container mx-auto flex justify-between items-center py-6">
         {/* Logo */}
         <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-          <img src={theme === "dark" ? LogoWhite : Logo} className="h-auto w-[180px]" alt="Logo" />
+          <img
+            src={theme === "dark" ? LogoWhite : Logo}
+            className="h-auto w-[180px]"
+            alt="Logo"
+          />
         </a>
 
         {/* Desktop Menu */}

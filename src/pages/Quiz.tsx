@@ -151,7 +151,7 @@ export default function Quiz() {
                 Try Again
               </button>
               <button
-                onClick={() => navigate("/dashboard")}
+                onClick={() => navigate("/home")}
                 className="w-full sm:w-auto py-3 px-6 bg-gray-300 text-darkBg font-semibold rounded-lg hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 Return to Home
