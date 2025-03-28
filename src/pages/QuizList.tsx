@@ -1,5 +1,5 @@
 import { ArrowUpRight, BookOpen } from "lucide-react";
-import Button from "@components/Button";
+import {Button} from "@components/ui/button";
 import Header from "@components/Header";
 import { fetchAllQuizzes } from "../services/quizService";
 import { useStore } from "@context/useStore";
@@ -43,7 +43,7 @@ export default function Quiz() {
             return (
               <div
                 key={quiz.id}
-                className="relative bg-white dark:bg-darkSecondary w-80 h-56 p-8 rounded-3xl shadow-lg border border-gray-300 dark:border-darkPrimary 
+                className="relative bg-white dark:bg-darkSecondary w-80 h-56 p-8 rounded-3xl shadow-sm border border-gray-300 dark:border-darkPrimary 
                             hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer overflow-hidden"
               >
                 {/* Background Icon */}
@@ -60,9 +60,9 @@ export default function Quiz() {
 
                 <Button
                   onClick={() => handleSelectedQuiz(quiz.id)}
-                  name="Start Quiz"
-                  icon={<ArrowUpRight />}
-                />
+                  className="text-white cursor-pointer"
+               
+                >Start Quiz <ArrowUpRight/></Button>
               </div>
             );
           })}

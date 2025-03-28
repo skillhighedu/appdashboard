@@ -1,3 +1,4 @@
+import Trigger from "@components/Trigger";
 import Contact from "./Contact";
 import Hero from "./Hero";
 
@@ -7,6 +8,7 @@ export default function Landing() {
   return (
     <div className="">
       <Hero />
+      <Trigger/>
       {/* <Sliding/> */}
       {/* <Testimonials /> */}
       <Contact />

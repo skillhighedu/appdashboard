@@ -118,7 +118,7 @@ export default function ForgotPassword() {
               label="Email"
               type="email"
               name="email"
-              placeholder="yourname@notsketchy.com"
+              placeholder="yourname@email.com"
               value={formData.email}
               onChange={handleInputChange}
               className="w-full rounded-lg focus:ring-2 focus:ring-blue-500 transition"

@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";
 import { useAuthStore } from "@context/authStore";
 import { useLocation } from "react-router-dom";
 import Tooltip from "./ToolTip";
+import { Button } from "./ui/button";
 
 export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
@@ -44,7 +45,7 @@ export default function Navbar() {
     <nav className="w-full bg-white text-gray-900 dark:bg-darkPrimary dark:text-white ">
       <div className="container mx-auto flex justify-between items-center py-6">
         {/* Logo */}
-        <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+        <a href={isAuthenticated ? "/home":"/"} className="flex items-center space-x-3 rtl:space-x-reverse">
           <img
             src={theme === "dark" ? LogoWhite : Logo}
             className="h-auto w-[180px]"
@@ -75,24 +76,50 @@ export default function Navbar() {
             text={theme === "dark" ? "Turn off DarkMode" : "Turn on DarkMode"}
             position="bottom"
           >
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer transition"
-            >
-              {theme === "dark" ? <Sun size={24} /> : <Moon size={24} />}
-            </button>
+          <button
+      onClick={toggleTheme}
+      className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer transition"
+    >
+      {theme === "dark" ? (
+        // Sun: Rotates on hover
+        <motion.div
+          whileHover={{
+            rotate: 360,
+            transition: { duration: 1, ease: "easeInOut" },
+          }}
+        >
+          <Sun size={24} />
+        </motion.div>
+      ) : (
+        // Moon: Small semi-circle bounce on hover
+        <motion.div
+          whileHover={{
+            x: [0, -1, 0],
+            transition: {
+              duration: 0.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            },
+          }}
+        >
+          <Moon size={24} />
+        </motion.div>
+      )}
+    </button>
           </Tooltip>
 
           {!isAuthenticated ? (
             <>
               <Link to="/login">
-                <button className="px-6 py-3 text-md rounded-lg transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer bg-secondary text-primary hidden md:flex">
-                  Login
-                </button>
+              
+                <Button variant="secondary" className="text-primary cursor-pointer hidden sm:flex">
+                Login
+                </Button>
               </Link>
-              <button className="px-6 py-3 text-md rounded-lg transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer bg-gradient-to-r from-[#0D8267] to-[#031C16] text-white hidden md:flex">
-                Join Now
-              </button>
+        
+              <Button variant="default" className="text-white cursor-pointer hidden sm:flex">
+              Join Now
+                </Button>
             </>
           ) : (
             <Link to="/profile">

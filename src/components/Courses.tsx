@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { useStore } from "@context/useStore";
 import { Rocket } from "lucide-react";
@@ -5,8 +6,9 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { fetchCourses } from "../services/courseService";
 import { Storage } from "@utils/storage";
-import Loading from "./Loading";
+import { Skeleton } from "@components/ui/skeleton";
 import { Button } from "@components/ui/button";
+
 export default function Courses() {
   const { enrolledCourses, setEnrolledCourses } = useStore();
   const navigate = useNavigate();
@@ -50,9 +52,9 @@ export default function Courses() {
         transition={{ duration: 0.6, ease: "easeOut", staggerChildren: 0.2 }}
       >
         {isLoading ? (
-          <div className="col-span-full flex justify-center">
-            <Loading />
-          </div>
+          Array.from({ length: 4 }).map((_, index) => (
+            <Skeleton key={index} className="h-96 w-full" />
+          ))
         ) : error ? (
           <div className="col-span-full text-center">
             <p className="text-lg text-red-600 dark:text-red-400">{error}</p>
@@ -67,7 +69,7 @@ export default function Courses() {
           enrolledCourses.map((course) => (
             <motion.div
               key={course.id}
-              className="bg-white dark:bg-darkSecondary rounded-3xl shadow-sm border-0 overflow-hidden dark:border-0 dark:border-darkPrimary"
+              className="bg-white dark:bg-darkSecondary rounded-md shadow-sm border-0 overflow-hidden dark:border-0 dark:border-darkPrimary"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               initial={{ opacity: 0, y: 20 }}

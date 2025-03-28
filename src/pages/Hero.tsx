@@ -5,9 +5,12 @@ import { Button } from "@components/ui/button";
 import { ArrowRight } from "lucide-react";
 import Logo from "@assets/images/logo.png";
 import { Link } from "react-router-dom";
+import { useAuthStore } from "@context/authStore";
+
+
 export default function Hero() {
   const [isDarkMode, setIsDarkMode] = useState(false);
-
+  const {isAuthenticated} = useAuthStore()
   useEffect(() => {
     setIsDarkMode(document.documentElement.classList.contains("dark"));
   }, []);
@@ -56,9 +59,21 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeOut", delay: 0.6 }}
       >
-        <Link to="/login">
+        <Link to={isAuthenticated ? "/home":"/login"}>
           <Button size="lg" className="text-white cursor-pointer">
-            Get Started <ArrowRight />
+            Get Started 
+            <motion.div 
+            animate={{
+              x:[0,3,0],
+            }}
+            transition={{
+              duration:1,
+              repeat:Infinity,
+              ease:"easeInOut"
+            }}
+            >
+            <ArrowRight />
+            </motion.div>
           </Button>
         </Link>
       </motion.div>

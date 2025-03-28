@@ -41,7 +41,7 @@ export const updateProjectSolution = async (
   solution: ProjectSolution,
 ): Promise<ProjectSolution[]> => {
   try {
-    console.log(solution);
+   
     const response = await apiClient.put<ApiResponse<ProjectSolution[]>>(
       `/courseProjects/projects/solutions/${solutionId}`,
       solution,
