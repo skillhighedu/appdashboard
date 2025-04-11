@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import ContactUs from "@assets/images/contact.png";
 import { sendContactService } from "../services/contactServices";
 import { Button } from "@components/ui/button";
-import {SendHorizonalIcon} from "lucide-react"
+import { SendHorizonalIcon } from "lucide-react";
 interface ContactFormState {
   name: string;
   email: string;
@@ -27,7 +27,9 @@ export default function Contact() {
   });
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -110,11 +112,11 @@ export default function Contact() {
               required
             >
               {Object.values(StudentCategory).map((cat) => (
-                <option key={cat} value={cat}>{
-                  cat === StudentCategory.EXISTING
+                <option key={cat} value={cat}>
+                  {cat === StudentCategory.EXISTING
                     ? "Existing Student"
-                    : "New Student"
-                }</option>
+                    : "New Student"}
+                </option>
               ))}
             </select>
           </div>
@@ -134,20 +136,23 @@ export default function Contact() {
             />
           </div>
 
-          <Button variant="default" size="lg" className="w-full text-white cursor-pointer">
-            Send Message <motion.div 
-            animate={
-              {
-                x:[0,5,0]
-              }
-            }
-            transition={{
-              duration:1,
-              repeat:Infinity,
-              ease:"easeInOut"
-            }}
+          <Button
+            variant="default"
+            size="lg"
+            className="w-full text-white cursor-pointer"
+          >
+            Send Message{" "}
+            <motion.div
+              animate={{
+                x: [0, 5, 0],
+              }}
+              transition={{
+                duration: 1,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
             >
-            <SendHorizonalIcon/>
+              <SendHorizonalIcon />
             </motion.div>
           </Button>
         </form>

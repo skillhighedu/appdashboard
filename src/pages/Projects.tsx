@@ -86,7 +86,10 @@ export default function Projects() {
                     setIsModalOpen(true);
                   }}
                 >
-                  {project.solutions[0]?.isCompleted ? "Check Solution" : "Submit"} <Upload />
+                  {project.solutions[0]?.isCompleted
+                    ? "Check Solution"
+                    : "Submit"}{" "}
+                  <Upload />
                 </Button>
               </div>
             </div>

@@ -8,7 +8,7 @@ export default function Landing() {
   return (
     <div className="">
       <Hero />
-      <Trigger/>
+      <Trigger />
       {/* <Sliding/> */}
       {/* <Testimonials /> */}
       <Contact />

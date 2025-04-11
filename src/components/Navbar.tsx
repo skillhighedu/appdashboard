@@ -7,8 +7,8 @@ import {
   Moon,
   User,
   HomeIcon,
-  // MessageCircle,
-  PenBox,
+  // MessageSquare,
+  // PenBox,
 } from "lucide-react";
 import Logo from "@assets/images/logo.png";
 import LogoWhite from "@assets/images/logpo-white.png";
@@ -28,24 +28,22 @@ export default function Navbar() {
   // Define menu items with icons (filtering Home & Messages if not authenticated)
   const menuItems = [
     { name: "Home", href: "/home", icon: <HomeIcon size={20} /> },
-    ...(isAuthenticated
-      ? [
-          // {
-          //   name: "Messages",
-          //   href: "/services",
-          //   icon: <MessageCircle size={20} />,
-          // },
-        ]
-      : []),
-
-    { name: "Blogs", href: "/blogs", icon: <PenBox size={20} /> },
+    // { name: "Blogs", href: "/blogs", icon: <PenBox size={20} /> },
+    // {
+    //   name: "Support",
+    //   href: "/support",
+    //   icon: <MessageSquare size={20} />,
+    // }
   ];
 
   return (
     <nav className="w-full bg-white text-gray-900 dark:bg-darkPrimary dark:text-white ">
       <div className="container mx-auto flex justify-between items-center py-6">
         {/* Logo */}
-        <a href={isAuthenticated ? "/home":"/"} className="flex items-center space-x-3 rtl:space-x-reverse">
+        <a
+          href={isAuthenticated ? "/home" : "/"}
+          className="flex items-center space-x-3 rtl:space-x-reverse"
+        >
           <img
             src={theme === "dark" ? LogoWhite : Logo}
             className="h-auto w-[180px]"
@@ -59,9 +57,8 @@ export default function Navbar() {
             <a
               key={item.name}
               href={item.href}
-              className={`flex text-sm items-center gap-2 ${
-                currentRouteName.pathname === item.href ? "text-primary" : ""
-              } hover:text-primary dark:hover:text-primary text-gray-500 dark:text-gray-100 transition-all`}
+              className={`flex text-sm items-center gap-2 ${currentRouteName.pathname === item.href ? "text-primary" : ""
+                } hover:text-primary dark:hover:text-primary text-gray-500 dark:text-gray-100 transition-all`}
             >
               {item.icon}
               {item.name}
@@ -76,50 +73,55 @@ export default function Navbar() {
             text={theme === "dark" ? "Turn off DarkMode" : "Turn on DarkMode"}
             position="bottom"
           >
-          <button
-      onClick={toggleTheme}
-      className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer transition"
-    >
-      {theme === "dark" ? (
-        // Sun: Rotates on hover
-        <motion.div
-          whileHover={{
-            rotate: 360,
-            transition: { duration: 1, ease: "easeInOut" },
-          }}
-        >
-          <Sun size={24} />
-        </motion.div>
-      ) : (
-        // Moon: Small semi-circle bounce on hover
-        <motion.div
-          whileHover={{
-            x: [0, -1, 0],
-            transition: {
-              duration: 0.5,
-              repeat: Infinity,
-              ease: "easeInOut",
-            },
-          }}
-        >
-          <Moon size={24} />
-        </motion.div>
-      )}
-    </button>
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer transition"
+            >
+              {theme === "dark" ? (
+                // Sun: Rotates on hover
+                <motion.div
+                  whileHover={{
+                    rotate: 360,
+                    transition: { duration: 1, ease: "easeInOut" },
+                  }}
+                >
+                  <Sun size={24} />
+                </motion.div>
+              ) : (
+                // Moon: Small semi-circle bounce on hover
+                <motion.div
+                  whileHover={{
+                    x: [0, -1, 0],
+                    transition: {
+                      duration: 0.5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    },
+                  }}
+                >
+                  <Moon size={24} />
+                </motion.div>
+              )}
+            </button>
           </Tooltip>
 
           {!isAuthenticated ? (
             <>
               <Link to="/login">
-              
-                <Button variant="secondary" className="text-primary cursor-pointer hidden sm:flex">
-                Login
+                <Button
+                  variant="secondary"
+                  className="text-primary cursor-pointer hidden sm:flex"
+                >
+                  Login
                 </Button>
               </Link>
-        
-              <Button variant="default" className="text-white cursor-pointer hidden sm:flex">
-              Join Now
-                </Button>
+
+              <Button
+                variant="default"
+                className="text-white cursor-pointer hidden sm:flex"
+              >
+                Join Now
+              </Button>
             </>
           ) : (
             <Link to="/profile">

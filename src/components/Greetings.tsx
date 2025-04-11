@@ -4,13 +4,13 @@ const getGreeting = (): string => {
   const hour = new Date().getHours();
 
   if (hour >= 5 && hour < 12) {
-    return "Good Morning! Have a great start to your day!";
+    return "Good Morning! ";
   } else if (hour >= 12 && hour < 17) {
-    return "Good Afternoon! Keep pushing forward!";
+    return "Good Afternoon! ";
   } else if (hour >= 17 && hour < 21) {
-    return "Good Evening! Hope you had a productive day!";
+    return "Good Evening! ";
   } else {
-    return "Good Night! Rest well and recharge!";
+    return "Good Night!";
   }
 };
 

@@ -28,7 +28,7 @@ export default function Input({
         className={`relative flex items-center rounded-lg border transition ${
           error
             ? "border-red-500 focus-within:ring-red-500"
-            : "border-gray-200 dark:border-gray-600 focus-within:ring-primary"
+            : "border-gray-200 dark:border-darkPrimary  focus-within:ring-primary"
         }`}
       >
         {/* Left Icon */}

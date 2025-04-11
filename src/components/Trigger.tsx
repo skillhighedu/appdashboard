@@ -1,11 +1,11 @@
-import Logo_letter from '@assets/images/skillhigh-letter.png';
-import { motion } from 'framer-motion';
-import { useRef } from 'react';
-import { useInView } from 'framer-motion';
+import Logo_letter from "@assets/images/skillhigh-letter.png";
+import { motion } from "framer-motion";
+import { useRef } from "react";
+import { useInView } from "framer-motion";
 
 export default function Trigger() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-50px' }); // Adjusted trigger margin
+  const isInView = useInView(ref, { once: true, margin: "-50px" }); // Adjusted trigger margin
 
   // Animation variants for cleaner code
   const fadeInLeft = {
@@ -25,22 +25,23 @@ export default function Trigger() {
         <motion.div
           variants={fadeInLeft}
           initial="initial"
-          animate={isInView ? 'animate' : 'initial'}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
+          animate={isInView ? "animate" : "initial"}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           className="p-6 sm:p-8 lg:p-10 max-w-xl w-full sm:w-2/3 z-10"
         >
           <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-4 tracking-tight">
             Your Ultimate Learning Platform
           </h2>
           <p className="text-white text-base sm:text-lg lg:text-xl leading-relaxed mb-6 opacity-90">
-            Skillhigh empowers learners with cutting-edge resources to master new skills, boost confidence, and accelerate career growth.
+            Skillhigh empowers learners with cutting-edge resources to master
+            new skills, boost confidence, and accelerate career growth.
           </p>
           <motion.a
             href="/login"
             variants={fadeInUp}
             initial="initial"
-            animate={isInView ? 'animate' : 'initial'}
-            transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
+            animate={isInView ? "animate" : "initial"}
+            transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
             className="inline-block bg-white text-primary font-semibold py-3 px-8 rounded-full hover:bg-opacity-95 transition-all duration-300 shadow-md"
           >
             Explore Now
@@ -54,11 +55,9 @@ export default function Trigger() {
           className="relative sm:absolute rounded-2xl right-6 bottom-6 sm:bottom-12 sm:right-16 w-36 sm:w-52 lg:w-72 rotate-[12deg] drop-shadow-lg"
           initial={{ y: 250, opacity: 0 }}
           animate={isInView ? { y: 0, opacity: 1 } : { y: 250, opacity: 0 }}
-          transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
         />
       </div>
-
-     
     </div>
   );
 }

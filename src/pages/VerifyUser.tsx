@@ -1,4 +1,4 @@
-import { Button} from "@components/ui/button";
+import { Button } from "@components/ui/button";
 import { useState } from "react";
 import { useStore } from "@context/useStore";
 import { Mail } from "lucide-react";
@@ -53,10 +53,12 @@ export default function VerifyUser() {
           />
 
           <Button
-      size="lg"
-       className="w-full mt-3 text-white cursor-pointer"
+            size="lg"
+            className="w-full mt-3 text-white cursor-pointer"
             onClick={handleVerifyEmail}
-          >{loading ? "Sending..." : "Verify Email"} <Mail /></Button>
+          >
+            {loading ? "Sending..." : "Verify Email"} <Mail />
+          </Button>
 
           {otpMessage && (
             <p className="text-center text-sm text-gray-600 dark:text-gray-400 mt-2">

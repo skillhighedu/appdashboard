@@ -11,6 +11,7 @@ import { PlayCircle, Brain, Folder } from "lucide-react";
 import Tooltip from "@components/ToolTip";
 import { Link } from "react-router-dom";
 
+
 export default function CourseDashboard() {
   const { selectedCourseData, setSelectedCourseData } = useStore();
   const courseId = Storage.get("selectedCourseId");
@@ -30,10 +31,19 @@ export default function CourseDashboard() {
     loadCourse();
   }, [courseId, setSelectedCourseData]);
 
+  // async function handleDownloadCertificate(courseId:string) {
+  //   try {
+  //     const data = await generateCerticateService(courseId);
+  //     console.log(data)
+  //   } catch (error) {
+  //     console.error("Error fetching course:", error);
+  //   }
+  // }
+
   if (!selectedCourseData) return <Loading />;
 
   return (
-    <div className="min-h-screen  dark:bg-darkPrimary p-4 md:p-6 space-y-6">
+    <div className="min-h-screen max-width-[90rem] dark:bg-darkPrimary p-4 md:p-6 space-y-6">
       <Header title="Course Dashboard" />
 
       {/* 📌 Course Header */}
@@ -55,14 +65,13 @@ export default function CourseDashboard() {
             {selectedCourseData.courseData.courseName}
           </h1>
           <p className="text-base text-gray-600 dark:text-gray-300">
-            {selectedCourseData.courseData.totalTopicsCount} Topics • Explore
-            Below
+            {selectedCourseData.courseData.totalTopicsCount} Topics • Explore Below
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
             <Link to="/course_player">
               <Tooltip text="Jump into Lessons" position="bottom">
                 <Button className="text-white rounded-lg cursor-pointer">
-                  <PlayCircle /> Start Learning{" "}
+                  <PlayCircle /> Start Learning
                 </Button>
               </Tooltip>
             </Link>
@@ -72,7 +81,7 @@ export default function CourseDashboard() {
                   variant="outline"
                   className="text-primary border-primary cursor-pointer rounded-lg"
                 >
-                  <Brain /> Take Quiz{" "}
+                  <Brain /> Take Quiz
                 </Button>
               </Tooltip>
             </Link>
@@ -82,14 +91,24 @@ export default function CourseDashboard() {
                   variant="outline"
                   className="text-primary border-primary cursor-pointer rounded-lg"
                 >
-                  <Folder /> Start Projects{" "}
+                  <Folder /> Start Projects
                 </Button>
               </Tooltip>
             </Link>
+
+              {/* <Tooltip text="Download Your Certificate" position="bottom">
+                <Button
+                onClick={()=>handleDownloadCertificate(courseId)}
+                  variant="outline"
+                  className="text-primary border-primary cursor-pointer rounded-lg"
+                >
+                  <DownloadIcon /> Download Certificate
+                </Button>
+              </Tooltip> */}
+         
           </div>
         </div>
       </motion.div>
-
       {/* 🎯 Progress Overview */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}

@@ -4,7 +4,7 @@
   --color-primary: #0d8267;
   --color-secondary: #c3ded8;
   --color-bermuda: #78dcca;
-  --color-muted: #6C7079;
+  --color-muted: #6c7079;
   --color-darkPrimary: #121213;
   --color-darkSecondary: #1b1b1a;
 }
@@ -32,4 +32,33 @@
 [data-theme="dark"] {
   background-color: var(--color-darkPrimary);
   color: white;
+}
+
+.wrapper {
+  height: 100%;
+  width: 100%;
+  max-width: 80rem;
+  padding: 1rem;
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .wrapper {
+    max-width: 90rem;
+  }
 }

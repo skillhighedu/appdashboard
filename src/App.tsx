@@ -15,6 +15,8 @@ import Blogs from "@pages/Blogs";
 import NotFound from "@pages/NotFound";
 import DetailsForm from "@pages/DetailsForm";
 import ForgotPassword from "@pages/ForgotPassword";
+import Support from "@pages/Support";
+import CertificateComponent from "@pages/Certificate";
 // import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator } from "@components/ui/BreadCrumbs";
 
 const Landing = lazy(() => import("@pages/Landing"));
@@ -77,7 +79,7 @@ const Home = lazy(() => import("@pages/Home"));
 function App() {
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <div className="w-full max-w-screen mx-auto px-2 lg:px-6">
+      <div className="wrapper h-full w-full max-w-[80rem] px-4 md:px-12 lg:px-10 xl:max-w-[90rem] mx-auto ">
         <Router>
           <Suspense
             fallback={<div className="text-white text-center">Loading...</div>}
@@ -151,6 +153,14 @@ function App() {
                     </Layout>
                   }
                 />
+                 <Route
+                  path="/certificate"
+                  element={
+                    <Layout>
+                      <CertificateComponent/>
+                    </Layout>
+                  }
+                />
                 <Route
                   path="/courseDashboard"
                   element={
@@ -204,6 +214,14 @@ function App() {
                   element={
                     <Layout>
                       <DetailsForm />
+                    </Layout>
+                  }
+                />
+                 <Route
+                  path="/support"
+                  element={
+                    <Layout>
+                      <Support/>
                     </Layout>
                   }
                 />

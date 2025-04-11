@@ -1,5 +1,5 @@
 import { ArrowUpRight, BookOpen } from "lucide-react";
-import {Button} from "@components/ui/button";
+import { Button } from "@components/ui/button";
 import Header from "@components/Header";
 import { fetchAllQuizzes } from "../services/quizService";
 import { useStore } from "@context/useStore";
@@ -61,8 +61,9 @@ export default function Quiz() {
                 <Button
                   onClick={() => handleSelectedQuiz(quiz.id)}
                   className="text-white cursor-pointer"
-               
-                >Start Quiz <ArrowUpRight/></Button>
+                >
+                  Start Quiz <ArrowUpRight />
+                </Button>
               </div>
             );
           })}
