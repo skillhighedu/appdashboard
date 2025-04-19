@@ -64,7 +64,8 @@ export default function Blogs() {
             SkillHigh Blogs
           </h1>
           <p className="text-lg  text-darkPrimary md:text-xl max-w-2xl mx-auto opacity-90">
-            Dive into expert insights, tutorials, and the latest industry trends.
+            Dive into expert insights, tutorials, and the latest industry
+            trends.
           </p>
 
           <div className="mt-8">
@@ -122,10 +123,11 @@ export default function Blogs() {
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`px-5 py-2 text-sm font-semibold rounded-full shadow-md transition-all duration-300 ${selectedCategory === category
+              className={`px-5 py-2 text-sm font-semibold rounded-full shadow-md transition-all duration-300 ${
+                selectedCategory === category
                   ? "bg-primary text-white"
                   : "bg-white text-gray-700 hover:bg-indigo-50 hover:text-indigo-700"
-                }`}
+              }`}
             >
               {category}
             </button>
@@ -159,7 +161,12 @@ export default function Blogs() {
                     <span>{post.date}</span>
                   </div>
                   <div className="mt-8">
-                    <Button className="cursor-pointer text-primary" variant="secondary" >Read More</Button>
+                    <Button
+                      className="cursor-pointer text-primary"
+                      variant="secondary"
+                    >
+                      Read More
+                    </Button>
                   </div>
                 </div>
               </div>

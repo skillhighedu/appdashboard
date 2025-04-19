@@ -7,15 +7,15 @@ import Header from "@components/Header";
 import CircleProgress from "@components/CircleProgress";
 import { Button } from "@components/ui/button";
 import Loading from "@components/Loading";
-import { PlayCircle, Brain, Folder } from "lucide-react";
+import { PlayCircle, Brain, Folder, DownloadIcon } from "lucide-react";
 import Tooltip from "@components/ToolTip";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import { generateCerticateService } from "../services/certificateServices";
 
 export default function CourseDashboard() {
-  const { selectedCourseData, setSelectedCourseData } = useStore();
+  const { selectedCourseData, setSelectedCourseData ,setCertificateDetails} = useStore();
   const courseId = Storage.get("selectedCourseId");
-
+  const navigate = useNavigate();
   useEffect(() => {
     const loadCourse = async () => {
       if (!courseId) return;
@@ -31,14 +31,17 @@ export default function CourseDashboard() {
     loadCourse();
   }, [courseId, setSelectedCourseData]);
 
-  // async function handleDownloadCertificate(courseId:string) {
-  //   try {
-  //     const data = await generateCerticateService(courseId);
-  //     console.log(data)
-  //   } catch (error) {
-  //     console.error("Error fetching course:", error);
-  //   }
-  // }
+  async function handleDownloadCertificate(courseId: string) {
+    try {
+      const data = await generateCerticateService(courseId);
+      if (data) {
+        setCertificateDetails(data)
+        navigate("/certificate");
+      }
+    } catch (error) {
+      console.error("Error fetching course:", error);
+    }
+  }
 
   if (!selectedCourseData) return <Loading />;
 
@@ -65,7 +68,8 @@ export default function CourseDashboard() {
             {selectedCourseData.courseData.courseName}
           </h1>
           <p className="text-base text-gray-600 dark:text-gray-300">
-            {selectedCourseData.courseData.totalTopicsCount} Topics • Explore Below
+            {selectedCourseData.courseData.totalTopicsCount} Topics • Explore
+            Below
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
             <Link to="/course_player">
@@ -96,16 +100,15 @@ export default function CourseDashboard() {
               </Tooltip>
             </Link>
 
-              {/* <Tooltip text="Download Your Certificate" position="bottom">
-                <Button
-                onClick={()=>handleDownloadCertificate(courseId)}
-                  variant="outline"
-                  className="text-primary border-primary cursor-pointer rounded-lg"
-                >
-                  <DownloadIcon /> Download Certificate
-                </Button>
-              </Tooltip> */}
-         
+            <Tooltip text="Download Your Certificate" position="bottom">
+              <Button
+                onClick={() => handleDownloadCertificate(courseId)}
+                variant="outline"
+                className="text-primary border-primary cursor-pointer rounded-lg"
+              >
+                <DownloadIcon /> Download Certificate
+              </Button>
+            </Tooltip>
           </div>
         </div>
       </motion.div>

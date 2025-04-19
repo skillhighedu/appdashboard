@@ -44,7 +44,7 @@ export default function Courses() {
         Your Enrolled Courses
       </h2>
 
-      <motion.div 
+      <motion.div
         className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}

@@ -14,12 +14,12 @@
 //   const [loading, setLoading] = useState(true);
 //   const [error, setError] = useState<string | null>(null);
 //   const [successMessage, setSuccessMessage] = useState<string | null>(null);
-  
+
 //   // Edit states
 //   const [isEditingName, setIsEditingName] = useState(false);
 //   const [isChangingPassword, setIsChangingPassword] = useState(false);
 //   const [nameValue, setNameValue] = useState("");
-  
+
 //   // Password states
 //   const [currentPassword, setCurrentPassword] = useState("");
 //   const [newPassword, setNewPassword] = useState("");
@@ -52,17 +52,17 @@
 //     try {
 //       setError(null);
 //       setSuccessMessage(null);
-      
+
 //       if (!nameValue.trim()) {
 //         setError("Name cannot be empty");
 //         return;
 //       }
-      
+
 //       // await updateUserProfile({ name: nameValue });
 //       // setUserProfile({ ...userProfile, name: nameValue });
 //       // setIsEditingName(false);
 //       // setSuccessMessage("Name updated successfully");
-      
+
 //       // Auto-clear success message after 3 seconds
 //       setTimeout(() => setSuccessMessage(null), 3000);
 //     } catch (error) {
@@ -80,35 +80,35 @@
 //     try {
 //       setPasswordError(null);
 //       setSuccessMessage(null);
-      
+
 //       // Validation
 //       if (!currentPassword || !newPassword || !confirmPassword) {
 //         setPasswordError("All password fields are required");
 //         return;
 //       }
-      
+
 //       if (newPassword !== confirmPassword) {
 //         setPasswordError("New passwords don't match");
 //         return;
 //       }
-      
+
 //       if (newPassword.length < 8) {
 //         setPasswordError("Password must be at least 8 characters long");
 //         return;
 //       }
-      
+
 //       // await updateUserPassword({
 //       //   currentPassword,
 //       //   newPassword
 //       // });
-      
+
 //       // Reset fields
 //       setCurrentPassword("");
 //       setNewPassword("");
 //       setConfirmPassword("");
 //       setIsChangingPassword(false);
 //       setSuccessMessage("Password updated successfully");
-      
+
 //       // Auto-clear success message after 3 seconds
 //       setTimeout(() => setSuccessMessage(null), 3000);
 //     } catch (error) {
@@ -132,10 +132,10 @@
 
 //   const formVariants = {
 //     hidden: { opacity: 0, height: 0 },
-//     visible: { 
-//       opacity: 1, 
-//       height: "auto", 
-//       transition: { duration: 0.3, ease: "easeOut" } 
+//     visible: {
+//       opacity: 1,
+//       height: "auto",
+//       transition: { duration: 0.3, ease: "easeOut" }
 //     },
 //   };
 
@@ -166,7 +166,7 @@
 //                 <div className="text-primary dark:text-white flex-shrink-0 bg-gray-100 dark:bg-darkPrimary p-4 rounded-full">
 //                   <User className="w-12 h-12" />
 //                 </div>
-                
+
 //                 <div className="flex-1 space-y-2 text-center md:text-left">
 //                   {isEditingName ? (
 //                     <div className="flex items-center gap-2">
@@ -177,18 +177,18 @@
 //                         className="max-w-xs"
 //                         placeholder="Enter your name"
 //                       />
-//                       <Button 
-//                         variant="outline" 
-//                         size="sm" 
+//                       <Button
+//                         variant="outline"
+//                         size="sm"
 //                         onClick={handleSaveName}
 //                         className="flex items-center gap-1"
 //                       >
 //                         <Save className="w-4 h-4" />
 //                         <span>Save</span>
 //                       </Button>
-//                       <Button 
-//                         variant="ghost" 
-//                         size="sm" 
+//                       <Button
+//                         variant="ghost"
+//                         size="sm"
 //                         onClick={handleCancelNameEdit}
 //                         className="flex items-center gap-1"
 //                       >
@@ -201,9 +201,9 @@
 //                       <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
 //                         {userProfile?.name ?? "Unknown User"}
 //                       </h2>
-//                       <Button 
-//                         variant="ghost" 
-//                         size="sm" 
+//                       <Button
+//                         variant="ghost"
+//                         size="sm"
 //                         onClick={() => setIsEditingName(true)}
 //                       >
 //                         <Edit className="w-4 h-4" />
@@ -214,7 +214,7 @@
 //                     {userProfile?.email ?? "No email available"}
 //                   </p>
 //                 </div>
-                
+
 //                 <Button
 //                   variant="default"
 //                   onClick={handleLogout}
@@ -243,7 +243,7 @@
 //                       {isChangingPassword ? "Cancel" : "Change Password"}
 //                     </Button>
 //                   </div>
-                  
+
 //                   {isChangingPassword && (
 //                     <div className="space-y-4 p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
 //                       {passwordError && (
@@ -251,7 +251,7 @@
 //                           {passwordError}
 //                         </div>
 //                       )}
-                      
+
 //                       <div className="space-y-4">
 //                         <div>
 //                           <label htmlFor="currentPassword" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
@@ -265,7 +265,7 @@
 //                             className="max-w-md "
 //                           />
 //                         </div>
-                        
+
 //                         <div>
 //                           <label htmlFor="newPassword" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
 //                             New Password
@@ -278,7 +278,7 @@
 //                             className="max-w-md"
 //                           />
 //                         </div>
-                        
+
 //                         <div>
 //                           <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
 //                             Confirm New Password
@@ -292,7 +292,7 @@
 //                           />
 //                         </div>
 //                       </div>
-                      
+
 //                       <div className="flex gap-4 justify-end">
 //                        <Button onClick={handleUpdatePassword} variant="outline" className="text-gray-700 cursor-pointer">Cancel</Button>
 //                         <Button onClick={handleUpdatePassword} className="text-white cursor-pointer">Update Password</Button>

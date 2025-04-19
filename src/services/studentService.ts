@@ -7,7 +7,6 @@ import { handleApiError } from "../utils/errorHandler";
 export const fetchCourses = async (): Promise<Course[]> => {
   try {
     const response = await apiClient.get<Course[]>("/courses/getUserCourses");
-    console.log(response)
     const formattedResponse: ApiResponse<Course[]> = {
       success: true,
       data: response.data,

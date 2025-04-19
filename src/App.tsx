@@ -17,6 +17,7 @@ import DetailsForm from "@pages/DetailsForm";
 import ForgotPassword from "@pages/ForgotPassword";
 import Support from "@pages/Support";
 import CertificateComponent from "@pages/Certificate";
+import CertificateVerification from "@pages/CertificateVerification";
 // import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator } from "@components/ui/BreadCrumbs";
 
 const Landing = lazy(() => import("@pages/Landing"));
@@ -118,6 +119,14 @@ function App() {
                   </Layout>
                 }
               />
+                <Route
+                path="/verify/:cid"
+                element={
+                  <Layout>
+                    <CertificateVerification />
+                  </Layout>
+                }
+              />
               <Route
                 path="/blogs"
                 element={
@@ -153,11 +162,11 @@ function App() {
                     </Layout>
                   }
                 />
-                 <Route
+                <Route
                   path="/certificate"
                   element={
                     <Layout>
-                      <CertificateComponent/>
+                      <CertificateComponent />
                     </Layout>
                   }
                 />
@@ -217,11 +226,11 @@ function App() {
                     </Layout>
                   }
                 />
-                 <Route
+                <Route
                   path="/support"
                   element={
                     <Layout>
-                      <Support/>
+                      <Support />
                     </Layout>
                   }
                 />

@@ -1,5 +1,6 @@
 import React, { createContext, useState, ReactNode } from "react";
 import { Course, SelectedCourse } from "../types/course";
+import { CertificateDetails } from "../types/certificate";
 import { Lesson } from "../types/lessons";
 import { userProfile } from "../types/user";
 import { Quiz, QuizArray } from "../types/quiz"; // Updated import
@@ -42,6 +43,11 @@ interface StoreContextType {
   //Name
   studentName: string | null;
   setStudentName: React.Dispatch<React.SetStateAction<string | null>>;
+
+  //CERTIFICATE TYPES
+  certificateDetails:CertificateDetails | null;
+  setCertificateDetails: React.Dispatch<React.SetStateAction<CertificateDetails | null>>;
+  
 }
 
 // Create Context
@@ -61,6 +67,7 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
   const [isForgotPassword, setIsForgotPassword] = useState<boolean>(false);
   const [isVerified, setIsVerified] = useState<boolean>(false);
   const [studentName, setStudentName] = useState<string | null>(null);
+  const [certificateDetails,setCertificateDetails] = useState<CertificateDetails | null>(null);
 
   const value = {
     enrolledCourses,
@@ -87,6 +94,8 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
     setIsVerified,
     studentName,
     setStudentName,
+    certificateDetails,
+    setCertificateDetails
   };
 
   return (

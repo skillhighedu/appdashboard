@@ -1,35 +1,40 @@
-import Cert from '@assets/images/certificate.jpg';
+import { CertificateDetails } from "../types/certificate";
+import Cert from '@assets/images/certificate.jpg'
+import {formatDate} from '@utils/utils'
 
-type Props = {
-  name: string;
-  course: string;
-  qRCode:string;
-  from?: string;
-  to?: string;
-};
+export const Certificate = ({ name, courseName, fromDate, toDate, qrCode }: CertificateDetails) => {
+ 
 
-const Certificate = ({ name, course, from, to,qRCode }: Props) => {
   return (
     <div
       className="w-[1120px] h-[790px] bg-cover bg-center bg-no-repeat relative shadow-xl"
       style={{ backgroundImage: `url(${Cert})` }}
     >
-      {/* Center text block aligned with certificate's central layout */}
       <div className="absolute top-[270px] left-1/2 transform -translate-x-1/2 w-[70%] text-center">
-        <p className="text-lg text-gray-600 mb-2">THIS CERTIFICATE IS AWARDED TO</p>
-        <h3 className="text-4xl font-bold text-black">{name || "Your Name"}</h3>
-        <p className="mt-6 text-lg text-gray-600">
-          for participating in Skill High Industrial Internship
-        </p>
-        <h4 className="text-2xl font-semibold text-black mt-2">{course || "Course Name"}</h4>
-        <p className="mt-4 text-sm text-gray-700">
-          Program from {from || "DD/MM/YYYY"} to {to || "DD/MM/YYYY"}
+        <p className="text-3xl text-amber-700 font-semibold mb-2">
+          CERTIFICATE OF APPRECIATION
         </p>
 
-        <img src={qRCode}></img>
+        <p className="text-xl text-gray-600 mb-2">This certificate is awarded to</p>
+
+        <h3 className="text-4xl font-bold text-black">{name || "Your Name"}</h3>
+
+        <p className="mt-6 text-lg text-gray-600">
+          for participating in the Skill High Industrial Internship{" "}
+          <span className="font-semibold text-black">{courseName || "Course Name"}</span>{" "}
+          Program from{" "}
+          <span className="font-semibold text-black">
+            {fromDate ? formatDate(fromDate) : "Start Date"} to{" "}
+            {toDate ? formatDate(toDate) : "End Date"}
+          </span>
+        </p>
+
+        {qrCode && (
+          <div className="mt-8 flex justify-center">
+            <img src={qrCode} alt="QR Code" className="w-24 h-24" />
+          </div>
+        )}
       </div>
     </div>
   );
 };
-
-export default Certificate;

@@ -7,7 +7,9 @@ import { Button } from "@components/ui/button";
 
 export default function Support() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState<string | null>("dashboard_navigation");
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(
+    "dashboard_navigation",
+  );
 
   const toggleAnswer = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -33,8 +35,8 @@ export default function Support() {
           <Link to="/verification" className="text-primary underline">
             Verify Your Email
           </Link>{" "}
-          button, enter your email, and an OTP will be sent to your registered email address.
-          Enter the OTP to complete the verification process.
+          button, enter your email, and an OTP will be sent to your registered
+          email address. Enter the OTP to complete the verification process.
         </>
       ),
     },
@@ -43,8 +45,8 @@ export default function Support() {
       question: "Didn't Receive OTP?",
       answer: (
         <>
-          If you haven't received the OTP, please check your spam or junk folder.
-          If it's not there, click on{" "}
+          If you haven't received the OTP, please check your spam or junk
+          folder. If it's not there, click on{" "}
           <Link to="/verification" className="text-primary underline">
             Resend OTP
           </Link>{" "}
@@ -55,7 +57,8 @@ export default function Support() {
     {
       category: "courses_content",
       question: "Do I Need to Verify My Email Every Time?",
-      answer: "No, you only need to verify your email once. After verification, simply log in.",
+      answer:
+        "No, you only need to verify your email once. After verification, simply log in.",
     },
     {
       category: "courses_content",
@@ -84,14 +87,18 @@ export default function Support() {
     },
     {
       category: "technical_support",
-      question: "How do I fix issues with video buffering or poor video quality?",
+      question:
+        "How do I fix issues with video buffering or poor video quality?",
       answer: "Project verification typically takes at least one week.",
     },
     {
       category: "technical_support",
       question: "What if my question isn’t listed here?",
       answer: (
-        <>No worries! Reach out to our support team via the 'Contact Us' page or email us at support@example.com.</>
+        <>
+          No worries! Reach out to our support team via the 'Contact Us' page or
+          email us at support@example.com.
+        </>
       ),
     },
   ];
@@ -112,16 +119,21 @@ export default function Support() {
           transition={{ duration: 0.5 }}
           className="mt-10 max-w-3xl text-center"
         >
-          <h2 className="text-3xl text-primary font-bold">Frequently Asked Questions</h2>
+          <h2 className="text-3xl text-primary font-bold">
+            Frequently Asked Questions
+          </h2>
           <p className="text-gray-600 dark:text-gray-300 mt-2">
-            Find quick answers to common questions below. Can’t find what you’re looking for? Contact us!
+            Find quick answers to common questions below. Can’t find what you’re
+            looking for? Contact us!
           </p>
 
           <div className="flex flex-wrap justify-center gap-2 mt-4">
             {Categories.map((category) => (
               <Button
                 key={category.key}
-                variant={selectedCategory === category.key ? "default" : "secondary"}
+                variant={
+                  selectedCategory === category.key ? "default" : "secondary"
+                }
                 className={`${selectedCategory === category.key ? "text-white" : " dark:text-primary"} cursor-pointer`}
                 onClick={() => setSelectedCategory(category.key)}
               >
@@ -129,8 +141,6 @@ export default function Support() {
               </Button>
             ))}
           </div>
-
-
         </motion.div>
 
         {/* FAQ List */}
@@ -175,7 +185,9 @@ export default function Support() {
               </motion.div>
             ))
           ) : (
-            <p className="text-gray-400">No questions found for this category.</p>
+            <p className="text-gray-400">
+              No questions found for this category.
+            </p>
           )}
         </div>
 
@@ -188,10 +200,12 @@ export default function Support() {
         >
           <p className="text-gray-400">
             Still need help?{" "}
-            <a href="mailto:support@example.com" className="text-primary hover:underline">
+            <a
+              href="mailto:support@example.com"
+              className="text-primary hover:underline"
+            >
               Contact Support
             </a>
-
           </p>
         </motion.div>
       </div>

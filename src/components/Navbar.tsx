@@ -7,8 +7,8 @@ import {
   Moon,
   User,
   HomeIcon,
-  // MessageSquare,
-  // PenBox,
+  MessageSquare,
+  PenBox,
 } from "lucide-react";
 import Logo from "@assets/images/logo.png";
 import LogoWhite from "@assets/images/logpo-white.png";
@@ -28,12 +28,12 @@ export default function Navbar() {
   // Define menu items with icons (filtering Home & Messages if not authenticated)
   const menuItems = [
     { name: "Home", href: "/home", icon: <HomeIcon size={20} /> },
-    // { name: "Blogs", href: "/blogs", icon: <PenBox size={20} /> },
-    // {
-    //   name: "Support",
-    //   href: "/support",
-    //   icon: <MessageSquare size={20} />,
-    // }
+    { name: "Blogs", href: "/blogs", icon: <PenBox size={20} /> },
+    {
+      name: "Support",
+      href: "/support",
+      icon: <MessageSquare size={20} />,
+    }
   ];
 
   return (
@@ -57,8 +57,9 @@ export default function Navbar() {
             <a
               key={item.name}
               href={item.href}
-              className={`flex text-sm items-center gap-2 ${currentRouteName.pathname === item.href ? "text-primary" : ""
-                } hover:text-primary dark:hover:text-primary text-gray-500 dark:text-gray-100 transition-all`}
+              className={`flex text-sm items-center gap-2 ${
+                currentRouteName.pathname === item.href ? "text-primary" : ""
+              } hover:text-primary dark:hover:text-primary text-gray-500 dark:text-gray-100 transition-all`}
             >
               {item.icon}
               {item.name}
