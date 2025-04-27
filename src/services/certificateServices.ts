@@ -4,11 +4,10 @@ import { handleApiError } from "@utils/errorHandler";
 import { toast } from "sonner";
 import { CertificateDetails } from "../types/certificate";
 
-
 // SEND CONTACT DATA TO THE SERVER
 export const generateCerticateService = async (
   courseId: string,
-  navigate:(path: string) => void 
+  navigate: (path: string) => void,
 ): Promise<CertificateDetails> => {
   try {
     const response = await apiClient.get<ApiResponse<CertificateDetails>>(

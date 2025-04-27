@@ -7,7 +7,6 @@ interface CertificateProps extends CertificateDetails {
   description: string;
 }
 
-
 export const Certificate = ({
   name,
   courseName,
@@ -31,9 +30,7 @@ export const Certificate = ({
       style={{ backgroundImage: `url(${certificateImage})` }}
     >
       <div className="absolute top-[270px] left-1/2 transform -translate-x-1/2 w-[70%] text-center">
-        <p className="text-3xl text-amber-700 font-semibold mb-2">
-          {heading}
-        </p>
+        <p className="text-3xl text-amber-700 font-semibold mb-2">{heading}</p>
 
         <p className="text-xl text-gray-600 mb-2">
           This certificate is awarded to
@@ -52,8 +49,6 @@ export const Certificate = ({
             {toDate ? formatDate(toDate) : "End Date"}
           </span>
         </p>
-
-        
 
         {qrCode && (
           <div className="mt-8 flex justify-center">

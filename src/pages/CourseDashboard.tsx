@@ -7,7 +7,7 @@ import Header from "@components/Header";
 import CircleProgress from "@components/CircleProgress";
 import { Button } from "@components/ui/button";
 import Loading from "@components/Loading";
-import { PlayCircle, Brain, Folder,GraduationCap } from "lucide-react";
+import { PlayCircle, Brain, Folder, GraduationCap } from "lucide-react";
 import Tooltip from "@components/ToolTip";
 import { Link, useNavigate } from "react-router-dom";
 import { generateCerticateService } from "../services/certificateServices";
@@ -34,11 +34,10 @@ export default function CourseDashboard() {
 
   async function handleDownloadCertificate(courseId: string) {
     try {
-      const data = await generateCerticateService(courseId,navigate);
+      const data = await generateCerticateService(courseId, navigate);
       if (data) {
-        console.log(data)
+        console.log(data);
         setCertificateDetails(data);
-       
       }
     } catch (error) {
       console.error("Error fetching course:", error);

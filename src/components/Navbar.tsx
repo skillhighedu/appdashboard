@@ -8,7 +8,6 @@ import {
   User,
   HomeIcon,
   MessageSquare,
-
 } from "lucide-react";
 import Logo from "@assets/images/logo.png";
 import LogoWhite from "@assets/images/logpo-white.png";
