@@ -60,7 +60,6 @@ export const resetPassword = async (
   newPassword: string,
 ): Promise<ResetPassword> => {
   try {
-
     const response = await apiClient.post<ApiResponse<ResetPassword>>(
       "/dashboardUsers/user/reset-password",
       { email, newPassword },

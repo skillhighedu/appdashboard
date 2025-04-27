@@ -8,7 +8,7 @@ import {
   User,
   HomeIcon,
   MessageSquare,
-  PenBox,
+
 } from "lucide-react";
 import Logo from "@assets/images/logo.png";
 import LogoWhite from "@assets/images/logpo-white.png";
@@ -28,12 +28,12 @@ export default function Navbar() {
   // Define menu items with icons (filtering Home & Messages if not authenticated)
   const menuItems = [
     { name: "Home", href: "/home", icon: <HomeIcon size={20} /> },
-    { name: "Blogs", href: "/blogs", icon: <PenBox size={20} /> },
+    // { name: "Blogs", href: "/blogs", icon: <PenBox size={20} /> },
     {
       name: "Support",
       href: "/support",
       icon: <MessageSquare size={20} />,
-    }
+    },
   ];
 
   return (

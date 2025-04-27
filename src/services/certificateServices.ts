@@ -4,9 +4,11 @@ import { handleApiError } from "@utils/errorHandler";
 import { toast } from "sonner";
 import { CertificateDetails } from "../types/certificate";
 
+
 // SEND CONTACT DATA TO THE SERVER
 export const generateCerticateService = async (
   courseId: string,
+  navigate:(path: string) => void 
 ): Promise<CertificateDetails> => {
   try {
     const response = await apiClient.get<ApiResponse<CertificateDetails>>(
@@ -17,6 +19,7 @@ export const generateCerticateService = async (
       throw new Error("Data is undefined");
     }
     toast.success(response.data.message);
+    navigate("/certificate");
     return response.data.additional;
   } catch (error) {
     throw handleApiError(error);

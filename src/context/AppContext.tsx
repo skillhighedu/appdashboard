@@ -45,9 +45,10 @@ interface StoreContextType {
   setStudentName: React.Dispatch<React.SetStateAction<string | null>>;
 
   //CERTIFICATE TYPES
-  certificateDetails:CertificateDetails | null;
-  setCertificateDetails: React.Dispatch<React.SetStateAction<CertificateDetails | null>>;
-  
+  certificateDetails: CertificateDetails | null;
+  setCertificateDetails: React.Dispatch<
+    React.SetStateAction<CertificateDetails | null>
+  >;
 }
 
 // Create Context
@@ -67,7 +68,8 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
   const [isForgotPassword, setIsForgotPassword] = useState<boolean>(false);
   const [isVerified, setIsVerified] = useState<boolean>(false);
   const [studentName, setStudentName] = useState<string | null>(null);
-  const [certificateDetails,setCertificateDetails] = useState<CertificateDetails | null>(null);
+  const [certificateDetails, setCertificateDetails] =
+    useState<CertificateDetails | null>(null);
 
   const value = {
     enrolledCourses,
@@ -95,7 +97,7 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
     studentName,
     setStudentName,
     certificateDetails,
-    setCertificateDetails
+    setCertificateDetails,
   };
 
   return (

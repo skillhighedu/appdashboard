@@ -119,8 +119,8 @@ function App() {
                   </Layout>
                 }
               />
-                <Route
-                path="/verify/:cid"
+              <Route
+                path="/certificate/verify/:cid"
                 element={
                   <Layout>
                     <CertificateVerification />

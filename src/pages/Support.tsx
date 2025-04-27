@@ -134,7 +134,7 @@ export default function Support() {
                 variant={
                   selectedCategory === category.key ? "default" : "secondary"
                 }
-                className={`${selectedCategory === category.key ? "text-white" : " dark:text-primary"} cursor-pointer`}
+                className={`${selectedCategory === category.key ? "text-white" : " dark:text-primary"} cursor-pointer `}
                 onClick={() => setSelectedCategory(category.key)}
               >
                 {category.label}
