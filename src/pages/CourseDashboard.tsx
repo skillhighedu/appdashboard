@@ -13,10 +13,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { generateCerticateService } from "../services/certificateServices";
 
 export default function CourseDashboard() {
-  const { selectedCourseData, setSelectedCourseData, setCertificateDetails } =
-    useStore();
+  const { selectedCourseData, setSelectedCourseData, setCertificateDetails } = useStore();
   const courseId = Storage.get("selectedCourseId");
   const navigate = useNavigate();
+
   useEffect(() => {
     const loadCourse = async () => {
       if (!courseId) return;
@@ -36,7 +36,7 @@ export default function CourseDashboard() {
     try {
       const data = await generateCerticateService(courseId, navigate);
       if (data) {
-        console.log(data);
+
         setCertificateDetails(data);
       }
     } catch (error) {

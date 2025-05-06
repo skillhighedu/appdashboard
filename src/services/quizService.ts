@@ -54,7 +54,7 @@ export const submitQuiz = async (
       `quiz/quizzes/submitResult/${quizId}`,
       { answers },
     );
-    console.log(response);
+   
     if (!response.data.additional) {
       throw new Error("Quiz Answers data is undefined");
     }
