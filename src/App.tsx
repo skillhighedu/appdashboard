@@ -203,7 +203,7 @@ function App() {
                     </Layout>
                   }
                 />
-                    <Route
+                <Route
                   path="/bounties/:courseId"
                   element={
                     <Layout>

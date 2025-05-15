@@ -1,9 +1,10 @@
 import { JSX } from "react/jsx-runtime";
 
-
 export interface Bounty {
   length: number;
-  map(arg0: (bounty: Bounty, index: number) => JSX.Element): import("react").ReactNode;
+  map(
+    arg0: (bounty: Bounty, index: number) => JSX.Element,
+  ): import("react").ReactNode;
 
   id: string;
   name: string;
@@ -13,12 +14,11 @@ export interface Bounty {
   isSlotsAvailable: boolean;
   courseId: string;
   amount: number;
-  status: 'OPEN' | 'CLOSED'; 
-  type: 'FEATURE' | 'NORMAL'; 
+  status: "OPEN" | "CLOSED";
+  type: "FEATURE" | "NORMAL";
   expiryDate: string;
-  createdAt: string;  
-  updatedAt: string; 
-
+  createdAt: string;
+  updatedAt: string;
 }
 
 export type BountyDetails = {
@@ -37,7 +37,7 @@ export type BountyDetails = {
 
 export type AppliedBounty = {
   id: string;
-  name:string;
+  name: string;
   description: string;
   type: string;
   expiryDate: string;
@@ -48,9 +48,6 @@ export type AppliedBounty = {
   bountyId: string;
   courseId: string;
   userId: string;
-  bounty:BountyDetails
-  submittedLink:string
-
+  bounty: BountyDetails;
+  submittedLink: string;
 };
-
-

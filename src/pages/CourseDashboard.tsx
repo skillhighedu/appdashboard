@@ -7,7 +7,13 @@ import Header from "@components/Header";
 import CircleProgress from "@components/CircleProgress";
 import { Button } from "@components/ui/button";
 import Loading from "@components/Loading";
-import { PlayCircle, Brain, Folder, GraduationCap,DollarSign } from "lucide-react";
+import {
+  PlayCircle,
+  Brain,
+  Folder,
+  GraduationCap,
+  DollarSign,
+} from "lucide-react";
 import Tooltip from "@components/ToolTip";
 import { Link, useNavigate } from "react-router-dom";
 import { generateCerticateService } from "../services/certificateServices";
@@ -45,8 +51,8 @@ export default function CourseDashboard() {
     }
   }
 
- function handleBounties(courseId: string) {
-   navigate(`/bounties/${courseId}`)
+  function handleBounties(courseId: string) {
+    navigate(`/bounties/${courseId}`);
   }
 
   if (!selectedCourseData) return <Loading />;

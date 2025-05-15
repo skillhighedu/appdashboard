@@ -11,7 +11,7 @@ export function Card({ children, className, ...props }: CardProps) {
     <div
       className={classNames(
         "rounded-2xl border border-gray-200 dark:border-darkPrimary bg-white dark:bg-darkSecondary shadow-sm transition-shadow hover:shadow-md",
-        className
+        className,
       )}
       {...props}
     >

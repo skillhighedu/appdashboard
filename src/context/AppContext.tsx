@@ -11,7 +11,9 @@ interface StoreContextType {
   enrolledCourses: Course[];
   setEnrolledCourses: React.Dispatch<React.SetStateAction<Course[]>>;
   selectedCourseData: SelectedCourse | null;
-  setSelectedCourseData: React.Dispatch<React.SetStateAction<SelectedCourse | null>>;
+  setSelectedCourseData: React.Dispatch<
+    React.SetStateAction<SelectedCourse | null>
+  >;
 
   courseLessons: Lesson[] | null;
   setCourseLessons: React.Dispatch<React.SetStateAction<Lesson[] | null>>;
@@ -32,7 +34,7 @@ interface StoreContextType {
   projects: Project[] | null;
   setProjects: React.Dispatch<React.SetStateAction<Project[] | null>>;
 
-  bounties:Bounty | null;
+  bounties: Bounty | null;
   setBounties: React.Dispatch<React.SetStateAction<Bounty | null>>;
 
   email: string | "";
@@ -72,8 +74,9 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
   const [isForgotPassword, setIsForgotPassword] = useState<boolean>(false);
   const [isVerified, setIsVerified] = useState<boolean>(false);
   const [studentName, setStudentName] = useState<string | null>(null);
-  const [certificateDetails, setCertificateDetails] =useState<CertificateDetails | null>(null);
-  const [bounties, setBounties] =useState<Bounty | null>(null);
+  const [certificateDetails, setCertificateDetails] =
+    useState<CertificateDetails | null>(null);
+  const [bounties, setBounties] = useState<Bounty | null>(null);
 
   const value = {
     enrolledCourses,
@@ -103,7 +106,7 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
     certificateDetails,
     setCertificateDetails,
     bounties,
-    setBounties
+    setBounties,
   };
 
   return (

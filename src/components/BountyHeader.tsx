@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { BadgeDollarSign, Target, Trophy, Info } from "lucide-react";
 
@@ -10,9 +9,12 @@ export default function BountyHeader() {
       transition={{ duration: 0.6 }}
       className="text-center max-w-3xl mx-auto mb-10"
     >
-      <h1 className="text-4xl font-bold text-[#0D8267] mb-4">Skill-Based Bounties</h1>
+      <h1 className="text-4xl font-bold text-[#0D8267] mb-4">
+        Skill-Based Bounties
+      </h1>
       <p className="text-lg text-gray-600 dark:text-gray-300">
-        Take on real-world challenges, apply your skills, and earn exciting rewards.
+        Take on real-world challenges, apply your skills, and earn exciting
+        rewards.
       </p>
 
       <div className="mt-6 flex flex-wrap justify-center gap-4">
@@ -49,8 +51,13 @@ export default function BountyHeader() {
         </h2>
         <ul className="list-disc pl-6 text-sm text-gray-700 dark:text-gray-300 space-y-2">
           <li>Only apply if you can complete the task by the deadline.</li>
-          <li>Submissions must be your own work and include proper references.</li>
-          <li>Plagiarism or AI-only generated content will lead to disqualification.</li>
+          <li>
+            Submissions must be your own work and include proper references.
+          </li>
+          <li>
+            Plagiarism or AI-only generated content will lead to
+            disqualification.
+          </li>
           <li>Submissions will be reviewed within 5 working days.</li>
         </ul>
       </div>

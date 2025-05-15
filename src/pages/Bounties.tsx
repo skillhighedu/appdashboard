@@ -1,13 +1,6 @@
 // pages/Bounties.tsx
 import { motion } from "framer-motion";
-import {
-
-  CalendarDays,
-  Link2,
-  ClipboardList,
-  BadgeCheck,
-
-} from "lucide-react";
+import { CalendarDays, Link2, ClipboardList, BadgeCheck } from "lucide-react";
 import { Card } from "@components/ui/Card";
 import { Button } from "@components/ui/button";
 import Header from "@components/Header";
@@ -37,18 +30,18 @@ export default function Bounties() {
   const refreshAllData = async () => {
     setIsLoading(true);
     setError(null);
-    
-      const [allResponse, appliedResponse] = await Promise.all([
-        fetchBounties(courseId),
-        getAppliedBounties(courseId),
-      ]);
-      setBounties(allResponse);
-      setAppliedBounties(Array.isArray(appliedResponse) ? appliedResponse : [appliedResponse]);
- 
-      setIsLoading(false);
-    
-  };
 
+    const [allResponse, appliedResponse] = await Promise.all([
+      fetchBounties(courseId),
+      getAppliedBounties(courseId),
+    ]);
+    setBounties(allResponse);
+    setAppliedBounties(
+      Array.isArray(appliedResponse) ? appliedResponse : [appliedResponse],
+    );
+
+    setIsLoading(false);
+  };
 
   useEffect(() => {
     if (courseId) refreshAllData();
@@ -66,7 +59,10 @@ export default function Bounties() {
     }
   };
 
-  const handleCancelApplication = async (applicationId: string, bountyId: string) => {
+  const handleCancelApplication = async (
+    applicationId: string,
+    bountyId: string,
+  ) => {
     try {
       setIsLoading(true);
       await cancelBountyApplication(applicationId, bountyId);
@@ -78,7 +74,12 @@ export default function Bounties() {
     }
   };
 
-  const handleBountySubmission = async (bountyId: string, submittedLink: string, notes: string, applicationId: string) => {
+  const handleBountySubmission = async (
+    bountyId: string,
+    submittedLink: string,
+    notes: string,
+    applicationId: string,
+  ) => {
     try {
       setIsLoading(true);
       await bountySubmission(bountyId, submittedLink, notes, applicationId);
@@ -109,13 +110,20 @@ export default function Bounties() {
       {/* APPLIED BOUNTIES */}
       {appliedBounties.length > 0 && (
         <section className="mb-12 max-w-6xl mx-auto">
-          <h2 className="text-2xl font-bold text-[#0D8267] mb-6">Your Applied Bounties</h2>
+          <h2 className="text-2xl font-bold text-[#0D8267] mb-6">
+            Your Applied Bounties
+          </h2>
           <div className="grid gap-6 md:grid-cols-2">
             {appliedBounties.map((bounty) => (
-              <Card key={bounty.id} className="p-6 space-y-4 rounded-xl dark:bg-darkPrimary bg-white">
+              <Card
+                key={bounty.id}
+                className="p-6 space-y-4 rounded-xl dark:bg-darkPrimary bg-white"
+              >
                 <div>
                   <h3 className="text-xl font-semibold">{bounty.name}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">{bounty.description}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">
+                    {bounty.description}
+                  </p>
                 </div>
                 <div className="text-sm space-y-2">
                   <div className="flex items-center gap-2">
@@ -125,16 +133,19 @@ export default function Bounties() {
                     <BadgeCheck size={16} />
                     Status:{" "}
                     <span
-                      className={`font-medium ${bounty.status === "SUCCESSFUL"
+                      className={`font-medium ${
+                        bounty.status === "SUCCESSFUL"
                           ? "text-green-600"
-                          : bounty.status === "REJECTED" || bounty.status === "FAILED"
+                          : bounty.status === "REJECTED" ||
+                              bounty.status === "FAILED"
                             ? "text-red-500"
                             : "text-gray-600"
-                        }`}
+                      }`}
                     >
                       {bounty.status === "SUCCESSFUL"
                         ? "Successful - Check your email for details!"
-                        : bounty.status === "REJECTED" || bounty.status === "FAILED"
+                        : bounty.status === "REJECTED" ||
+                            bounty.status === "FAILED"
                           ? "Better luck next time"
                           : bounty.status}
                     </span>
@@ -145,12 +156,16 @@ export default function Bounties() {
                     {new Date(bounty.expiryDate).toLocaleDateString()}
                   </div>
                 </div>
-                <div className="text-[#0D8267] font-bold text-lg">₹ {bounty.amount}</div>
+                <div className="text-[#0D8267] font-bold text-lg">
+                  ₹ {bounty.amount}
+                </div>
 
                 {!bounty.submittedLink && (
                   <>
                     <Button
-                      onClick={() => handleCancelApplication(bounty.id, bounty.bountyId)}
+                      onClick={() =>
+                        handleCancelApplication(bounty.id, bounty.bountyId)
+                      }
                       className="w-full"
                       variant="secondary"
                       disabled={isLoading}
@@ -184,7 +199,14 @@ export default function Bounties() {
                     />
                     <Button
                       className="w-full bg-[#0D8267] hover:bg-[#0b7059] text-white"
-                      onClick={() => handleBountySubmission(bounty.bountyId, submittedLink, notes, bounty.id)}
+                      onClick={() =>
+                        handleBountySubmission(
+                          bounty.bountyId,
+                          submittedLink,
+                          notes,
+                          bounty.id,
+                        )
+                      }
                       disabled={!submittedLink || isLoading}
                     >
                       {isLoading ? "Submitting..." : "Submit Bounty"}
@@ -199,9 +221,10 @@ export default function Bounties() {
 
       {/* ALL BOUNTIES */}
       <section className="max-w-6xl mx-auto">
-        <h2 className="text-2xl font-bold text-[#0D8267] mb-6">Available Bounties</h2>
+        <h2 className="text-2xl font-bold text-[#0D8267] mb-6">
+          Available Bounties
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-
           {bounties && bounties.length > 0 ? (
             bounties.map((bounty: Bounty, index: number) => (
               <motion.div
@@ -212,50 +235,66 @@ export default function Bounties() {
               >
                 <Card className="flex flex-col justify-between p-6 rounded-xl shadow-sm dark:bg-darkPrimary bg-white hover:shadow-lg transition-all">
                   <div className="space-y-2">
-                    <h3 className="text-lg font-semibold text-[#0D8267]">{bounty.name}</h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">{bounty.description}</p>
+                    <h3 className="text-lg font-semibold text-[#0D8267]">
+                      {bounty.name}
+                    </h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">
+                      {bounty.description}
+                    </p>
 
                     <div className="grid grid-cols-2 gap-2 text-sm text-gray-700 dark:text-gray-300">
                       <div className="flex items-center gap-1">
                         <ClipboardList size={16} /> {bounty.type}
                       </div>
                       <div className="flex items-center gap-1">
-                        <CalendarDays size={16} /> {new Date(bounty.expiryDate).toLocaleDateString()}
+                        <CalendarDays size={16} />{" "}
+                        {new Date(bounty.expiryDate).toLocaleDateString()}
                       </div>
                       <div className="col-span-2 flex items-center gap-1">
-                        <span className={`text-xs px-2 py-0.5 rounded-full ${bounty.isSlotsAvailable ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>
-                          {bounty.slots} Slots • {bounty.isSlotsAvailable ? "Available" : "Filled"}
+                        <span
+                          className={`text-xs px-2 py-0.5 rounded-full ${bounty.isSlotsAvailable ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}
+                        >
+                          {bounty.slots} Slots •{" "}
+                          {bounty.isSlotsAvailable ? "Available" : "Filled"}
                         </span>
                       </div>
                     </div>
 
                     {bounty.link && (
-                      <a href={bounty.link} target="_blank" className="text-sm text-blue-600 underline flex items-center gap-1 mt-2">
+                      <a
+                        href={bounty.link}
+                        target="_blank"
+                        className="text-sm text-blue-600 underline flex items-center gap-1 mt-2"
+                      >
                         <Link2 size={16} /> View Link
                       </a>
                     )}
                   </div>
 
                   <div className="mt-4 flex justify-between items-center">
-                    <div className="text-[#0D8267] font-bold">₹ {bounty.amount}</div>
+                    <div className="text-[#0D8267] font-bold">
+                      ₹ {bounty.amount}
+                    </div>
                     <Button
                       onClick={() => handleBountyApplication(bounty.id)}
                       disabled={!bounty.isSlotsAvailable || isLoading}
-                      className={`text-white px-4 py-2 rounded-lg ${bounty.isSlotsAvailable
+                      className={`text-white px-4 py-2 rounded-lg ${
+                        bounty.isSlotsAvailable
                           ? "bg-[#0D8267] hover:bg-[#0b7059]"
                           : "bg-gray-400 cursor-not-allowed"
-                        }`}
+                      }`}
                     >
                       {bounty.isSlotsAvailable ? "Apply" : "Slots Filled"}
                     </Button>
                   </div>
                 </Card>
-
               </motion.div>
             ))
           ) : (
             <div>
-              <h2 className="text-md font-bold text-primary mb-6">No Bounties Available</h2>
+              <h2 className="text-md font-bold text-primary mb-6">
+                No Bounties Available
+              </h2>
             </div>
           )}
         </div>
