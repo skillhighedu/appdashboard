@@ -5,11 +5,10 @@ export interface Lesson {
   description: string;
   pptLink: string;
   video: string;
-  topicQuestion:TopicQuestion[];
+  topicQuestion: TopicQuestion[];
   courseId: string;
   createdAt: string;
   updatedAt: string;
-
 }
 
 export interface CourseLessonsResponse {
@@ -21,7 +20,7 @@ export interface TopicQuestion {
   question: string;
   answer: string;
   lessonId: string;
-  studentName:string;
+  studentName: string;
   createdAt: string;
   updatedAt: string;
 }

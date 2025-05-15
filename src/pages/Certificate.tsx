@@ -12,7 +12,7 @@ const certificateTypes = [
   {
     type: "Internship",
     background: certificateBg,
-    heading: "CERTIFICATE OF APPRECIATION",
+    heading: "INTERNSHIP COMPLETION CERTIFICATE.",
     description: "for participating in the Skill High Industrial Internship",
   },
   {

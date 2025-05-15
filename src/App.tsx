@@ -18,6 +18,7 @@ import ForgotPassword from "@pages/ForgotPassword";
 import Support from "@pages/Support";
 import CertificateComponent from "@pages/Certificate";
 import CertificateVerification from "@pages/CertificateVerification";
+import Bounties from "@pages/Bounties";
 // import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator } from "@components/ui/BreadCrumbs";
 
 const Landing = lazy(() => import("@pages/Landing"));
@@ -199,6 +200,14 @@ function App() {
                   element={
                     <Layout>
                       <QuizList />
+                    </Layout>
+                  }
+                />
+                    <Route
+                  path="/bounties/:courseId"
+                  element={
+                    <Layout>
+                      <Bounties />
                     </Layout>
                   }
                 />

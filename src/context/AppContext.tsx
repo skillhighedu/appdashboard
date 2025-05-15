@@ -3,18 +3,19 @@ import { Course, SelectedCourse } from "../types/course";
 import { CertificateDetails } from "../types/certificate";
 import { Lesson } from "../types/lessons";
 import { userProfile } from "../types/user";
-import { Quiz, QuizArray } from "../types/quiz"; // Updated import
+import { Quiz, QuizArray } from "../types/quiz";
 import { Project } from "../types/projects";
+import { Bounty } from "../types/bounties";
 
 interface StoreContextType {
   enrolledCourses: Course[];
   setEnrolledCourses: React.Dispatch<React.SetStateAction<Course[]>>;
   selectedCourseData: SelectedCourse | null;
-  setSelectedCourseData: React.Dispatch<
-    React.SetStateAction<SelectedCourse | null>
-  >;
+  setSelectedCourseData: React.Dispatch<React.SetStateAction<SelectedCourse | null>>;
+
   courseLessons: Lesson[] | null;
   setCourseLessons: React.Dispatch<React.SetStateAction<Lesson[] | null>>;
+  // SELECTED LESSON
   selectedLesson: Lesson | null;
   setSelectedLesson: (lesson: Lesson) => void;
   userProfile: userProfile | null;
@@ -30,6 +31,9 @@ interface StoreContextType {
 
   projects: Project[] | null;
   setProjects: React.Dispatch<React.SetStateAction<Project[] | null>>;
+
+  bounties:Bounty | null;
+  setBounties: React.Dispatch<React.SetStateAction<Bounty | null>>;
 
   email: string | "";
   setEmail: React.Dispatch<React.SetStateAction<string | "">>;
@@ -68,8 +72,8 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
   const [isForgotPassword, setIsForgotPassword] = useState<boolean>(false);
   const [isVerified, setIsVerified] = useState<boolean>(false);
   const [studentName, setStudentName] = useState<string | null>(null);
-  const [certificateDetails, setCertificateDetails] =
-    useState<CertificateDetails | null>(null);
+  const [certificateDetails, setCertificateDetails] =useState<CertificateDetails | null>(null);
+  const [bounties, setBounties] =useState<Bounty | null>(null);
 
   const value = {
     enrolledCourses,
@@ -98,6 +102,8 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
     setStudentName,
     certificateDetails,
     setCertificateDetails,
+    bounties,
+    setBounties
   };
 
   return (

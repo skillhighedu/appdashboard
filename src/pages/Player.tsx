@@ -3,13 +3,15 @@ import { useStore } from "@context/useStore";
 import { fetchCourseTopics } from "../services/lessonsService";
 import { Storage } from "@utils/storage";
 import { Button } from "@components/ui/button";
-import { MessageCircleQuestionIcon } from 'lucide-react';
+import { MessageCircleQuestionIcon } from "lucide-react";
 import { sendQuestionService } from "../services/topicQuestionServices";
 import { toast } from "sonner";
 
 export default function Player() {
   const [isLoading, setIsLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<"content" | "discussions">("content");
+  const [activeTab, setActiveTab] = useState<"content" | "discussions">(
+    "content",
+  );
   const [isQuestionFormOpen, setIsQuestionFormOpen] = useState(false);
   const [question, setQuestion] = useState("");
   const { selectedLesson, setSelectedLesson, setCourseLessons } = useStore();
@@ -53,9 +55,9 @@ export default function Player() {
       };
 
       const response = await sendQuestionService(payload);
-     if(response.success) {
-      toast.success("Question submitted successfully!");
-     }
+      if (response.success) {
+        toast.success("Question submitted successfully!");
+      }
       setQuestion("");
       setIsQuestionFormOpen(false);
     }
@@ -169,7 +171,8 @@ export default function Player() {
 
           {/* Description */}
           <p className="text-gray-600 dark:text-gray-300 mb-6 text-sm sm:text-base leading-relaxed">
-            Engage with the course content, ask questions, and connect with your mentor and peers.
+            Engage with the course content, ask questions, and connect with your
+            mentor and peers.
           </p>
 
           {/* Questions List */}
@@ -191,13 +194,16 @@ export default function Player() {
                       </p>
                       <p className="text-xs text-gray-500 dark:text-gray-400">
                         {question.createdAt
-                          ? new Date(question.createdAt).toLocaleString("en-US", {
-                            month: "short",
-                            day: "numeric",
-                            year: "numeric",
-                            hour: "numeric",
-                            minute: "2-digit",
-                          })
+                          ? new Date(question.createdAt).toLocaleString(
+                              "en-US",
+                              {
+                                month: "short",
+                                day: "numeric",
+                                year: "numeric",
+                                hour: "numeric",
+                                minute: "2-digit",
+                              },
+                            )
                           : "Date not available"}
                       </p>
                     </div>
@@ -210,18 +216,20 @@ export default function Player() {
 
                   {/* Answer with Code Block Support */}
                   <div className="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed space-y-4">
-                    {(question?.answer || "No answer provided yet").split("```").map((block, idx) =>
-                      idx % 2 === 1 ? (
-                        <pre
-                          key={idx}
-                          className="bg-gray-100 dark:bg-gray-800 text-sm font-mono p-3 rounded overflow-x-auto"
-                        >
-                          <code>{block.trim()}</code>
-                        </pre>
-                      ) : (
-                        <p key={idx}>{block.trim()}</p>
-                      )
-                    )}
+                    {(question?.answer || "No answer provided yet")
+                      .split("```")
+                      .map((block, idx) =>
+                        idx % 2 === 1 ? (
+                          <pre
+                            key={idx}
+                            className="bg-gray-100 dark:bg-gray-800 text-sm font-mono p-3 rounded overflow-x-auto"
+                          >
+                            <code>{block.trim()}</code>
+                          </pre>
+                        ) : (
+                          <p key={idx}>{block.trim()}</p>
+                        ),
+                      )}
                   </div>
                 </div>
               ))
@@ -239,7 +247,6 @@ export default function Player() {
               </div>
             )}
           </div>
-
         </div>
       )}
     </div>

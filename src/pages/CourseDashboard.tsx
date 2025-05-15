@@ -7,13 +7,15 @@ import Header from "@components/Header";
 import CircleProgress from "@components/CircleProgress";
 import { Button } from "@components/ui/button";
 import Loading from "@components/Loading";
-import { PlayCircle, Brain, Folder, GraduationCap } from "lucide-react";
+import { PlayCircle, Brain, Folder, GraduationCap,DollarSign } from "lucide-react";
 import Tooltip from "@components/ToolTip";
 import { Link, useNavigate } from "react-router-dom";
 import { generateCerticateService } from "../services/certificateServices";
 
 export default function CourseDashboard() {
-  const { selectedCourseData, setSelectedCourseData, setCertificateDetails } = useStore();
+  const { selectedCourseData, setSelectedCourseData, setCertificateDetails } =
+    useStore();
+
   const courseId = Storage.get("selectedCourseId");
   const navigate = useNavigate();
 
@@ -36,12 +38,15 @@ export default function CourseDashboard() {
     try {
       const data = await generateCerticateService(courseId, navigate);
       if (data) {
-
         setCertificateDetails(data);
       }
     } catch (error) {
       console.error("Error fetching course:", error);
     }
+  }
+
+ function handleBounties(courseId: string) {
+   navigate(`/bounties/${courseId}`)
   }
 
   if (!selectedCourseData) return <Loading />;
@@ -108,6 +113,16 @@ export default function CourseDashboard() {
                 className="text-primary border-primary cursor-pointer rounded-lg"
               >
                 <GraduationCap /> Claim Certificates
+              </Button>
+            </Tooltip>
+
+            <Tooltip text="Check Avaliable Bounties" position="bottom">
+              <Button
+                onClick={() => handleBounties(courseId)}
+                variant="outline"
+                className="text-primary border-primary cursor-pointer rounded-lg"
+              >
+                <DollarSign /> Bounties
               </Button>
             </Tooltip>
           </div>
