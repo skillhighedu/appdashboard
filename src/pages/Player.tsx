@@ -9,12 +9,10 @@ import { toast } from "sonner";
 
 export default function Player() {
   const [isLoading, setIsLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<"content" | "discussions">(
-    "content",
-  );
+  const [activeTab, setActiveTab] = useState<"content" | "discussions">("content");
   const [isQuestionFormOpen, setIsQuestionFormOpen] = useState(false);
   const [question, setQuestion] = useState("");
-  const { selectedLesson, setSelectedLesson, setCourseLessons } = useStore();
+  const { selectedLesson, setSelectedLesson, courseLessons, setCourseLessons } = useStore();
   const courseId = Storage.get("selectedCourseId");
 
   const tabNames: { key: "content" | "discussions"; name: string }[] = [
@@ -22,24 +20,55 @@ export default function Player() {
     { key: "discussions", name: "Discussions" },
   ];
 
+  // Load lessons
   useEffect(() => {
     const loadCourses = async () => {
       try {
         const data = await fetchCourseTopics(courseId);
         setCourseLessons(data);
-        if (!selectedLesson && data.length > 0) {
-          if (data[0]) {
-            setSelectedLesson(data[0]);
-          }
-        }
+        if (!selectedLesson && data.length > 0 && data[0]) {
+  setSelectedLesson(data[0]); // now safe
+}
+
         setIsLoading(false);
       } catch (error) {
         console.error("Error loading lessons:", error);
+        setIsLoading(false);
       }
     };
     loadCourses();
   }, []);
 
+  // Next / Previous Handlers
+  const handlePrevLesson = () => {
+  if (!selectedLesson || !courseLessons) return;
+
+  const currentIndex = courseLessons.findIndex(l => l.id === selectedLesson.id);
+  if (currentIndex > 0) {
+    const prevLesson = courseLessons[currentIndex - 1];
+    if (prevLesson) {
+      setSelectedLesson(prevLesson);
+    }
+  } else {
+    toast("You're already at the first lesson.");
+  }
+};
+
+const handleNextLesson = () => {
+  if (!selectedLesson || !courseLessons) return;
+
+  const currentIndex = courseLessons.findIndex(l => l.id === selectedLesson.id);
+  if (currentIndex < courseLessons.length - 1) {
+    const nextLesson = courseLessons[currentIndex + 1];
+    if (nextLesson) {
+      setSelectedLesson(nextLesson);
+    }
+  } else {
+    toast("You've completed all lessons!");
+  }
+};
+
+  // Question Submit
   const handleQuestionSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (question.trim()) {
@@ -85,17 +114,42 @@ export default function Player() {
         )}
       </div>
 
+      {/* Next / Previous Buttons */}
+      <div className="flex justify-between p-4 bg-gray-100 dark:bg-darkSecondary text-darkPrimary border-t border-gray-200 dark:border-gray-700">
+        <Button
+          onClick={handlePrevLesson}
+          disabled={
+            !selectedLesson || courseLessons?.findIndex(l => l.id === selectedLesson.id) === 0
+          }
+          variant="secondary"
+        >
+          Previous
+        </Button>
+      <Button
+  onClick={handleNextLesson}
+  disabled={
+    !selectedLesson ||
+    !courseLessons || // guard
+    courseLessons.findIndex(l => l.id === selectedLesson.id) === courseLessons.length - 1
+  }
+>
+  Next
+</Button>
+
+      </div>
+
       {/* Tabs */}
-      <div className="mt-4 flex gap-4 items-center p-4 bg-gray-100 dark:bg-darkSecondary">
+      <div className="mt-4 flex gap-4 items-center p-4 bg-gray-100 text-darkPrimary dark:bg-darkSecondary">
         {tabNames.map((tab) => (
           <Button
             key={tab.key}
             variant={activeTab === tab.key ? "default" : "secondary"}
             onClick={() => setActiveTab(tab.key)}
-            className={`
-              transition-all duration-200 cursor-pointer
-              ${activeTab === tab.key ? "shadow-md" : "hover:bg-gray-200 dark:hover:bg-gray-600"}
-            `}
+            className={`transition-all duration-200 cursor-pointer ${
+              activeTab === tab.key
+                ? "shadow-md"
+                : "hover:bg-gray-200 dark:hover:bg-gray-600"
+            }`}
             aria-current={activeTab === tab.key ? "page" : undefined}
             aria-label={`Switch to ${tab.name} tab`}
           >
@@ -118,8 +172,8 @@ export default function Player() {
 
       {/* Discussions Tab */}
       {activeTab === "discussions" && (
-        <div className="p-6 sm:p-8 bg-gray-50 dark:bg-darkSecondary min-h-screen">
-          {/* Header Section */}
+        <div className="p-6 sm:p-8 bg-gray-50  dark:bg-darkSecondary min-h-screen">
+          {/* Header */}
           <div className="flex justify-between items-center mb-6">
             <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
               Lesson Discussions
@@ -140,7 +194,7 @@ export default function Player() {
                   value={question}
                   onChange={(e) => setQuestion(e.target.value)}
                   placeholder="Type your question here..."
-                  className="w-full p-3 border-0 border-primary rounded-lg focus:ring-0 focus:ring-primary/90  bg-gray-50 dark:bg-darkPrimary text-gray-900 dark:text-gray-100 text-sm sm:text-base resize-y min-h-[120px]"
+                  className="w-full p-3 border-0 border-primary rounded-lg focus:ring-0 focus:ring-primary/90 bg-gray-50 dark:bg-darkPrimary text-gray-900 dark:text-gray-100 text-sm sm:text-base resize-y min-h-[120px]"
                   aria-label="Question input"
                   required
                 />
@@ -171,8 +225,7 @@ export default function Player() {
 
           {/* Description */}
           <p className="text-gray-600 dark:text-gray-300 mb-6 text-sm sm:text-base leading-relaxed">
-            Engage with the course content, ask questions, and connect with your
-            mentor and peers.
+            Engage with the course content, ask questions, and connect with your mentor and peers.
           </p>
 
           {/* Questions List */}
@@ -183,7 +236,7 @@ export default function Player() {
                   key={index}
                   className="p-4 sm:p-6 bg-white dark:bg-darkPrimary rounded-xl border border-gray-200 dark:border-darkSecondary shadow-sm hover:shadow-md transition-shadow duration-300"
                 >
-                  {/* User Info Section */}
+                  {/* User Info */}
                   <div className="flex items-center space-x-3 mb-4">
                     <div className="h-10 w-10 rounded-full bg-primary text-white flex items-center justify-center font-semibold text-lg">
                       {question.studentName?.charAt(0)?.toUpperCase() || "?"}
@@ -194,16 +247,13 @@ export default function Player() {
                       </p>
                       <p className="text-xs text-gray-500 dark:text-gray-400">
                         {question.createdAt
-                          ? new Date(question.createdAt).toLocaleString(
-                              "en-US",
-                              {
-                                month: "short",
-                                day: "numeric",
-                                year: "numeric",
-                                hour: "numeric",
-                                minute: "2-digit",
-                              },
-                            )
+                          ? new Date(question.createdAt).toLocaleString("en-US", {
+                              month: "short",
+                              day: "numeric",
+                              year: "numeric",
+                              hour: "numeric",
+                              minute: "2-digit",
+                            })
                           : "Date not available"}
                       </p>
                     </div>
@@ -214,7 +264,7 @@ export default function Player() {
                     {question?.question || "No question provided"}
                   </p>
 
-                  {/* Answer with Code Block Support */}
+                  {/* Answer */}
                   <div className="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed space-y-4">
                     {(question?.answer || "No answer provided yet")
                       .split("```")
@@ -228,7 +278,7 @@ export default function Player() {
                           </pre>
                         ) : (
                           <p key={idx}>{block.trim()}</p>
-                        ),
+                        )
                       )}
                   </div>
                 </div>
@@ -240,7 +290,7 @@ export default function Player() {
                 </p>
                 <Button
                   onClick={() => setIsQuestionFormOpen(!isQuestionFormOpen)}
-                  className="mt-4 px-4 py-2 text-sm font-medium text-white bg-primary focus:ring-2 "
+                  className="mt-4 px-4 py-2 text-sm font-medium text-white bg-primary focus:ring-2"
                 >
                   {isQuestionFormOpen ? "Close Form" : "Start a Discussion"}
                 </Button>
