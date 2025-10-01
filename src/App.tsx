@@ -19,6 +19,7 @@ import Support from "@pages/Support";
 import CertificateComponent from "@pages/Certificate";
 import CertificateVerification from "@pages/CertificateVerification";
 import Bounties from "@pages/Bounties";
+import Resume from "@pages/Resume";
 // import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator } from "@components/ui/BreadCrumbs";
 
 const Landing = lazy(() => import("@pages/Landing"));
@@ -240,6 +241,14 @@ function App() {
                   element={
                     <Layout>
                       <Support />
+                    </Layout>
+                  }
+                />
+                <Route
+                  path="/resume"
+                  element={
+                    <Layout>
+                      <Resume />
                     </Layout>
                   }
                 />
