@@ -154,7 +154,7 @@ function generatePDF(data: ResumeFormValues): void {
   // small helper to parse "Title - desc"
   const parseProject = (line: string) => {
     const m = line.match(/^(.+?)\s*[-–—:]\s+(.*)$/);
-    if (m) return { title: m[1].trim(), desc: m[2].trim() };
+    if (m) return { title: m[1]?.trim() ?? "", desc: m[2]?.trim() ?? "" };
     return { title: line.trim(), desc: "" };
   };
 
@@ -209,13 +209,13 @@ function generatePDF(data: ResumeFormValues): void {
       const lines = block.split("\n").map((l) => l.trim()).filter(Boolean);
       if (!lines.length) return;
 
-      const heading = lines[0];
+      const heading = lines[0] ?? "";
       const [left, right] = heading.split("|").map((s) => s.trim());
 
       y = ensureSpace(y, 10);
       doc.setFont("helvetica", "bold");
       doc.setFontSize(12);
-      doc.text(left, MARGIN_X, y);
+      doc.text(left ?? "", MARGIN_X, y);
       if (right) {
         doc.setFont("helvetica", "normal");
         doc.setFontSize(11);
@@ -336,7 +336,7 @@ const Resume: React.FC = () => {
       <div className="mx-auto w-full max-w-4xl">
         <div className="rounded-2xl bg-white dark:bg-zinc-900 shadow-xl ring-1 ring-slate-200 dark:ring-zinc-800">
           <div className="border-b border-slate-200 dark:border-zinc-800 px-8 py-6">
-            <h1 className="text-2xl font-semibold tracking-tight text-slate-800 dark:text-slate-100">Resume Builder</h1>
+            <h1 className="text-2xl font-semibold tracking-tight text-slate-800 dark:text-slate-100">SkillHigh Resume Builder</h1>
             <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
               Fill in your details and generate a clean PDF resume.
             </p>
@@ -355,7 +355,7 @@ const Resume: React.FC = () => {
                     value={formik.values.firstname}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    placeholder="Sai"
+                    placeholder="First Name"
                     className="w-full rounded-lg border border-slate-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-2 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400"
                   />
                   {formik.touched.firstname && formik.errors.firstname && (
@@ -371,7 +371,7 @@ const Resume: React.FC = () => {
                     value={formik.values.lastname}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    placeholder="Devi"
+                    placeholder="Last Name"
                     className="w-full rounded-lg border border-slate-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-2 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400"
                   />
                   {formik.touched.lastname && formik.errors.lastname && (
@@ -403,7 +403,7 @@ const Resume: React.FC = () => {
                     value={formik.values.mobnum}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    placeholder="+91 98765 43210"
+                    placeholder="Mobile number"
                     className="w-full rounded-lg border border-slate-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-2 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400"
                   />
                   {formik.touched.mobnum && formik.errors.mobnum && (
@@ -572,13 +572,13 @@ Published 10+ blog posts on GenAI.`}
               <button
                 type="button"
                 onClick={() => formik.resetForm()}
-                className="rounded-lg border border-slate-300 dark:border-zinc-700 px-5 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-zinc-800"
+                className="rounded-lg border border-slate-300 dark:border-zinc-700 px-5 py-2.5 text-sm cursor-pointer font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-zinc-800"
               >
                 Reset
               </button>
               <button
                 type="submit"
-                className="rounded-lg bg-indigo-600 dark:bg-indigo-500 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 dark:hover:bg-indigo-600"
+                className="rounded-lg bg-primary dark:bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm cursor-pointer"
               >
                 Generate PDF
               </button>
@@ -586,9 +586,7 @@ Published 10+ blog posts on GenAI.`}
           </form>
         </div>
 
-        <p className="mt-6 text-center text-xs text-slate-500 dark:text-slate-400">
-          Your data stays in the browser. PDF is generated locally.
-        </p>
+      
       </div>
     </div>
   );

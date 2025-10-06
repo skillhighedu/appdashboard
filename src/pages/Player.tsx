@@ -9,10 +9,13 @@ import { toast } from "sonner";
 
 export default function Player() {
   const [isLoading, setIsLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<"content" | "discussions">("content");
+  const [activeTab, setActiveTab] = useState<"content" | "discussions">(
+    "content",
+  );
   const [isQuestionFormOpen, setIsQuestionFormOpen] = useState(false);
   const [question, setQuestion] = useState("");
-  const { selectedLesson, setSelectedLesson, courseLessons, setCourseLessons } = useStore();
+  const { selectedLesson, setSelectedLesson, courseLessons, setCourseLessons } =
+    useStore();
   const courseId = Storage.get("selectedCourseId");
 
   const tabNames: { key: "content" | "discussions"; name: string }[] = [
@@ -27,8 +30,8 @@ export default function Player() {
         const data = await fetchCourseTopics(courseId);
         setCourseLessons(data);
         if (!selectedLesson && data.length > 0 && data[0]) {
-  setSelectedLesson(data[0]); // now safe
-}
+          setSelectedLesson(data[0]); // now safe
+        }
 
         setIsLoading(false);
       } catch (error) {
@@ -41,32 +44,36 @@ export default function Player() {
 
   // Next / Previous Handlers
   const handlePrevLesson = () => {
-  if (!selectedLesson || !courseLessons) return;
+    if (!selectedLesson || !courseLessons) return;
 
-  const currentIndex = courseLessons.findIndex(l => l.id === selectedLesson.id);
-  if (currentIndex > 0) {
-    const prevLesson = courseLessons[currentIndex - 1];
-    if (prevLesson) {
-      setSelectedLesson(prevLesson);
+    const currentIndex = courseLessons.findIndex(
+      (l) => l.id === selectedLesson.id,
+    );
+    if (currentIndex > 0) {
+      const prevLesson = courseLessons[currentIndex - 1];
+      if (prevLesson) {
+        setSelectedLesson(prevLesson);
+      }
+    } else {
+      toast("You're already at the first lesson.");
     }
-  } else {
-    toast("You're already at the first lesson.");
-  }
-};
+  };
 
-const handleNextLesson = () => {
-  if (!selectedLesson || !courseLessons) return;
+  const handleNextLesson = () => {
+    if (!selectedLesson || !courseLessons) return;
 
-  const currentIndex = courseLessons.findIndex(l => l.id === selectedLesson.id);
-  if (currentIndex < courseLessons.length - 1) {
-    const nextLesson = courseLessons[currentIndex + 1];
-    if (nextLesson) {
-      setSelectedLesson(nextLesson);
+    const currentIndex = courseLessons.findIndex(
+      (l) => l.id === selectedLesson.id,
+    );
+    if (currentIndex < courseLessons.length - 1) {
+      const nextLesson = courseLessons[currentIndex + 1];
+      if (nextLesson) {
+        setSelectedLesson(nextLesson);
+      }
+    } else {
+      toast("You've completed all lessons!");
     }
-  } else {
-    toast("You've completed all lessons!");
-  }
-};
+  };
 
   // Question Submit
   const handleQuestionSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -119,23 +126,24 @@ const handleNextLesson = () => {
         <Button
           onClick={handlePrevLesson}
           disabled={
-            !selectedLesson || courseLessons?.findIndex(l => l.id === selectedLesson.id) === 0
+            !selectedLesson ||
+            courseLessons?.findIndex((l) => l.id === selectedLesson.id) === 0
           }
           variant="secondary"
         >
           Previous
         </Button>
-      <Button
-  onClick={handleNextLesson}
-  disabled={
-    !selectedLesson ||
-    !courseLessons || // guard
-    courseLessons.findIndex(l => l.id === selectedLesson.id) === courseLessons.length - 1
-  }
->
-  Next
-</Button>
-
+        <Button
+          onClick={handleNextLesson}
+          disabled={
+            !selectedLesson ||
+            !courseLessons || // guard
+            courseLessons.findIndex((l) => l.id === selectedLesson.id) ===
+              courseLessons.length - 1
+          }
+        >
+          Next
+        </Button>
       </div>
 
       {/* Tabs */}
@@ -225,7 +233,8 @@ const handleNextLesson = () => {
 
           {/* Description */}
           <p className="text-gray-600 dark:text-gray-300 mb-6 text-sm sm:text-base leading-relaxed">
-            Engage with the course content, ask questions, and connect with your mentor and peers.
+            Engage with the course content, ask questions, and connect with your
+            mentor and peers.
           </p>
 
           {/* Questions List */}
@@ -247,13 +256,16 @@ const handleNextLesson = () => {
                       </p>
                       <p className="text-xs text-gray-500 dark:text-gray-400">
                         {question.createdAt
-                          ? new Date(question.createdAt).toLocaleString("en-US", {
-                              month: "short",
-                              day: "numeric",
-                              year: "numeric",
-                              hour: "numeric",
-                              minute: "2-digit",
-                            })
+                          ? new Date(question.createdAt).toLocaleString(
+                              "en-US",
+                              {
+                                month: "short",
+                                day: "numeric",
+                                year: "numeric",
+                                hour: "numeric",
+                                minute: "2-digit",
+                              },
+                            )
                           : "Date not available"}
                       </p>
                     </div>
@@ -278,7 +290,7 @@ const handleNextLesson = () => {
                           </pre>
                         ) : (
                           <p key={idx}>{block.trim()}</p>
-                        )
+                        ),
                       )}
                   </div>
                 </div>
