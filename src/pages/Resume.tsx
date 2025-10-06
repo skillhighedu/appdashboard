@@ -332,12 +332,12 @@ const Resume: React.FC = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 dark:bg-gradient-to-b dark:from-zinc-950 dark:to-zinc-900 py-12 px-4">
       <div className="mx-auto w-full max-w-4xl">
-        <div className="rounded-2xl bg-white shadow-xl ring-1 ring-slate-200">
-          <div className="border-b border-slate-200 px-8 py-6">
-            <h1 className="text-2xl font-semibold tracking-tight text-slate-800">Resume Builder</h1>
-            <p className="mt-1 text-sm text-slate-500">
+        <div className="rounded-2xl bg-white dark:bg-zinc-900 shadow-xl ring-1 ring-slate-200 dark:ring-zinc-800">
+          <div className="border-b border-slate-200 dark:border-zinc-800 px-8 py-6">
+            <h1 className="text-2xl font-semibold tracking-tight text-slate-800 dark:text-slate-100">Resume Builder</h1>
+            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
               Fill in your details and generate a clean PDF resume.
             </p>
           </div>
@@ -345,10 +345,10 @@ const Resume: React.FC = () => {
           <form onSubmit={formik.handleSubmit} className="px-8 py-8">
             {/* Personal Info */}
             <section className="mb-8">
-              <h2 className="mb-4 text-lg font-semibold text-slate-800">Personal Information</h2>
+              <h2 className="mb-4 text-lg font-semibold text-slate-800 dark:text-slate-100">Personal Information</h2>
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div>
-                  <label className="mb-1 block text-sm font-medium text-slate-700">First name</label>
+                  <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">First name</label>
                   <input
                     type="text"
                     name="firstname"
@@ -356,7 +356,7 @@ const Resume: React.FC = () => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     placeholder="Sai"
-                    className="w-full rounded-lg border border-slate-300 px-3 py-2"
+                    className="w-full rounded-lg border border-slate-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-2 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400"
                   />
                   {formik.touched.firstname && formik.errors.firstname && (
                     <p className="mt-1 text-xs text-rose-600">{formik.errors.firstname}</p>
@@ -364,7 +364,7 @@ const Resume: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="mb-1 block text-sm font-medium text-slate-700">Last name</label>
+                  <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">Last name</label>
                   <input
                     type="text"
                     name="lastname"
@@ -372,7 +372,7 @@ const Resume: React.FC = () => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     placeholder="Devi"
-                    className="w-full rounded-lg border border-slate-300 px-3 py-2"
+                    className="w-full rounded-lg border border-slate-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-2 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400"
                   />
                   {formik.touched.lastname && formik.errors.lastname && (
                     <p className="mt-1 text-xs text-rose-600">{formik.errors.lastname}</p>
@@ -380,7 +380,7 @@ const Resume: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="mb-1 block text-sm font-medium text-slate-700">Email</label>
+                  <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">Email</label>
                   <input
                     type="email"
                     name="email"
@@ -388,7 +388,7 @@ const Resume: React.FC = () => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     placeholder="example@gmail.com"
-                    className="w-full rounded-lg border border-slate-300 px-3 py-2"
+                    className="w-full rounded-lg border border-slate-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-2 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400"
                   />
                   {formik.touched.email && formik.errors.email && (
                     <p className="mt-1 text-xs text-rose-600">{formik.errors.email}</p>
@@ -396,7 +396,7 @@ const Resume: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="mb-1 block text-sm font-medium text-slate-700">Mobile number</label>
+                  <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">Mobile number</label>
                   <input
                     type="tel"
                     name="mobnum"
@@ -404,7 +404,7 @@ const Resume: React.FC = () => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     placeholder="+91 98765 43210"
-                    className="w-full rounded-lg border border-slate-300 px-3 py-2"
+                    className="w-full rounded-lg border border-slate-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-2 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400"
                   />
                   {formik.touched.mobnum && formik.errors.mobnum && (
                     <p className="mt-1 text-xs text-rose-600">{formik.errors.mobnum}</p>
@@ -412,7 +412,7 @@ const Resume: React.FC = () => {
                 </div>
 
                 <div className="md:col-span-1">
-                  <label className="mb-1 block text-sm font-medium text-slate-700">
+                  <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">
                     LinkedIn URL (optional)
                   </label>
                   <input
@@ -422,7 +422,7 @@ const Resume: React.FC = () => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     placeholder="https://www.linkedin.com/in/your-handle"
-                    className="w-full rounded-lg border border-slate-300 px-3 py-2"
+                    className="w-full rounded-lg border border-slate-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-2 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400"
                   />
                   {formik.touched.linkedin && formik.errors.linkedin && (
                     <p className="mt-1 text-xs text-rose-600">
@@ -432,7 +432,7 @@ const Resume: React.FC = () => {
                 </div>
 
                 <div className="md:col-span-1">
-                  <label className="mb-1 block text-sm font-medium text-slate-700">
+                  <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">
                     GitHub URL (optional)
                   </label>
                   <input
@@ -442,7 +442,7 @@ const Resume: React.FC = () => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     placeholder="https://github.com/your-handle"
-                    className="w-full rounded-lg border border-slate-300 px-3 py-2"
+                    className="w-full rounded-lg border border-slate-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-2 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400"
                   />
                   {formik.touched.github && formik.errors.github && (
                     <p className="mt-1 text-xs text-rose-600">
@@ -452,7 +452,7 @@ const Resume: React.FC = () => {
                 </div>
 
                 {/* <div className="md:col-span-2">
-                  <label className="mb-1 block text-sm font-medium text-slate-700">
+                  <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">
                     Address (optional)
                   </label>
                   <textarea
@@ -462,7 +462,7 @@ const Resume: React.FC = () => {
                     onBlur={formik.handleBlur}
                     placeholder="House No, Street, City, State, Zip"
                     rows={3}
-                    className="w-full rounded-lg border border-slate-300 px-3 py-2"
+                    className="w-full rounded-lg border border-slate-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-2 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400"
                   />
                 </div> */}
               </div>
@@ -470,7 +470,7 @@ const Resume: React.FC = () => {
 
             {/* Objective */}
             <section className="mb-8">
-              <h2 className="mb-4 text-lg font-semibold text-slate-800">Objective (optional)</h2>
+              <h2 className="mb-4 text-lg font-semibold text-slate-800 dark:text-slate-100">Objective (optional)</h2>
               <textarea
                 name="obj"
                 value={formik.values.obj}
@@ -478,15 +478,15 @@ const Resume: React.FC = () => {
                 onBlur={formik.handleBlur}
                 placeholder="A concise statement summarizing your goals and strengths..."
                 rows={4}
-                className="w-full rounded-lg border border-slate-300 px-3 py-2"
+                className="w-full rounded-lg border border-slate-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-2 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400"
               />
             </section>
 
             {/* Experience */}
             <section className="mb-8">
               <div className="flex items-center justify-between">
-                <h2 className="mb-4 text-lg font-semibold text-slate-800">Experience (optional)</h2>
-                <p className="text-xs text-slate-500">
+                <h2 className="mb-4 text-lg font-semibold text-slate-800 dark:text-slate-100">Experience (optional)</h2>
+                <p className="text-xs text-slate-500 dark:text-slate-400">
                   First line is job heading (e.g. <i>Acme – SWE | Jan 2023 – Present</i>).<br />
                   Following lines are bullet points. Use blank lines to separate jobs.
                 </p>
@@ -503,15 +503,15 @@ const Resume: React.FC = () => {
 Beta Labs – Intern | May 2022 – Aug 2022
 - Prototyped analytics dashboards; increased adoption by 12%.`}
                 rows={6}
-                className="w-full rounded-lg border border-slate-300 px-3 py-2"
+                className="w-full rounded-lg border border-slate-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-2 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400"
               />
             </section>
 
             {/* Skills */}
             <section className="mb-8">
               <div className="flex items-center justify-between">
-                <h2 className="mb-4 text-lg font-semibold text-slate-800">Skills</h2>
-                <p className="text-xs text-slate-500">Tip: Separate with commas or new lines</p>
+                <h2 className="mb-4 text-lg font-semibold text-slate-800 dark:text-slate-100">Skills</h2>
+                <p className="text-xs text-slate-500 dark:text-slate-400">Tip: Separate with commas or new lines</p>
               </div>
               <textarea
                 name="skills"
@@ -520,7 +520,7 @@ Beta Labs – Intern | May 2022 – Aug 2022
                 onBlur={formik.handleBlur}
                 placeholder="AWS Bedrock, RAG, TypeScript, Prisma, Docker, Kubernetes"
                 rows={3}
-                className="w-full rounded-lg border border-slate-300 px-3 py-2"
+                className="w-full rounded-lg border border-slate-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-2 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400"
               />
               {formik.touched.skills && formik.errors.skills && (
                 <p className="mt-1 text-xs text-rose-600">{formik.errors.skills}</p>
@@ -530,8 +530,8 @@ Beta Labs – Intern | May 2022 – Aug 2022
             {/* Projects */}
             <section className="mb-8">
               <div className="flex items-center justify-between">
-                <h2 className="mb-4 text-lg font-semibold text-slate-800">Projects (optional)</h2>
-                <p className="text-xs text-slate-500">
+                <h2 className="mb-4 text-lg font-semibold text-slate-800 dark:text-slate-100">Projects (optional)</h2>
+                <p className="text-xs text-slate-500 dark:text-slate-400">
                   One per line. Optional format: <strong>Title - description</strong>
                 </p>
               </div>
@@ -543,17 +543,17 @@ Beta Labs – Intern | May 2022 – Aug 2022
                 placeholder={`Smart RAG Assistant - Built a Bedrock-powered RAG chatbot that cut ticket resolution time by 40%.
 E-commerce Analytics - Designed ELT + dashboards to reduce churn by 12%.`}
                 rows={4}
-                className="w-full rounded-lg border border-slate-300 px-3 py-2"
+                className="w-full rounded-lg border border-slate-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-2 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400"
               />
             </section>
 
             {/* Extra-Curricular */}
             <section className="mb-8">
               <div className="flex items-center justify-between">
-                <h2 className="mb-4 text-lg font-semibold text-slate-800">
+                <h2 className="mb-4 text-lg font-semibold text-slate-800 dark:text-slate-100">
                   Extra-Curricular Activities (optional)
                 </h2>
-                <p className="text-xs text-slate-500">One bullet per line</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400">One bullet per line</p>
               </div>
               <textarea
                 name="extracurricular"
@@ -563,7 +563,7 @@ E-commerce Analytics - Designed ELT + dashboards to reduce churn by 12%.`}
                 placeholder={`Organized monthly tech meetups with 150+ attendees.
 Published 10+ blog posts on GenAI.`}
                 rows={3}
-                className="w-full rounded-lg border border-slate-300 px-3 py-2"
+                className="w-full rounded-lg border border-slate-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-2 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400"
               />
             </section>
 
@@ -572,13 +572,13 @@ Published 10+ blog posts on GenAI.`}
               <button
                 type="button"
                 onClick={() => formik.resetForm()}
-                className="rounded-lg border border-slate-300 px-5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50"
+                className="rounded-lg border border-slate-300 dark:border-zinc-700 px-5 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-zinc-800"
               >
                 Reset
               </button>
               <button
                 type="submit"
-                className="rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700"
+                className="rounded-lg bg-indigo-600 dark:bg-indigo-500 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 dark:hover:bg-indigo-600"
               >
                 Generate PDF
               </button>
@@ -586,7 +586,7 @@ Published 10+ blog posts on GenAI.`}
           </form>
         </div>
 
-        <p className="mt-6 text-center text-xs text-slate-500">
+        <p className="mt-6 text-center text-xs text-slate-500 dark:text-slate-400">
           Your data stays in the browser. PDF is generated locally.
         </p>
       </div>
