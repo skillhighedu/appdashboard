@@ -19,8 +19,14 @@ const validationSchema = Yup.object({
   school: Yup.string().notRequired(),
   address: Yup.string().notRequired(),
   grad_per: Yup.string().notRequired(),
-  linkedin: Yup.string().trim().url("Enter a valid URL (e.g., https://...)").notRequired(),
-  github: Yup.string().trim().url("Enter a valid URL (e.g., https://...)").notRequired(),
+  linkedin: Yup.string()
+    .trim()
+    .url("Enter a valid URL (e.g., https://...)")
+    .notRequired(),
+  github: Yup.string()
+    .trim()
+    .url("Enter a valid URL (e.g., https://...)")
+    .notRequired(),
   projects: Yup.string().trim().notRequired(),
   extracurricular: Yup.string().trim().notRequired(),
   experience: Yup.string().trim().notRequired(),
@@ -135,7 +141,8 @@ function generatePDF(data: ResumeFormValues): void {
     const sep = "  .  ";
     const widths = visible.map((t) => doc.getTextWidth(t));
     const sepW = doc.getTextWidth(sep);
-    const totalW = widths.reduce((a, b) => a + b, 0) + sepW * (visible.length - 1);
+    const totalW =
+      widths.reduce((a, b) => a + b, 0) + sepW * (visible.length - 1);
 
     let x = (PAGE_W - totalW) / 2;
     visible.forEach((t, i) => {
@@ -176,8 +183,12 @@ function generatePDF(data: ResumeFormValues): void {
 
   y += 7;
   drawContactLinks(
-    [(data.email || "").trim(), (data.linkedin || "").trim(), (data.github || "").trim()],
-    y
+    [
+      (data.email || "").trim(),
+      (data.linkedin || "").trim(),
+      (data.github || "").trim(),
+    ],
+    y,
   );
 
   y += 8;
@@ -186,11 +197,12 @@ function generatePDF(data: ResumeFormValues): void {
 
   // ---------- SKILLS ----------
   y = section("SKILLS", y);
-  const skillsText = (data.skills || "")
-    .split(/[,|\n]/)
-    .map((s) => s.trim())
-    .filter(Boolean)
-    .join(", ") || "—";
+  const skillsText =
+    (data.skills || "")
+      .split(/[,|\n]/)
+      .map((s) => s.trim())
+      .filter(Boolean)
+      .join(", ") || "—";
   y = labeledRow("Technical Skills", skillsText, y + 2);
 
   y += 4;
@@ -201,12 +213,18 @@ function generatePDF(data: ResumeFormValues): void {
   const expRaw = (data.experience || "").trim();
   if (expRaw) {
     y = section("EXPERIENCE", y);
-    const blocks = expRaw.split(/\n\s*\n/).map((b) => b.trim()).filter(Boolean);
+    const blocks = expRaw
+      .split(/\n\s*\n/)
+      .map((b) => b.trim())
+      .filter(Boolean);
     const HEADING_GAP = 4;
     const BLOCK_GAP = 6;
 
     blocks.forEach((block, idx) => {
-      const lines = block.split("\n").map((l) => l.trim()).filter(Boolean);
+      const lines = block
+        .split("\n")
+        .map((l) => l.trim())
+        .filter(Boolean);
       if (!lines.length) return;
 
       const heading = lines[0] ?? "";
@@ -223,7 +241,9 @@ function generatePDF(data: ResumeFormValues): void {
       }
 
       const bullets = lines.slice(1);
-      y = bullets.length ? bulletBlock(bullets, y + HEADING_GAP) : y + HEADING_GAP;
+      y = bullets.length
+        ? bulletBlock(bullets, y + HEADING_GAP)
+        : y + HEADING_GAP;
 
       if (idx < blocks.length - 1) y += BLOCK_GAP;
     });
@@ -296,7 +316,8 @@ function generatePDF(data: ResumeFormValues): void {
       ];
   y = bulletBlock(extras, y + 2);
 
-  const baseName = (data.firstname || "Resume") + "_" + (data.lastname || "Template");
+  const baseName =
+    (data.firstname || "Resume") + "_" + (data.lastname || "Template");
   doc.save(`${baseName}_ImageStyle.pdf`);
 }
 
@@ -336,7 +357,9 @@ const Resume: React.FC = () => {
       <div className="mx-auto w-full max-w-4xl">
         <div className="rounded-2xl bg-white dark:bg-zinc-900 shadow-xl ring-1 ring-slate-200 dark:ring-zinc-800">
           <div className="border-b border-slate-200 dark:border-zinc-800 px-8 py-6">
-            <h1 className="text-2xl font-semibold tracking-tight text-slate-800 dark:text-slate-100">SkillHigh Resume Builder</h1>
+            <h1 className="text-2xl font-semibold tracking-tight text-slate-800 dark:text-slate-100">
+              SkillHigh Resume Builder
+            </h1>
             <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
               Fill in your details and generate a clean PDF resume.
             </p>
@@ -345,10 +368,14 @@ const Resume: React.FC = () => {
           <form onSubmit={formik.handleSubmit} className="px-8 py-8">
             {/* Personal Info */}
             <section className="mb-8">
-              <h2 className="mb-4 text-lg font-semibold text-slate-800 dark:text-slate-100">Personal Information</h2>
+              <h2 className="mb-4 text-lg font-semibold text-slate-800 dark:text-slate-100">
+                Personal Information
+              </h2>
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div>
-                  <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">First name</label>
+                  <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">
+                    First name
+                  </label>
                   <input
                     type="text"
                     name="firstname"
@@ -359,12 +386,16 @@ const Resume: React.FC = () => {
                     className="w-full rounded-lg border border-slate-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-2 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400"
                   />
                   {formik.touched.firstname && formik.errors.firstname && (
-                    <p className="mt-1 text-xs text-rose-600">{formik.errors.firstname}</p>
+                    <p className="mt-1 text-xs text-rose-600">
+                      {formik.errors.firstname}
+                    </p>
                   )}
                 </div>
 
                 <div>
-                  <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">Last name</label>
+                  <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">
+                    Last name
+                  </label>
                   <input
                     type="text"
                     name="lastname"
@@ -375,12 +406,16 @@ const Resume: React.FC = () => {
                     className="w-full rounded-lg border border-slate-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-2 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400"
                   />
                   {formik.touched.lastname && formik.errors.lastname && (
-                    <p className="mt-1 text-xs text-rose-600">{formik.errors.lastname}</p>
+                    <p className="mt-1 text-xs text-rose-600">
+                      {formik.errors.lastname}
+                    </p>
                   )}
                 </div>
 
                 <div>
-                  <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">Email</label>
+                  <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">
+                    Email
+                  </label>
                   <input
                     type="email"
                     name="email"
@@ -391,12 +426,16 @@ const Resume: React.FC = () => {
                     className="w-full rounded-lg border border-slate-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-2 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400"
                   />
                   {formik.touched.email && formik.errors.email && (
-                    <p className="mt-1 text-xs text-rose-600">{formik.errors.email}</p>
+                    <p className="mt-1 text-xs text-rose-600">
+                      {formik.errors.email}
+                    </p>
                   )}
                 </div>
 
                 <div>
-                  <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">Mobile number</label>
+                  <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">
+                    Mobile number
+                  </label>
                   <input
                     type="tel"
                     name="mobnum"
@@ -407,7 +446,9 @@ const Resume: React.FC = () => {
                     className="w-full rounded-lg border border-slate-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-2 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400"
                   />
                   {formik.touched.mobnum && formik.errors.mobnum && (
-                    <p className="mt-1 text-xs text-rose-600">{formik.errors.mobnum}</p>
+                    <p className="mt-1 text-xs text-rose-600">
+                      {formik.errors.mobnum}
+                    </p>
                   )}
                 </div>
 
@@ -470,7 +511,9 @@ const Resume: React.FC = () => {
 
             {/* Objective */}
             <section className="mb-8">
-              <h2 className="mb-4 text-lg font-semibold text-slate-800 dark:text-slate-100">Objective (optional)</h2>
+              <h2 className="mb-4 text-lg font-semibold text-slate-800 dark:text-slate-100">
+                Objective (optional)
+              </h2>
               <textarea
                 name="obj"
                 value={formik.values.obj}
@@ -485,10 +528,15 @@ const Resume: React.FC = () => {
             {/* Experience */}
             <section className="mb-8">
               <div className="flex items-center justify-between">
-                <h2 className="mb-4 text-lg font-semibold text-slate-800 dark:text-slate-100">Experience (optional)</h2>
+                <h2 className="mb-4 text-lg font-semibold text-slate-800 dark:text-slate-100">
+                  Experience (optional)
+                </h2>
                 <p className="text-xs text-slate-500 dark:text-slate-400">
-                  First line is job heading (e.g. <i>Acme – SWE | Jan 2023 – Present</i>).<br />
-                  Following lines are bullet points. Use blank lines to separate jobs.
+                  First line is job heading (e.g.{" "}
+                  <i>Acme – SWE | Jan 2023 – Present</i>).
+                  <br />
+                  Following lines are bullet points. Use blank lines to separate
+                  jobs.
                 </p>
               </div>
               <textarea
@@ -510,8 +558,12 @@ Beta Labs – Intern | May 2022 – Aug 2022
             {/* Skills */}
             <section className="mb-8">
               <div className="flex items-center justify-between">
-                <h2 className="mb-4 text-lg font-semibold text-slate-800 dark:text-slate-100">Skills</h2>
-                <p className="text-xs text-slate-500 dark:text-slate-400">Tip: Separate with commas or new lines</p>
+                <h2 className="mb-4 text-lg font-semibold text-slate-800 dark:text-slate-100">
+                  Skills
+                </h2>
+                <p className="text-xs text-slate-500 dark:text-slate-400">
+                  Tip: Separate with commas or new lines
+                </p>
               </div>
               <textarea
                 name="skills"
@@ -523,16 +575,21 @@ Beta Labs – Intern | May 2022 – Aug 2022
                 className="w-full rounded-lg border border-slate-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-2 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400"
               />
               {formik.touched.skills && formik.errors.skills && (
-                <p className="mt-1 text-xs text-rose-600">{formik.errors.skills}</p>
+                <p className="mt-1 text-xs text-rose-600">
+                  {formik.errors.skills}
+                </p>
               )}
             </section>
 
             {/* Projects */}
             <section className="mb-8">
               <div className="flex items-center justify-between">
-                <h2 className="mb-4 text-lg font-semibold text-slate-800 dark:text-slate-100">Projects (optional)</h2>
+                <h2 className="mb-4 text-lg font-semibold text-slate-800 dark:text-slate-100">
+                  Projects (optional)
+                </h2>
                 <p className="text-xs text-slate-500 dark:text-slate-400">
-                  One per line. Optional format: <strong>Title - description</strong>
+                  One per line. Optional format:{" "}
+                  <strong>Title - description</strong>
                 </p>
               </div>
               <textarea
@@ -553,7 +610,9 @@ E-commerce Analytics - Designed ELT + dashboards to reduce churn by 12%.`}
                 <h2 className="mb-4 text-lg font-semibold text-slate-800 dark:text-slate-100">
                   Extra-Curricular Activities (optional)
                 </h2>
-                <p className="text-xs text-slate-500 dark:text-slate-400">One bullet per line</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400">
+                  One bullet per line
+                </p>
               </div>
               <textarea
                 name="extracurricular"
@@ -585,8 +644,6 @@ Published 10+ blog posts on GenAI.`}
             </div>
           </form>
         </div>
-
-      
       </div>
     </div>
   );

@@ -8,8 +8,7 @@ import {
   User,
   HomeIcon,
   MessageSquare,
-  FileText
-  
+  FileText,
 } from "lucide-react";
 import Logo from "@assets/images/logo.png";
 import LogoWhite from "@assets/images/logpo-white.png";
@@ -29,7 +28,9 @@ export default function Navbar() {
   // Define menu items with icons (filtering Home & Messages if not authenticated)
   const menuItems = [
     { name: "Home", href: "/home", icon: <HomeIcon size={20} /> },
-    ...(isAuthenticated ? [{ name: "Resume", href: "/resume", icon:  <FileText size={20} />}] : []),
+    ...(isAuthenticated
+      ? [{ name: "Resume", href: "/resume", icon: <FileText size={20} /> }]
+      : []),
     // { name: "Resume", href: "/resume", icon:  <FileText size={20} />},
     // { name: "Blogs", href: "/blogs", icon: <PenBox size={20} /> },
     {
