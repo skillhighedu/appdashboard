@@ -27,16 +27,22 @@ export default function Navbar() {
 
   // Define menu items with icons (filtering Home & Messages if not authenticated)
   const menuItems = [
-    { name: "Home", href: "/home", icon: <HomeIcon size={20} /> },
+    { name: "Home", href: "/home", icon: <HomeIcon size={20} />, isNew: false },
     ...(isAuthenticated
-      ? [{ name: "Resume", href: "/resume", icon: <FileText size={20} /> }]
+      ? [
+          {
+            name: "Resume",
+            href: "/resume",
+            icon: <FileText size={20} />,
+            isNew: true,
+          },
+        ]
       : []),
-    // { name: "Resume", href: "/resume", icon:  <FileText size={20} />},
-    // { name: "Blogs", href: "/blogs", icon: <PenBox size={20} /> },
     {
       name: "Support",
       href: "/support",
       icon: <MessageSquare size={20} />,
+      isNew: false,
     },
   ];
 
@@ -56,17 +62,25 @@ export default function Navbar() {
         </a>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex gap-6 text-lg">
+        <div className="hidden md:flex gap-10 text-lg">
           {menuItems.map((item) => (
             <a
               key={item.name}
               href={item.href}
-              className={`flex text-sm items-center gap-2 ${
-                currentRouteName.pathname === item.href ? "text-primary" : ""
-              } hover:text-primary dark:hover:text-primary text-gray-500 dark:text-gray-100 transition-all`}
+              className={`relative flex items-center  text-sm transition-all
+    ${item.isNew ? "text-primary/70" : currentRouteName.pathname === item.href ? "text-primary" : ""}
+    hover:text-primary dark:hover:text-primary text-gray-500 dark:text-gray-100
+  `}
             >
-              {item.icon}
+              {/* Text */}
               {item.name}
+
+              {/* 🏷️ CTA badge (instead of dot) */}
+              {item.isNew && (
+                <span className="ml-2 px-2 py-[2px] text-[10px] rounded-full bg-primary/10 text-primary font-semibold uppercase tracking-wide animate-pulse">
+                  Try Now
+                </span>
+              )}
             </a>
           ))}
         </div>

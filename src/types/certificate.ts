@@ -11,4 +11,5 @@ export interface CertificateDetails {
 interface CertificateIds {
   internshipId: string;
   industrialTrainingId: string;
+  participationId:string;
 }

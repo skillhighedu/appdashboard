@@ -15,6 +15,8 @@
   :root {
     --font-funnel: "Funnel Sans", sans-serif;
     --font-lexend: "Lexend", sans-serif;
+    --font-alex: "Alex Brush", cursive;
+
     font-family: var(--font-lexend);
   }
 
@@ -25,6 +27,10 @@
 
   .font-funnel {
     font-family: var(--font-funnel);
+  }
+
+  .font-alex {
+    font-family: var(--font-alex);
   }
 }
 
