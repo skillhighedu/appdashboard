@@ -74,7 +74,7 @@ export default function App() {
         // Name
         center(certificateDetails?.name || "Your Name", 46, alexFont, 415, rgb(0.8627, 0.7059, 0.3451));
 
-        const fontGray = rgb(0.6, 0.6, 0.6);
+        const fontGray = rgb(0.2, 0.2, 0.2);
 
         // Line 1: description
 center(cert.description, 20, cormorantFont, 365, fontGray);
