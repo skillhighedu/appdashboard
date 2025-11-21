@@ -124,37 +124,37 @@ export default function Player() {
 
       {/* Next / Previous Buttons */}
       <div className="flex justify-between p-4 bg-gray-100 dark:bg-darkSecondary text-darkPrimary border-t border-gray-200 dark:border-gray-700">
-       <div className="flex justify-between gap-5">
-         <Button
-          onClick={handlePrevLesson}
-          disabled={
-            !selectedLesson ||
-            courseLessons?.findIndex((l) => l.id === selectedLesson.id) === 0
-          }
-          variant="secondary"
-        >
-          Previous
-        </Button>
-        <Button
-          onClick={handleNextLesson}
-          disabled={
-            !selectedLesson ||
-            !courseLessons || 
-            courseLessons.findIndex((l) => l.id === selectedLesson.id) ===
-              courseLessons.length - 1
-          }
-        >
-          Next
-        </Button>
-       </div>
-       <div>
-         <Link to="/learn-in-public">
-                       <Button className="rounded-lg text-white flex items-center gap-2 cursor-pointer">
-                         <NotebookPen size={16} />
-                        Share Your Learning
-                       </Button>
-                     </Link>
-       </div>
+        <div className="flex justify-between gap-5">
+          <Button
+            onClick={handlePrevLesson}
+            disabled={
+              !selectedLesson ||
+              courseLessons?.findIndex((l) => l.id === selectedLesson.id) === 0
+            }
+            variant="secondary"
+          >
+            Previous
+          </Button>
+          <Button
+            onClick={handleNextLesson}
+            disabled={
+              !selectedLesson ||
+              !courseLessons ||
+              courseLessons.findIndex((l) => l.id === selectedLesson.id) ===
+                courseLessons.length - 1
+            }
+          >
+            Next
+          </Button>
+        </div>
+        <div>
+          <Link to="/learn-in-public">
+            <Button className="rounded-lg text-white flex items-center gap-2 cursor-pointer">
+              <NotebookPen size={16} />
+              Share Your Learning
+            </Button>
+          </Link>
+        </div>
       </div>
 
       {/* Tabs */}

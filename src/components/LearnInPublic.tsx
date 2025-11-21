@@ -1,8 +1,11 @@
-
-
-import React, { ComponentPropsWithoutRef, PropsWithChildren, useMemo, useState } from "react";
+import React, {
+  ComponentPropsWithoutRef,
+  PropsWithChildren,
+  useMemo,
+  useState,
+} from "react";
 import Header from "./Header";
-import { Linkedin ,ArrowUpRight} from "lucide-react";
+import { Linkedin, ArrowUpRight } from "lucide-react";
 // -------- Custom UI Components -------- //
 
 type ButtonProps = ComponentPropsWithoutRef<"button"> & {
@@ -47,14 +50,20 @@ type CardProps = PropsWithChildren<
   }
 >;
 
-export function Card({ children, className = "", tone = "default" }: CardProps) {
+export function Card({
+  children,
+  className = "",
+  tone = "default",
+}: CardProps) {
   const toneClasses =
     tone === "muted"
       ? "bg-slate-50/70 border-slate-200 dark:bg-slate-900/40 dark:border-slate-800"
       : "bg-white border-white/60 shadow-[0_20px_50px_rgba(15,23,42,0.08)] dark:bg-slate-900 dark:border-slate-800 dark:shadow-[0_20px_50px_rgba(0,0,0,0.45)]";
 
   return (
-    <div className={`rounded-3xl border ${toneClasses} ${className}`}>{children}</div>
+    <div className={`rounded-3xl border ${toneClasses} ${className}`}>
+      {children}
+    </div>
   );
 }
 
@@ -62,66 +71,72 @@ const bulletClass =
   "relative pl-5 text-left text-sm text-slate-600 leading-relaxed before:absolute before:left-0 before:top-2 before:h-2 before:w-2 before:rounded-full before:bg-primary/70 dark:text-slate-300";
 
 function LearnInPublicInsights() {
- const sections = [
-  {
-    title: "About this feature",
-    description:
-      "A quick way to log what you worked on or learned each day.",
-    bullets: [
-  "Write your update in minutes, not hours.",
-  "Shows steady proof of your progress over time.",
-  "Keeps your profile active and visible without extra effort.",
-  "Opens doors by showing you're consistent and serious about your skills."
-]
-
-  },
-  {
-    title: "What to share",
-    description:
-      "Keep it short and honest. Just share what actually happened today.",
-    bullets: [
-      "Bugs you fixed or problems you solved.",
-      "New concepts, tools, or ideas you explored.",
-      "Projects you started or made progress on.",
-      "Issues you're stuck on right now.",
-      "Any small win, metric, or question you're thinking about."
-    ]
-  },
-  {
-    title: "How it helps",
-    description:
-      "Small daily updates build trust faster than big polished posts.",
-    bullets: [
-      "Shows consistency to hiring managers and teammates.",
-      "Brings in feedback from people who can help.",
-      "Creates a searchable record of everything you've learned."
-    ]
-  }
-];
-
+  const sections = [
+    {
+      title: "About this feature",
+      description: "A quick way to log what you worked on or learned each day.",
+      bullets: [
+        "Write your update in minutes, not hours.",
+        "Shows steady proof of your progress over time.",
+        "Keeps your profile active and visible without extra effort.",
+        "Opens doors by showing you're consistent and serious about your skills.",
+      ],
+    },
+    {
+      title: "What to share",
+      description:
+        "Keep it short and honest. Just share what actually happened today.",
+      bullets: [
+        "Bugs you fixed or problems you solved.",
+        "New concepts, tools, or ideas you explored.",
+        "Projects you started or made progress on.",
+        "Issues you're stuck on right now.",
+        "Any small win, metric, or question you're thinking about.",
+      ],
+    },
+    {
+      title: "How it helps",
+      description:
+        "Small daily updates build trust faster than big polished posts.",
+      bullets: [
+        "Shows consistency to hiring managers and teammates.",
+        "Brings in feedback from people who can help.",
+        "Creates a searchable record of everything you've learned.",
+      ],
+    },
+  ];
 
   return (
     <div className="space-y-4">
-          
       <Card className="p-7 space-y-4">
-        <p className="text-xs uppercase tracking-[0.4em] text-slate-400 dark:text-slate-500">Why it matters</p>
-        <h2 className="text-2xl font-semibold text-slate-900 dark:text-white">About the Learn In Public </h2>
+        <p className="text-xs uppercase tracking-[0.4em] text-slate-400 dark:text-slate-500">
+          Why it matters
+        </p>
+        <h2 className="text-2xl font-semibold text-slate-900 dark:text-white">
+          About the Learn In Public{" "}
+        </h2>
         <p className="text-sm text-slate-600 max-w-3xl dark:text-slate-300">
-          Keep momentum visible by logging micro-updates. These entries act like shipping receipts for your curiosity and work ethic.
+          Keep momentum visible by logging micro-updates. These entries act like
+          shipping receipts for your curiosity and work ethic.
         </p>
         <ul className="space-y-3">
-          {sections[0] && sections[0].bullets.map((point) => (
-            <li key={point} className={bulletClass}>
-              {point}
-            </li>
-          ))}
+          {sections[0] &&
+            sections[0].bullets.map((point) => (
+              <li key={point} className={bulletClass}>
+                {point}
+              </li>
+            ))}
         </ul>
       </Card>
       <div className="grid md:grid-cols-2 gap-4">
         {sections.slice(1).map((section) => (
           <Card key={section.title} className="p-6 space-y-3">
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 dark:text-slate-500">{section.title}</p>
-            <p className="text-sm text-slate-600 dark:text-slate-300">{section.description}</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 dark:text-slate-500">
+              {section.title}
+            </p>
+            <p className="text-sm text-slate-600 dark:text-slate-300">
+              {section.description}
+            </p>
             <ul className="space-y-3">
               {section.bullets.map((point) => (
                 <li key={point} className={bulletClass}>
@@ -142,7 +157,7 @@ type SharePlatform = "x" | "linkedin";
 
 export default function LearnInPublic() {
   const [text, setText] = useState("");
-  
+
   const [isSharing, setIsSharing] = useState<SharePlatform | null>(null);
 
   const platformConfigs: Record<
@@ -160,15 +175,36 @@ export default function LearnInPublic() {
       badge: <ArrowUpRight size={16} />,
       signature: "#LearnInPublic #SkillHigh @SkillHighedu",
       variant: "primary",
-      builder: (encoded) => `https://twitter.com/intent/tweet?text=${encoded}`
+      builder: (encoded) => `https://twitter.com/intent/tweet?text=${encoded}`,
     },
     linkedin: {
-      label: "Post on LinkedIn",
-      badge: <Linkedin size={16} />,
-      signature: "#LearnInPublic #SkillHigh ",
-      variant: "secondary",
-      builder: (encoded) => `https://www.linkedin.com/feed/?shareActive=true&text=${encoded}`
-    }
+  label: "Post on LinkedIn",
+  badge: <Linkedin size={16} />,
+  signature: "#LearnInPublic #SkillHigh",
+  variant: "secondary",
+  builder: (rawText) => {
+    // Add signature and encode everything
+    const fullText = `${rawText}\n\n#LearnInPublic #SkillHigh`;
+    const encoded = encodeURIComponent(fullText);
+
+    // This URL is needed because LinkedIn **forces** a URL for sharing.
+    const fallbackUrl = `https://skillhigh.in/shared?text=${encoded}`;
+
+    // Deep link for app
+    const appLink = `linkedin://shareArticle?mini=true&url=${encodeURIComponent(
+      fallbackUrl
+    )}`;
+
+    // Web fallback
+    const webLink = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
+      fallbackUrl
+    )}`;
+
+    // Return a small script-triggering URL that tries app → falls back to web
+    return `javascript:(function(){window.location='${appLink}';setTimeout(function(){window.location='${webLink}';},600);})();`;
+  }
+}
+
   };
 
   const signatureSuffix = `\n\n${platformConfigs.x.signature}`;
@@ -181,9 +217,9 @@ export default function LearnInPublic() {
       "Today I learned that...",
       "A challenge I overcame:",
       "One insight from building:",
-      "A question I'm now exploring:"
+      "A question I'm now exploring:",
     ],
-    []
+    [],
   );
 
   const handleShare = (platform: SharePlatform) => {
@@ -194,7 +230,11 @@ export default function LearnInPublic() {
     const encoded = encodeURIComponent(payload);
 
     setIsSharing(platform);
-    window.open(platformConfigs[platform].builder(encoded), "_blank", "noopener,noreferrer");
+    window.open(
+      platformConfigs[platform].builder(encoded),
+      "_blank",
+      "noopener,noreferrer",
+    );
     // setPosts((prev) => [text.trim(), ...prev]);
     setText("");
     setTimeout(() => setIsSharing(null), 600);
@@ -211,38 +251,48 @@ export default function LearnInPublic() {
           <span className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-primary text-white text-xs tracking-[0.2em] uppercase dark:bg-white dark:text-slate-900">
             Learn In Public
           </span>
-         <h1 className="text-4xl font-bold tracking-tight text-primary dark:text-white">
-  Show your work. Show your progress.
-</h1>
-<p className="text-base text-slate-600 mx-auto max-w-2xl dark:text-slate-300">
-  Log what you build, fix, or learn. These small updates compound into proof of skill, discipline, and direction. The journey matters more than polished results.
-</p>
-
+          <h1 className="text-4xl font-bold tracking-tight text-primary dark:text-white">
+            Show your work. Show your progress.
+          </h1>
+          <p className="text-base text-slate-600 mx-auto max-w-2xl dark:text-slate-300">
+            Log what you build, fix, or learn. These small updates compound into
+            proof of skill, discipline, and direction. The journey matters more
+            than polished results.
+          </p>
         </div>
       </Card>
 
-  <div className="grid md:grid-cols-3 gap-4">
-  {[
-    {
-      title: "Write",
-      body: "Share what you learned or built today. Keep it short and honest."
-    },
-    {
-      title: "Share",
-      body: "Post it publicly so others can see your progress."
-    },
-    {
-      title: "Interact",
-      body: "Reply, discuss, and learn from others in the community."
-    }
-  ].map((step, idx) => (
-    <Card key={step.title} className="p-6 space-y-2 hover:bg-primary/10 dark:hover:bg-white/5">
-      <p className="text-xs uppercase tracking-[0.4em] text-slate-400 dark:text-slate-500">Step {idx + 1}</p>
-      <h3 className="text-xl font-semibold text-primary dark:text-white">{step.title}</h3>
-      <p className="text-sm text-slate-600 dark:text-slate-300">{step.body}</p>
-    </Card>
-  ))}
-</div>
+      <div className="grid md:grid-cols-3 gap-4">
+        {[
+          {
+            title: "Write",
+            body: "Share what you learned or built today. Keep it short and honest.",
+          },
+          {
+            title: "Share",
+            body: "Post it publicly so others can see your progress.",
+          },
+          {
+            title: "Interact",
+            body: "Reply, discuss, and learn from others in the community.",
+          },
+        ].map((step, idx) => (
+          <Card
+            key={step.title}
+            className="p-6 space-y-2 hover:bg-primary/10 dark:hover:bg-white/5"
+          >
+            <p className="text-xs uppercase tracking-[0.4em] text-slate-400 dark:text-slate-500">
+              Step {idx + 1}
+            </p>
+            <h3 className="text-xl font-semibold text-primary dark:text-white">
+              {step.title}
+            </h3>
+            <p className="text-sm text-slate-600 dark:text-slate-300">
+              {step.body}
+            </p>
+          </Card>
+        ))}
+      </div>
 
       <LearnInPublicInsights />
 
@@ -250,12 +300,18 @@ export default function LearnInPublic() {
       <Card className="p-8 space-y-6">
         <div className="flex flex-wrap items-center gap-3 justify-between">
           <div>
-            <p className="text-sm uppercase tracking-[0.3em] text-slate-400 dark:text-slate-500">Daily log</p>
-            <h2 className="text-2xl font-semibold text-primary dark:text-white">What did you learn today?</h2>
+            <p className="text-sm uppercase tracking-[0.3em] text-slate-400 dark:text-slate-500">
+              Daily log
+            </p>
+            <h2 className="text-2xl font-semibold text-primary dark:text-white">
+              What did you learn today?
+            </h2>
           </div>
           <span
             className={`text-sm font-medium ${
-              remaining < 40 ? "text-amber-600" : "text-slate-500 dark:text-slate-400"
+              remaining < 40
+                ? "text-amber-600"
+                : "text-slate-500 dark:text-slate-400"
             }`}
           >
             {remaining} characters left
@@ -288,7 +344,9 @@ export default function LearnInPublic() {
             <button
               key={prompt}
               type="button"
-              onClick={() => setText((prev) => (prev ? `${prev}\n${prompt} ` : `${prompt} `))}
+              onClick={() =>
+                setText((prev) => (prev ? `${prev}\n${prompt} ` : `${prompt} `))
+              }
               className="text-xs font-medium px-3 py-1.5 rounded-full border border-slate-200 bg-white hover:border-slate-300 text-slate-600 transition dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:border-slate-500"
             >
               {prompt}
@@ -306,7 +364,9 @@ export default function LearnInPublic() {
                 className="w-full py-4 text-lg flex items-center justify-center gap-2 cursor-pointer"
                 variant={config.variant}
               >
-                <span>{isSharing === platform ? "Opening…" : config.label}</span>
+                <span>
+                  {isSharing === platform ? "Opening…" : config.label}
+                </span>
                 <span className="text-sm opacity-70">{config.badge}</span>
               </Button>
             );
@@ -314,7 +374,6 @@ export default function LearnInPublic() {
         </div>
       </Card>
 
-   
       {/* Recent Posts */}
       {/* {posts.length > 0 && (
         <section className="space-y-5">

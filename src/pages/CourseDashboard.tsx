@@ -63,19 +63,19 @@ export default function CourseDashboard() {
   const learnInPublicBullets = [
     "Log a short update after each study session to cement the lesson.",
     "Share blockers, fixes, or wins so others can follow your roadmap.",
-    "Build an authentic proof-of-work timeline employers can skim."
+    "Build an authentic proof-of-work timeline employers can skim.",
   ];
 
   const shareIdeas = [
     "What you built or debugged today",
     "A new concept or API you explored",
-    "Next action you are planning tomorrow"
+    "Next action you are planning tomorrow",
   ];
 
   const helpBenefits = [
     "Makes progress visible even when certificates are pending",
     "Attracts collaborators and accountability buddies",
-    "Turns your curiosity into a searchable knowledge base"
+    "Turns your curiosity into a searchable knowledge base",
   ];
 
   return (
@@ -200,8 +200,9 @@ export default function CourseDashboard() {
               Turn daily lessons into a visible portfolio
             </h2>
             <p className="text-sm text-gray-600 dark:text-gray-300">
-              Share short progress notes on SkillHigh social channels with built-in hashtags and
-              mentions. Consistency compounds even if you only have five minutes.
+              Share short progress notes on SkillHigh social channels with
+              built-in hashtags and mentions. Consistency compounds even if you
+              only have five minutes.
             </p>
             <ul className="space-y-3 text-sm text-gray-700 dark:text-gray-200">
               {learnInPublicBullets.map((point) => (
@@ -218,9 +219,10 @@ export default function CourseDashboard() {
                   Go to Learn In Public
                 </Button>
               </Link>
-              
+
               <blockquote className="w-full text-sm italic text-gray-600 dark:text-gray-300 border-l-4 mt-2 border-primary/50 dark:border-white/40 pl-4">
-                “People learn quietly all the time. But the ones who show their process get the invites, the mentorship, the opportunities.”
+                “People learn quietly all the time. But the ones who show their
+                process get the invites, the mentorship, the opportunities.”
               </blockquote>
             </div>
           </div>
@@ -254,11 +256,16 @@ export default function CourseDashboard() {
             </div>
             <div className="rounded-xl bg-slate-900 text-white dark:bg-white dark:text-slate-900 p-4 flex items-center justify-between">
               <div>
-                <p className="text-xs uppercase tracking-[0.4em] opacity-70">New</p>
+                <p className="text-xs uppercase tracking-[0.4em] opacity-70">
+                  New
+                </p>
                 <p className="text-lg font-semibold">For X & LinkedIn</p>
               </div>
               <Link to="/learn-in-public">
-                <Button variant="secondary" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-white rounded-lg">
+                <Button
+                  variant="secondary"
+                  className="bg-white text-slate-900 dark:bg-slate-900 dark:text-white rounded-lg"
+                >
                   Log today
                 </Button>
               </Link>

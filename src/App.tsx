@@ -173,7 +173,7 @@ function App() {
                     </Layout>
                   }
                 />
-                  <Route
+                <Route
                   path="/learn-in-public"
                   element={
                     <Layout>
@@ -181,7 +181,7 @@ function App() {
                     </Layout>
                   }
                 />
-                
+
                 <Route
                   path="/courseDashboard"
                   element={
