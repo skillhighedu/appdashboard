@@ -20,6 +20,7 @@ import CertificateComponent from "@pages/Certificate";
 import CertificateVerification from "@pages/CertificateVerification";
 import Bounties from "@pages/Bounties";
 import Resume from "@pages/Resume";
+import LearnInPublic from "@components/LearnInPublic";
 // import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator } from "@components/ui/BreadCrumbs";
 
 const Landing = lazy(() => import("@pages/Landing"));
@@ -172,6 +173,15 @@ function App() {
                     </Layout>
                   }
                 />
+                  <Route
+                  path="/learn-in-public"
+                  element={
+                    <Layout>
+                      <LearnInPublic />
+                    </Layout>
+                  }
+                />
+                
                 <Route
                   path="/courseDashboard"
                   element={

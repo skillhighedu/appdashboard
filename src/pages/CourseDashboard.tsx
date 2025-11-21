@@ -13,6 +13,9 @@ import {
   Folder,
   GraduationCap,
   DollarSign,
+  NotebookPen,
+  Sparkles,
+  TrendingUp,
 } from "lucide-react";
 import Tooltip from "@components/ToolTip";
 import { Link, useNavigate } from "react-router-dom";
@@ -56,6 +59,24 @@ export default function CourseDashboard() {
   }
 
   if (!selectedCourseData) return <Loading />;
+
+  const learnInPublicBullets = [
+    "Log a short update after each study session to cement the lesson.",
+    "Share blockers, fixes, or wins so others can follow your roadmap.",
+    "Build an authentic proof-of-work timeline employers can skim."
+  ];
+
+  const shareIdeas = [
+    "What you built or debugged today",
+    "A new concept or API you explored",
+    "Next action you are planning tomorrow"
+  ];
+
+  const helpBenefits = [
+    "Makes progress visible even when certificates are pending",
+    "Attracts collaborators and accountability buddies",
+    "Turns your curiosity into a searchable knowledge base"
+  ];
 
   return (
     <div className="min-h-screen max-width-[90rem] dark:bg-darkPrimary p-4 md:p-6 space-y-6">
@@ -160,6 +181,89 @@ export default function CourseDashboard() {
             value={selectedCourseData.projectProgress}
             navigate="/projects"
           />
+        </div>
+      </motion.div>
+
+      {/* 📣 Learn In Public CTA */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.3, ease: "easeInOut" }}
+        className="bg-gradient-to-br from-white via-white to-slate-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-900 border border-gray-200 dark:border-darkPrimary rounded-2xl shadow-lg p-6 md:p-8"
+      >
+        <div className="grid gap-8 lg:grid-cols-2">
+          <div className="space-y-6">
+            <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold tracking-[0.3em] uppercase dark:bg-white/10 dark:text-white">
+              <NotebookPen size={16} /> Learn In Public
+            </div>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+              Turn daily lessons into a visible portfolio
+            </h2>
+            <p className="text-sm text-gray-600 dark:text-gray-300">
+              Share short progress notes on SkillHigh social channels with built-in hashtags and
+              mentions. Consistency compounds even if you only have five minutes.
+            </p>
+            <ul className="space-y-3 text-sm text-gray-700 dark:text-gray-200">
+              {learnInPublicBullets.map((point) => (
+                <li key={point} className="flex items-start gap-3">
+                  <Sparkles className="mt-1 h-4 w-4 text-primary dark:text-white" />
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="flex flex-wrap gap-3">
+              <Link to="/learn-in-public">
+                <Button className="rounded-lg text-white flex items-center gap-2">
+                  <NotebookPen size={16} />
+                  Go to Learn In Public
+                </Button>
+              </Link>
+              
+              <blockquote className="w-full text-sm italic text-gray-600 dark:text-gray-300 border-l-4 mt-2 border-primary/50 dark:border-white/40 pl-4">
+                “People learn quietly all the time. But the ones who show their process get the invites, the mentorship, the opportunities.”
+              </blockquote>
+            </div>
+          </div>
+
+          <div className="bg-white dark:bg-darkSecondary rounded-xl border border-gray-200 dark:border-darkPrimary p-6 space-y-6 shadow-inner">
+            <div>
+              <p className="text-xs uppercase tracking-[0.4em] text-gray-500 dark:text-gray-400">
+                What to share
+              </p>
+              <ul className="mt-3 space-y-3 text-sm text-gray-700 dark:text-gray-200">
+                {shareIdeas.map((idea) => (
+                  <li key={idea} className="flex items-start gap-2">
+                    <Folder className="mt-0.5 h-4 w-4 text-primary dark:text-white" />
+                    {idea}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="border-t border-dashed border-gray-200 dark:border-gray-700 pt-4">
+              <p className="text-xs uppercase tracking-[0.4em] text-gray-500 dark:text-gray-400">
+                How it helps
+              </p>
+              <ul className="mt-3 space-y-3 text-sm text-gray-700 dark:text-gray-200">
+                {helpBenefits.map((benefit) => (
+                  <li key={benefit} className="flex items-start gap-2">
+                    <TrendingUp className="mt-0.5 h-4 w-4 text-primary dark:text-white" />
+                    {benefit}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-xl bg-slate-900 text-white dark:bg-white dark:text-slate-900 p-4 flex items-center justify-between">
+              <div>
+                <p className="text-xs uppercase tracking-[0.4em] opacity-70">New</p>
+                <p className="text-lg font-semibold">For X & LinkedIn</p>
+              </div>
+              <Link to="/learn-in-public">
+                <Button variant="secondary" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-white rounded-lg">
+                  Log today
+                </Button>
+              </Link>
+            </div>
+          </div>
         </div>
       </motion.div>
 

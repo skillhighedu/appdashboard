@@ -3,9 +3,10 @@ import { useStore } from "@context/useStore";
 import { fetchCourseTopics } from "../services/lessonsService";
 import { Storage } from "@utils/storage";
 import { Button } from "@components/ui/button";
-import { MessageCircleQuestionIcon } from "lucide-react";
+import { MessageCircleQuestionIcon, NotebookPen } from "lucide-react";
 import { sendQuestionService } from "../services/topicQuestionServices";
 import { toast } from "sonner";
+import { Link } from "react-router-dom";
 
 export default function Player() {
   const [isLoading, setIsLoading] = useState(true);
@@ -123,7 +124,8 @@ export default function Player() {
 
       {/* Next / Previous Buttons */}
       <div className="flex justify-between p-4 bg-gray-100 dark:bg-darkSecondary text-darkPrimary border-t border-gray-200 dark:border-gray-700">
-        <Button
+       <div className="flex justify-between gap-5">
+         <Button
           onClick={handlePrevLesson}
           disabled={
             !selectedLesson ||
@@ -137,13 +139,22 @@ export default function Player() {
           onClick={handleNextLesson}
           disabled={
             !selectedLesson ||
-            !courseLessons || // guard
+            !courseLessons || 
             courseLessons.findIndex((l) => l.id === selectedLesson.id) ===
               courseLessons.length - 1
           }
         >
           Next
         </Button>
+       </div>
+       <div>
+         <Link to="/learn-in-public">
+                       <Button className="rounded-lg text-white flex items-center gap-2 cursor-pointer">
+                         <NotebookPen size={16} />
+                        Share Your Learning
+                       </Button>
+                     </Link>
+       </div>
       </div>
 
       {/* Tabs */}
