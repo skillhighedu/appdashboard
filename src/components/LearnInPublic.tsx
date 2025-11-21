@@ -178,33 +178,13 @@ export default function LearnInPublic() {
       builder: (encoded) => `https://twitter.com/intent/tweet?text=${encoded}`,
     },
     linkedin: {
-  label: "Post on LinkedIn",
-  badge: <Linkedin size={16} />,
-  signature: "#LearnInPublic #SkillHigh",
-  variant: "secondary",
-  builder: (rawText) => {
-    // Add signature and encode everything
-    const fullText = `${rawText}\n\n#LearnInPublic #SkillHigh`;
-    const encoded = encodeURIComponent(fullText);
-
-    // This URL is needed because LinkedIn **forces** a URL for sharing.
-    const fallbackUrl = `https://skillhigh.in/shared?text=${encoded}`;
-
-    // Deep link for app
-    const appLink = `linkedin://shareArticle?mini=true&url=${encodeURIComponent(
-      fallbackUrl
-    )}`;
-
-    // Web fallback
-    const webLink = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
-      fallbackUrl
-    )}`;
-
-    // Return a small script-triggering URL that tries app → falls back to web
-    return `javascript:(function(){window.location='${appLink}';setTimeout(function(){window.location='${webLink}';},600);})();`;
-  }
-}
-
+      label: "Post on LinkedIn",
+      badge: <Linkedin size={16} />,
+      signature: "#LearnInPublic #SkillHigh ",
+      variant: "secondary",
+      builder: (encoded) =>
+        `https://www.linkedin.com/feed/?shareActive=true&text=${encoded}`,
+    },
   };
 
   const signatureSuffix = `\n\n${platformConfigs.x.signature}`;
