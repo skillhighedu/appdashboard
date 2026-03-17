@@ -1,14 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { PDFDocument, PDFFont, rgb, StandardFonts } from "pdf-lib";
 import fontkit from "@pdf-lib/fontkit";
 import certificateBg from "@assets/images/certificate.jpg";
-
 import { saveAs } from "file-saver";
 import { useStore } from "@context/useStore";
 import { formatDate } from "@utils/utils";
-import { DownloadIcon, EyeIcon } from "lucide-react";
+import { DownloadIcon, EyeIcon, UserCheck, X } from "lucide-react";
 import { Button } from "@components/ui/button";
 import { alexBrushFont, CormorantGramond } from "@assets/fonts";
 
@@ -38,6 +37,41 @@ export default function App() {
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
   const [isPreviewMode, setIsPreviewMode] = useState(false);
 
+  // Popup state
+  const [showNamePopup, setShowNamePopup] = useState(true);
+  const [nameInput, setNameInput] = useState("");
+  const [confirmedName, setConfirmedName] = useState("");
+  const [nameConfirmed, setNameConfirmed] = useState(false);
+  const [closeCount, setCloseCount] = useState(0); // tracks how many times user dismissed without confirming
+
+  // Pre-fill from store once available
+  useEffect(() => {
+    if (certificateDetails?.name) {
+      setNameInput(certificateDetails.name);
+      setConfirmedName(certificateDetails.name);
+    }
+  }, [certificateDetails?.name]);
+
+  const handleNameConfirm = () => {
+    if (!nameInput.trim()) return;
+    setConfirmedName(nameInput.trim());
+    setNameConfirmed(true);
+    setShowNamePopup(false);
+  };
+
+  // Close without confirming — only allowed up to 2 times
+  const handlePopupClose = () => {
+    if (closeCount >= 2) return; // already hit the limit, button is gone
+    const newCount = closeCount + 1;
+    setCloseCount(newCount);
+    setShowNamePopup(false);
+  };
+
+  const handleEditName = () => {
+    if (closeCount >= 2 && !nameConfirmed) return;
+    setShowNamePopup(true);
+  };
+
   const generateCertificates = async () => {
     try {
       const urls: string[] = [];
@@ -53,18 +87,18 @@ export default function App() {
         const fontRegular = await pdfDoc.embedFont(StandardFonts.Helvetica);
 
         const alexBytes = await fetch(alexBrushFont).then((res) =>
-          res.arrayBuffer(),
+          res.arrayBuffer()
         );
         const alexFont = await pdfDoc.embedFont(alexBytes);
 
         const cormorantBytes = await fetch(CormorantGramond).then((res) =>
-          res.arrayBuffer(),
+          res.arrayBuffer()
         );
         const cormorantFont = await pdfDoc.embedFont(cormorantBytes);
 
         // Background
         const imageBytes = await fetch(cert.background).then((res) =>
-          res.arrayBuffer(),
+          res.arrayBuffer()
         );
         const jpgImage = await pdfDoc.embedJpg(imageBytes);
         page.drawImage(jpgImage, {
@@ -80,7 +114,7 @@ export default function App() {
           size: number,
           font: PDFFont,
           y: number,
-          color = rgb(0, 0, 0),
+          color = rgb(0, 0, 0)
         ) => {
           const width = font.widthOfTextAtSize(text, size);
           page.drawText(text, {
@@ -98,16 +132,16 @@ export default function App() {
           20,
           fontRegular,
           470,
-          rgb(0.4, 0.4, 0.4),
+          rgb(0.4, 0.4, 0.4)
         );
 
-        // Name
+        // Name — uses confirmedName from popup
         center(
-          certificateDetails?.name || "Your Name",
+          confirmedName || "Your Name",
           46,
           alexFont,
           415,
-          rgb(0.8627, 0.7059, 0.3451),
+          rgb(0.8627, 0.7059, 0.3451)
         );
 
         const fontGray = rgb(0.2, 0.2, 0.2);
@@ -115,7 +149,7 @@ export default function App() {
         // Line 1: description
         center(cert.description, 20, cormorantFont, 365, fontGray);
 
-        // Line 2: course + dates
+        // Line 2: course + dates (mixed fonts)
         const courseParts = [
           {
             text: certificateDetails?.courseName || "Course Name",
@@ -138,7 +172,7 @@ export default function App() {
 
         const totalWidth = courseParts.reduce(
           (acc, part) => acc + part.font.widthOfTextAtSize(part.text, 20),
-          0,
+          0
         );
         let startX = (page.getWidth() - totalWidth) / 2;
 
@@ -156,8 +190,8 @@ export default function App() {
         // QR Code
         if (certificateDetails?.qrCode) {
           try {
-            const qrBytes = await fetch(certificateDetails.qrCode).then((res) =>
-              res.arrayBuffer(),
+            const qrBytes = await fetch(certificateDetails.qrCode).then(
+              (res) => res.arrayBuffer()
             );
             const qrImage = await pdfDoc.embedPng(qrBytes);
             page.drawImage(qrImage, {
@@ -189,7 +223,7 @@ export default function App() {
             (page.getWidth() -
               fontRegular.widthOfTextAtSize(
                 `Certificate ID: ${certificateId}`,
-                14,
+                14
               )) /
             2,
           y: 250,
@@ -201,7 +235,7 @@ export default function App() {
         const pdfBytes = await pdfDoc.save();
         const arrayBuffer = pdfBytes.buffer.slice(
           pdfBytes.byteOffset,
-          pdfBytes.byteOffset + pdfBytes.byteLength,
+          pdfBytes.byteOffset + pdfBytes.byteLength
         );
         const pdfBlob = new Blob([arrayBuffer as ArrayBuffer], {
           type: "application/pdf",
@@ -227,14 +261,125 @@ export default function App() {
         const blob = await response.blob();
         saveAs(
           blob,
-          `${certificateDetails?.courseName || "certificate"}_${certType}.pdf`,
+          `${certificateDetails?.courseName || "certificate"}_${certType}.pdf`
         );
       }
     }
   };
 
+  // Remaining skips the user has left
+  const skipsLeft = 2 - closeCount;
+
   return (
     <div className="min-h-screen p-8 dark:bg-darkPrimary flex flex-col items-center gap-8">
+
+      {/* ── Name Confirmation Popup ── */}
+      {showNamePopup && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+          <div className="bg-white dark:bg-neutral-900 rounded-2xl shadow-2xl p-8 w-full max-w-md mx-4 flex flex-col gap-5 relative">
+
+            {/* Close (X) button — hidden after 2 dismissals */}
+            {skipsLeft > 0 && (
+              <button
+                onClick={handlePopupClose}
+                className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"
+                title={`Skip (${skipsLeft} left)`}
+              >
+                <X className="h-5 w-5" />
+              </button>
+            )}
+
+            {/* Header */}
+            <div className="flex flex-col gap-1 pr-6">
+              <h2 className="text-xl font-semibold text-gray-800 dark:text-white">
+                Confirm Your Name
+              </h2>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                This name will be printed on all your certificates. Edit if
+                needed.
+              </p>
+            </div>
+
+            {/* Skip warning — shown after 1st dismissal */}
+            {closeCount === 1 && (
+              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-700 rounded-lg px-4 py-2.5 text-sm text-red-700 dark:text-red-300">
+                Last chance to skip — after this you must confirm a name.
+              </div>
+            )}
+
+            {/* Input */}
+            <div className="flex flex-col gap-2">
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                Full Name
+              </label>
+              <input
+                type="text"
+                value={nameInput}
+                onChange={(e) => setNameInput(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleNameConfirm()}
+                placeholder="Enter your full name"
+                autoFocus
+                className="border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2.5 text-base text-gray-900 dark:text-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
+            {/* Live preview */}
+            <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-lg px-4 py-3 text-sm text-amber-800 dark:text-amber-300">
+              Will be printed as:{" "}
+              <span className="font-semibold italic text-amber-600 dark:text-amber-400">
+                {nameInput.trim() || "Your Name"}
+              </span>
+            </div>
+
+            {/* Confirm button */}
+            <Button
+              variant="default"
+              onClick={handleNameConfirm}
+              disabled={!nameInput.trim()}
+              className="w-full p-3 text-white cursor-pointer"
+            >
+              <UserCheck className="mr-2 h-4 w-4" />
+              Confirm & Continue
+            </Button>
+          </div>
+        </div>
+      )}
+
+      {/* ── Confirmed name chip ── */}
+      {nameConfirmed && !showNamePopup && (
+        <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded-full">
+          <UserCheck className="h-4 w-4 text-green-500" />
+          Printing as:{" "}
+          <span className="font-semibold text-gray-900 dark:text-white">
+            {confirmedName}
+          </span>
+          <button
+            onClick={handleEditName}
+            className="ml-1 text-blue-500 underline text-xs hover:text-blue-700"
+          >
+            Edit
+          </button>
+        </div>
+      )}
+
+      {/* ── Warning banner when skipped twice and name not confirmed ── */}
+      {!nameConfirmed && !showNamePopup && closeCount >= 2 && (
+        <div className="flex items-center gap-3 bg-orange-50 dark:bg-orange-900/20 border border-orange-300 dark:border-orange-700 text-orange-800 dark:text-orange-300 px-5 py-3 rounded-xl text-sm max-w-md w-full">
+          <span>
+            No name confirmed — certificates will print{" "}
+            <span className="font-semibold italic">"Your Name"</span> as a
+            placeholder.
+          </span>
+          <button
+            onClick={() => setShowNamePopup(true)}
+            className="ml-auto shrink-0 text-blue-500 underline text-xs hover:text-blue-700 whitespace-nowrap"
+          >
+            Set name
+          </button>
+        </div>
+      )}
+
+      {/* ── Main content ── */}
       {!isPreviewMode ? (
         <>
           <h2 className="text-xl font-semibold text-gray-700 dark:text-white">
@@ -267,7 +412,9 @@ export default function App() {
                   src={url}
                   width="100%"
                   height="400px"
-                  title={`Preview ${certificateTypes[idx]?.type ?? "Certificate"}`}
+                  title={`Preview ${
+                    certificateTypes[idx]?.type ?? "Certificate"
+                  }`}
                 />
                 <p className="p-2 text-center text-sm text-gray-500 dark:text-gray-400">
                   {certificateTypes[idx]?.type}
