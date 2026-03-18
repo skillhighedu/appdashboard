@@ -8,8 +8,6 @@ import { sendQuestionService } from "../services/topicQuestionServices";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
 
-
-
 export default function Player() {
   const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<"content" | "discussions">(
@@ -26,15 +24,17 @@ export default function Player() {
     { key: "content", name: "Content" },
     { key: "discussions", name: "Discussions" },
   ];
-  
+
   useEffect(() => {
-   {
-    fetch("https://raw.githubusercontent.com/skillhighedu/skillhigh-notes/main/fullstack/lesson1.md")
-      .then(res => res.text())
-      .then(setMarkdownContent)
-      .catch(() => setMarkdownContent("❌ Failed to load lesson content"));
-  }
-}, [selectedLesson]);
+    {
+      fetch(
+        "https://raw.githubusercontent.com/skillhighedu/skillhigh-notes/main/fullstack/lesson1.md",
+      )
+        .then((res) => res.text())
+        .then(setMarkdownContent)
+        .catch(() => setMarkdownContent("❌ Failed to load lesson content"));
+    }
+  }, [selectedLesson]);
   // Load lessons
   useEffect(() => {
     const loadCourses = async () => {
@@ -189,14 +189,11 @@ export default function Player() {
       </div>
 
       {/* Content Tab */}
-    {activeTab === "content" && (
-  <div className="p-6 prose dark:prose-invert max-w-none">
-    {markdownContent || "Loading content..."}
-  </div>
-
-  
-)}
-
+      {activeTab === "content" && (
+        <div className="p-6 prose dark:prose-invert max-w-none">
+          {markdownContent || "Loading content..."}
+        </div>
+      )}
 
       {/* Discussions Tab */}
       {activeTab === "discussions" && (

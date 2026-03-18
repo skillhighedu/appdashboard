@@ -87,18 +87,18 @@ export default function App() {
         const fontRegular = await pdfDoc.embedFont(StandardFonts.Helvetica);
 
         const alexBytes = await fetch(alexBrushFont).then((res) =>
-          res.arrayBuffer()
+          res.arrayBuffer(),
         );
         const alexFont = await pdfDoc.embedFont(alexBytes);
 
         const cormorantBytes = await fetch(CormorantGramond).then((res) =>
-          res.arrayBuffer()
+          res.arrayBuffer(),
         );
         const cormorantFont = await pdfDoc.embedFont(cormorantBytes);
 
         // Background
         const imageBytes = await fetch(cert.background).then((res) =>
-          res.arrayBuffer()
+          res.arrayBuffer(),
         );
         const jpgImage = await pdfDoc.embedJpg(imageBytes);
         page.drawImage(jpgImage, {
@@ -114,7 +114,7 @@ export default function App() {
           size: number,
           font: PDFFont,
           y: number,
-          color = rgb(0, 0, 0)
+          color = rgb(0, 0, 0),
         ) => {
           const width = font.widthOfTextAtSize(text, size);
           page.drawText(text, {
@@ -132,7 +132,7 @@ export default function App() {
           20,
           fontRegular,
           470,
-          rgb(0.4, 0.4, 0.4)
+          rgb(0.4, 0.4, 0.4),
         );
 
         // Name — uses confirmedName from popup
@@ -141,7 +141,7 @@ export default function App() {
           46,
           alexFont,
           415,
-          rgb(0.8627, 0.7059, 0.3451)
+          rgb(0.8627, 0.7059, 0.3451),
         );
 
         const fontGray = rgb(0.2, 0.2, 0.2);
@@ -172,7 +172,7 @@ export default function App() {
 
         const totalWidth = courseParts.reduce(
           (acc, part) => acc + part.font.widthOfTextAtSize(part.text, 20),
-          0
+          0,
         );
         let startX = (page.getWidth() - totalWidth) / 2;
 
@@ -190,8 +190,8 @@ export default function App() {
         // QR Code
         if (certificateDetails?.qrCode) {
           try {
-            const qrBytes = await fetch(certificateDetails.qrCode).then(
-              (res) => res.arrayBuffer()
+            const qrBytes = await fetch(certificateDetails.qrCode).then((res) =>
+              res.arrayBuffer(),
             );
             const qrImage = await pdfDoc.embedPng(qrBytes);
             page.drawImage(qrImage, {
@@ -223,7 +223,7 @@ export default function App() {
             (page.getWidth() -
               fontRegular.widthOfTextAtSize(
                 `Certificate ID: ${certificateId}`,
-                14
+                14,
               )) /
             2,
           y: 250,
@@ -235,7 +235,7 @@ export default function App() {
         const pdfBytes = await pdfDoc.save();
         const arrayBuffer = pdfBytes.buffer.slice(
           pdfBytes.byteOffset,
-          pdfBytes.byteOffset + pdfBytes.byteLength
+          pdfBytes.byteOffset + pdfBytes.byteLength,
         );
         const pdfBlob = new Blob([arrayBuffer as ArrayBuffer], {
           type: "application/pdf",
@@ -261,7 +261,7 @@ export default function App() {
         const blob = await response.blob();
         saveAs(
           blob,
-          `${certificateDetails?.courseName || "certificate"}_${certType}.pdf`
+          `${certificateDetails?.courseName || "certificate"}_${certType}.pdf`,
         );
       }
     }
@@ -272,12 +272,10 @@ export default function App() {
 
   return (
     <div className="min-h-screen p-8 dark:bg-darkPrimary flex flex-col items-center gap-8">
-
       {/* ── Name Confirmation Popup ── */}
       {showNamePopup && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
           <div className="bg-white dark:bg-neutral-900 rounded-2xl shadow-2xl p-8 w-full max-w-md mx-4 flex flex-col gap-5 relative">
-
             {/* Close (X) button — hidden after 2 dismissals */}
             {skipsLeft > 0 && (
               <button

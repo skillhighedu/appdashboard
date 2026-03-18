@@ -78072,16 +78072,14 @@ class Jj extends ku {
       });
   }
   required(e) {
-    return super
-      .required(e)
-      .withMutation((r) =>
-        r.test({
-          message: e || pu.required,
-          name: "required",
-          skipAbsent: !0,
-          test: (n) => !!n.length,
-        }),
-      );
+    return super.required(e).withMutation((r) =>
+      r.test({
+        message: e || pu.required,
+        name: "required",
+        skipAbsent: !0,
+        test: (n) => !!n.length,
+      }),
+    );
   }
   notRequired() {
     return super
@@ -103413,34 +103411,32 @@ function cye() {
       }),
       N.jsx("div", {
         className: "grid md:grid-cols-2 gap-4",
-        children: t
-          .slice(1)
-          .map((e) =>
-            N.jsxs(
-              qv,
-              {
-                className: "p-6 space-y-3",
-                children: [
-                  N.jsx("p", {
-                    className:
-                      "text-xs uppercase tracking-[0.3em] text-slate-400 dark:text-slate-500",
-                    children: e.title,
-                  }),
-                  N.jsx("p", {
-                    className: "text-sm text-slate-600 dark:text-slate-300",
-                    children: e.description,
-                  }),
-                  N.jsx("ul", {
-                    className: "space-y-3",
-                    children: e.bullets.map((r) =>
-                      N.jsx("li", { className: T9, children: r }, r),
-                    ),
-                  }),
-                ],
-              },
-              e.title,
-            ),
+        children: t.slice(1).map((e) =>
+          N.jsxs(
+            qv,
+            {
+              className: "p-6 space-y-3",
+              children: [
+                N.jsx("p", {
+                  className:
+                    "text-xs uppercase tracking-[0.3em] text-slate-400 dark:text-slate-500",
+                  children: e.title,
+                }),
+                N.jsx("p", {
+                  className: "text-sm text-slate-600 dark:text-slate-300",
+                  children: e.description,
+                }),
+                N.jsx("ul", {
+                  className: "space-y-3",
+                  children: e.bullets.map((r) =>
+                    N.jsx("li", { className: T9, children: r }, r),
+                  ),
+                }),
+              ],
+            },
+            e.title,
           ),
+        ),
       }),
     ],
   });
